@@ -20,7 +20,7 @@ import java.util.*;
 @Table(name="reserva")
 public class Reserva implements Serializable {
 
-		@Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idReserva")
     private Long idReserva;

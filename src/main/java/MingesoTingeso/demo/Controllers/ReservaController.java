@@ -38,8 +38,8 @@ public class ReservaController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
       @ResponseBody
-      public Reserva getReservayId(@PathVariable Long id) {
-          return reservaRepository.findReservaById(id);
+      public Reserva getReservaId(@PathVariable Long id) {
+          return reservaRepository.findReservaByIdReserva(id);
       }
 
 
