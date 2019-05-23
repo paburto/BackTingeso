@@ -23,24 +23,4 @@ import MingesoTingeso.demo.Repositories.ResHabRepository;
 
 //Evaluacion 07-mayo-2019
 
-@CrossOrigin(origins = "*")
-@RestController
-@RequestMapping("/reservas")
-public class ResHabController {
-	@Autowired
-	ResHabRepository reshabRepository;
-
-	@RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public List<ReservaHabitacion> getAllReservas() {
-        return reshabRepository.findAll();
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-      @ResponseBody
-      public ReservaHabitacion getReservasHabitacionesById(@PathVariable Long id) {
-          return reshabRepository.findReservaHabitacionById(id);
-      }
-
-
-}
+@
