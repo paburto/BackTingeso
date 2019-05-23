@@ -26,9 +26,9 @@ public class Reserva implements Serializable {
     private Long idReserva;
 
     @Column(nullable = false, name = "`estado`")
-    private String estado;
+    private int estado;
 
-		@Column(nullable = false, name = "`descuento`")
+		@Column(name = "`descuento`")
 		private int descuento;
 
 		@ManyToOne(cascade = CascadeType.ALL,
@@ -37,8 +37,7 @@ public class Reserva implements Serializable {
 		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 		private Cliente cliente;
 
-		@ManyToOne(cascade = CascadeType.ALL,
-					fetch = FetchType.LAZY)
+		@ManyToOne(fetch = FetchType.LAZY)
 		@JoinColumn(name = "idUser")
 		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 		private Usuario usuario;
@@ -55,8 +54,9 @@ public class Reserva implements Serializable {
 
     }
 
-    public Reserva(String estado) {
+    public Reserva(int estado, int descuento) {
         this.estado = estado;
+				this.descuento = descuento;
     }
 
 	public Long getIdReserva() {
@@ -71,15 +71,16 @@ public class Reserva implements Serializable {
 	public int getDescuento(){
 		return descuento;
 	}
-	public int setDescuento(int descuento){
-		this.descuento;
+
+	public void setDescuento(int descuento){
+		this.descuento = descuento;
 	}
 
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 

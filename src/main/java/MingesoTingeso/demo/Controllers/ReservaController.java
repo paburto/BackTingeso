@@ -25,7 +25,7 @@ import MingesoTingeso.demo.Repositories.ReservaRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/reservas2")
+@RequestMapping("/reservas")
 public class ReservaController {
 	@Autowired
 	ReservaRepository reservaRepository;
@@ -36,11 +36,32 @@ public class ReservaController {
         return reservaRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-      @ResponseBody
-      public Reserva getReservaId(@PathVariable Long id) {
-          return reservaRepository.findReservaByIdReserva(id);
-      }
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Reserva getReservaById(@PathVariable Long id) {
+        return reservaRepository.findReservaByIdReserva(id);
+    }
 
-
+		@CrossOrigin(origins = "*")
+		@PostMapping("/delete/{id}")
+	    @ResponseBody
+	    public List<HashMap<String, String>> update(@PathVariable Long id) throws ParseException {
+			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+			HashMap<String, String> map = new HashMap<>();
+			Reserva reserva = reservaRepository.findReservaByIdReserva(id);
+			if(reserva == null) {
+				map.put("status", "404");
+				map.put("message", "Reserva does not exist!.");
+				map.put("item", "");
+				result.add(map);
+				return result;
+			}
+			else {
+				reservaRepository.deleteById(id);
+				map.put("status", "200");
+				map.put("message", "OK, reserva erased!.");
+				result.add(map);
+				return result;
+			}
+	}
 }
