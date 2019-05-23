@@ -20,13 +20,16 @@ import java.util.*;
 @Table(name="reserva")
 public class Reserva implements Serializable {
 
-	@Id
+		@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idReserva")
     private Long idReserva;
 
     @Column(nullable = false, name = "`estado`")
     private String estado;
+
+		@Column(nullable = false, name = "`descuento`")
+		private int descuento;
 
 		@ManyToOne(cascade = CascadeType.ALL,
 					fetch = FetchType.LAZY)
@@ -60,8 +63,16 @@ public class Reserva implements Serializable {
 		return idReserva;
 	}
 
+
 	public void setIdReserva(Long idReserva) {
 		this.idReserva= idReserva;
+	}
+
+	public int getDescuento(){
+		return descuento;
+	}
+	public int setDescuento(int descuento){
+		this.descuento;
 	}
 
 	public String getEstado() {
