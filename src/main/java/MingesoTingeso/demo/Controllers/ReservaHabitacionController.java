@@ -19,7 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import MingesoTingeso.demo.Models.ReservaHabitacion;
+import MingesoTingeso.demo.Models.Cliente;
+import MingesoTingeso.demo.Models.Reserva;
+import MingesoTingeso.demo.Repositories.ClienteRepository;
 import MingesoTingeso.demo.Repositories.ResHabRepository;
+import MingesoTingeso.demo.Repositories.ReservaRepository;
+import MingesoTingeso.demo.Controllers.ClienteController;
 
 
 @CrossOrigin(origins = "*")
@@ -29,11 +34,36 @@ public class ReservaHabitacionController {
 	@Autowired
 	ResHabRepository reshabRepository;
 
+	@Autowired
+	ClienteRepository clienteRepository;
+
+	@Autowired
+	ReservaRepository reservaRepository;
+
+
+	ClienteController clienteController;
+
 	@RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<ReservaHabitacion> getAllReservasHabitacions() {
+    public List<ReservaHabitacion> getAllReservasHabitaciones() {
         return reshabRepository.findAll();
     }
+
+		@RequestMapping(value = "/rack" , method = RequestMethod.GET)
+	    @ResponseBody
+	    public void getAllRack() {
+	        List<ReservaHabitacion> reservahabitacion = reshabRepository.findAll();
+					List<Reserva> reserva = reservaRepository.findAll();
+					List<Cliente> cliente = clienteRepository.findAll();
+
+
+	    }
+
+
+
+
+
+
 
 
 }

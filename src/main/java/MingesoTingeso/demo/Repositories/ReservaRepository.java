@@ -12,8 +12,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>{
     Reserva findReservaByDescuento(int descuento);
 
     Reserva findReservaByEstado(int estado);
-
-
+    
   	Reserva deleteReservaByIdReserva(Long idReserva);
 
 

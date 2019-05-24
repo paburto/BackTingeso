@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import MingesoTingeso.demo.Models.Reserva;
+import MingesoTingeso.demo.Models.ReservaHabitacion;
+import MingesoTingeso.demo.Models.Cliente;
+import MingesoTingeso.demo.Repositories.ClienteRepository;
 import MingesoTingeso.demo.Repositories.ReservaRepository;
-
-
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -29,6 +30,9 @@ import MingesoTingeso.demo.Repositories.ReservaRepository;
 public class ReservaController {
 	@Autowired
 	ReservaRepository reservaRepository;
+
+	@Autowired
+	ClienteRepository clienteRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
     @ResponseBody

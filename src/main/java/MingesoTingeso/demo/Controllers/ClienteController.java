@@ -18,7 +18,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import MingesoTingeso.demo.Models.Producto;
-import MingesoTingeso.demo.Repositories.ProductoRepository;
+import MingesoTingeso.demo.Models.Cliente;
+import MingesoTingeso.demo.Repositories.ClienteRepository;
 
-//Evaluacion 07-mayo-2019
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/clientes")
+public class ClienteController {
+	@Autowired
+	ClienteRepository clienteRepository;
+
+	@RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public List<Cliente> getAllClientes() {
+        return clienteRepository.findAll();
+    }
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String getNombreClienteById(@PathVariable Long id) {
+        Cliente cliente = clienteRepository.findClienteByIdCliente(id);
+				return cliente.getNombreCliente();
+    }
+}
