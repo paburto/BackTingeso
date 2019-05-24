@@ -41,19 +41,19 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/nombreUsuario/{idUser}", method = RequestMethod.GET)
     @ResponseBody
-    public Usuario getUsuarioByIdUser(@PathVariable int nombreUsuario ) {
+    public Usuario getUsuarioByNombreUsuario(@PathVariable int nombreUsuario ) {
         return usuarioRepository.findUsuarioByNombreUsuario(nombreUsuario);
     }
 
     @RequestMapping(value = "/RolUsuario/{idUser}", method = RequestMethod.GET)
     @ResponseBody
-    public Usuario getUsuarioByIdUser(@PathVariable int Rolusuario ) {
+    public Usuario getUsuarioByRolUsuario(@PathVariable int rolUsuario ) {
         return usuarioRepository.findUsuarioByRolUsuario(rolUsuario);
     }
 
     @RequestMapping(value = "/CorreoUsuario/{idUser}", method = RequestMethod.GET)
     @ResponseBody
-    public Usuario getUsuarioByIdUser(@PathVariable int CorreoUsuario ) {
+    public Usuario getUsuarioByCorreoUsuario(@PathVariable int correoUsuario ) {
         return usuarioRepository.findUsuarioBycorreoUsuario(correoUsuario);
     }
 
@@ -77,7 +77,7 @@ public class UsuarioController {
 		else {
 			map.put("status", "401");
 			map.put("message", "User code already exist.");
-			map.put("item", usuario.getid());
+			map.put("item", usuario.getidUser());
 			result.add(map);
 			return result;
 		}
@@ -103,7 +103,9 @@ public class UsuarioController {
 			usuarioRepository.save(usuario);
 			map.put("status", "200");
 			map.put("message", "OK");
-			map.put("item", usuario.getEstado());
+			map.put("item", usuario.getNomnbreUsuario());
+			map.put("item", usuario.getRolUsuario());
+			map.put("item", usuario.getCorreoUsuario());
 			result.add(map);
 			return result;
 		}
@@ -124,10 +126,10 @@ public class UsuarioController {
 			return result;
 		}
 		else {
-			String erasedUser = usuario.getNomnbreUsuario();
+			String erasedUser = usuario.getNombreUsuario();
             String erasedUser = usuario.getRolUsuario();
             String erasedUser = usuario.getCorreoUsuario();
-			usuarioRepository.deleteByIdUser(id);
+			usuarioRepository.deleteByIdUser(idUser);
 			map.put("status", "200");
 			map.put("message", "OK, user erased!.");
 			map.put("item", erasedUser);
