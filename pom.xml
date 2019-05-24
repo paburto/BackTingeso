@@ -17,10 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-	</properties>
-	
-	<properties>
-    		<!-- Sonar -->
+		<!-- Sonar -->
     		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
