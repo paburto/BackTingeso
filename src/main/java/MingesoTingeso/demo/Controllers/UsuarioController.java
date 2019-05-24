@@ -39,10 +39,10 @@ public class UsuarioController {
         return usuarioRepository.findUsuarioByIdUser(idUser);
     }
 
-	@RequestMapping(value = "/nombre/{idUser}", method = RequestMethod.GET)
+	@RequestMapping(value = "/nombreUsuario/{idUser}", method = RequestMethod.GET)
     @ResponseBody
-    public Usuario getUsuarioByIdUser(@PathVariable int nombre ) {
-        return usuarioRepository.findUsuarioByNombre(nombre);
+    public Usuario getUsuarioByIdUser(@PathVariable int nombreUsuario ) {
+        return usuarioRepository.findUsuarioByNombreUsuario(nombreUsuario);
     }
 
     @RequestMapping(value = "/RolUsuario/{idUser}", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class UsuarioController {
     @RequestMapping(value = "/CorreoUsuario/{idUser}", method = RequestMethod.GET)
     @ResponseBody
     public Usuario getUsuarioByIdUser(@PathVariable int CorreoUsuario ) {
-        return usuarioRepository.findUsuarioByEstado(correoUsuario);
+        return usuarioRepository.findUsuarioBycorreoUsuario(correoUsuario);
     }
 
 	@PostMapping("/create")
