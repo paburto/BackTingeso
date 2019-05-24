@@ -31,8 +31,7 @@ public class Reserva implements Serializable {
 		@Column(name = "`descuento`")
 		private int descuento;
 
-		@ManyToOne(cascade = CascadeType.ALL,
-					fetch = FetchType.LAZY)
+		@ManyToOne(	fetch = FetchType.LAZY)
 		@JoinColumn(name = "idCliente")
 		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 		private Cliente cliente;
@@ -82,6 +81,22 @@ public class Reserva implements Serializable {
 
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+
+	public Cliente getCliente(){
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente){
+		this.cliente = cliente;
+	}
+
+	public Usuario getUsuario(){
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario){
+		this.usuario = usuario;
 	}
 
 }

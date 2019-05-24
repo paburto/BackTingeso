@@ -51,15 +51,36 @@ public class ReservaHabitacionController {
 
 		@RequestMapping(value = "/rack" , method = RequestMethod.GET)
 	    @ResponseBody
-	    public void getAllRack() {
-	        List<ReservaHabitacion> reservahabitacion = reshabRepository.findAll();
-					List<Reserva> reserva = reservaRepository.findAll();
-					List<Cliente> cliente = clienteRepository.findAll();
-
-
+	    public List<HashMap<String, String>> getAllRack() {
+				List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+				HashMap<String, String> map = new HashMap<>();
+        List<ReservaHabitacion> reservahabitacion = reshabRepository.findAll();
+				List<Reserva> reserva = reservaRepository.findAll();
+				List<Cliente> cliente = clienteRepository.findAll();
+				for(ReservaHabitacion rh : reservahabitacion){
+					for(Reserva r : reserva){
+						for(Cliente c : cliente){
+							if(rh.getReserva().getIdReserva() == r.getIdReserva() && r.getCliente().getIdCliente() == c.getIdCliente()){
+								map.put("fechaInicio", rh.getFechaInicioRH().toString());
+								map.put("fechaTermino", rh.getFechaTerminoRH().toString());
+								map.put("idHab", rh.getHabitacion().getIdHabitacion().toString());
+								map.put("idReserva", rh.getReserva().getIdReserva().toString());
+								map.put("descuento", Integer.toString(r.getDescuento()));
+								map.put("estado", Integer.toString(r.getEstado()));
+								map.put("idUser", r.getUsuario().getIdUsuario().toString());
+								map.put("idCliente", c.getIdCliente().toString());
+								map.put("nombreCliente", c.getNombreCliente());
+								map.put("rut", Integer.toString(c.getRut()));
+								map.put("telefono", Integer.toString(c.getTelefonoCliente()));
+								map.put("fechaNacimiento", c.getFechaNacimiento().toString());
+								result.add(map);
+								map = new HashMap<>();
+							}
+						}
+					}
+				}
+				return result;
 	    }
-
-
 
 
 

@@ -78,5 +78,20 @@ public class ReservaHabitacion implements Serializable {
       this.fechaTermino = fechaTermino;
     }
 
+    public Reserva getReserva(){
+      return reserva;
+    }
+
+    public void setReserva(Reserva reserva){
+      this.reserva = reserva;
+    }
+
+    public Habitacion getHabitacion(){
+      return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion){
+      this.habitacion = habitacion;
+    }
 
 }
