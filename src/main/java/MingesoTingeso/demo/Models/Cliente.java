@@ -33,6 +33,8 @@ public class Cliente implements Serializable {
     @Column(nullable = false, name = "`nombreCliente`")
     private String nombreCliente;
 
+		@Column(nullable = false, name = "`correoCliente`")
+		private String correoCliente;
 
     @Column(nullable = false, name = "`telefono`")
     private int telefono;
@@ -53,9 +55,10 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente( int rut, String nombreCliente, int telefono ,Date fechaNacimiento) {
+    public Cliente( int rut, String nombreCliente,String correoCliente, int telefono ,Date fechaNacimiento) {
 			this.rut = rut;
         this.nombreCliente = nombreCliente;
+				this.correoCliente = correoCliente;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
     }

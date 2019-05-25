@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import MingesoTingeso.demo.Models.Habitacion;
+import MingesoTingeso.demo.Models.ReservaHabitacion;
+import MingesoTingeso.demo.Repositories.ResHabRepository;
 import MingesoTingeso.demo.Repositories.HabitacionRepository;
 
 //Evaluacion 07-mayo-2019
@@ -48,28 +50,39 @@ public class HabitacionController {
 			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 			HashMap<String, String> map = new HashMap<>();
 			Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(id);
-			System.out.println("hola");
+
 			if(habitacion == null) {
 				map.put("status", "404");
-				map.put("message", "Product does not exist!.");
+				map.put("message", "La habitacion no existe");
 				map.put("item", "");
 				result.add(map);
 				return result;
 			}
 
 			else {
+				Habitacion h = habitacionRepository.findHabitacionByNroHabitacion(Integer.parseInt(jsonData.get("nroHabitacion").toString()));
+				if (h != null){
+					map.put("status", "404");
+					map.put("message", "Nro de habitacion ya existe!.");
+					map.put("item", "");
+					result.add(map);
+					return result;
+				}
+				else{
+
 				habitacion.setTipoHabitacion(jsonData.get("tipo").toString());
+				habitacion.setNroHabitacion(Integer.parseInt(jsonData.get("nroHabitacion").toString()));
 				habitacion.setCapacidadNinos(Integer.parseInt(jsonData.get("capacidadNinos").toString()));
 				habitacion.setCapacidadAdultos(Integer.parseInt(jsonData.get("capacidadAdultos").toString()));
 				habitacion.setPrecioNoche(Integer.parseInt(jsonData.get("precioNoche").toString()));
 				habitacionRepository.save(habitacion);
 				map.put("status", "200");
-				map.put("message", "OK");
+				map.put("message", "La Habitacion ha sido editada");
 				result.add(map);
 				return result;
 			}
+			}
 		}
-
 
 
 	@RequestMapping(value = "/precio/{precio}", method = RequestMethod.GET)
@@ -87,12 +100,23 @@ public class HabitacionController {
 		Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(id);
 		if(habitacion == null) {
 			map.put("status", "404");
-			map.put("message", "Product does not exist!.");
+			map.put("message", "Habitacion no existe");
 			map.put("item", "");
 			result.add(map);
 			return result;
 		}
 		else {
+			List<ReservaHabitacion> reservahabitacion = habitacion.getReservasHabitaciones();
+			Date objDate = new Date();
+			for(ReservaHabitacion rh: reservahabitacion){
+				if(rh.getFechaTerminoRH().compareTo(objDate) > 0){
+					map.put("status", "404");
+					map.put("message", "No se puede borrar esta habitacion, hay reservas pendientes");
+					map.put("item", "");
+					result.add(map);
+					return result;
+				}
+			}
 			habitacionRepository.deleteById(id);
 			map.put("status", "200");
 			map.put("message", "OK, Habitacion erased!.");
@@ -100,4 +124,35 @@ public class HabitacionController {
 			return result;
 		}
     }
+
+
+		@PostMapping("/create")
+			@ResponseBody
+			public List<HashMap<String, String>> create(@RequestBody Map<String, Object> jsonData) throws ParseException {
+			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+			HashMap<String, String> map = new HashMap<>();
+			Habitacion habitacion = habitacionRepository.findHabitacionByNroHabitacion(Integer.parseInt(jsonData.get("nroHabitacion").toString()));
+			if(habitacion == null) {
+				habitacionRepository.save(new Habitacion(jsonData.get("tipo").toString(),
+															Integer.parseInt(jsonData.get("nroHabitacion").toString()),
+															Integer.parseInt(jsonData.get("capacidadNinos").toString()),
+															Integer.parseInt(jsonData.get("capacidadAdultos").toString()),
+															Integer.parseInt(jsonData.get("precioNoche").toString())));
+				map.put("status", "201");
+				map.put("message", "OK");
+				result.add(map);
+				return result;
+			}
+			else {
+				map.put("status", "401");
+				map.put("message", "Product code already exist.");
+				result.add(map);
+				return result;
+			}
+			}
+
+
+
+
+
 }
