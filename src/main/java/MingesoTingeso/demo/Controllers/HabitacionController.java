@@ -63,7 +63,7 @@ public class HabitacionController {
 				Habitacion h = habitacionRepository.findHabitacionByNroHabitacion(Integer.parseInt(jsonData.get("nroHabitacion").toString()));
 				if (h != null){
 					map.put("status", "404");
-					map.put("message", "Nro de habitacion ya existe!.");
+					map.put("message", "Nro de habitacion ya existe, ingrese otro nro");
 					map.put("item", "");
 					result.add(map);
 					return result;
@@ -119,7 +119,7 @@ public class HabitacionController {
 			}
 			habitacionRepository.deleteById(id);
 			map.put("status", "200");
-			map.put("message", "OK, Habitacion erased!.");
+			map.put("message", "La habitacion ha sido borrada");
 			result.add(map);
 			return result;
 		}
@@ -139,13 +139,13 @@ public class HabitacionController {
 															Integer.parseInt(jsonData.get("capacidadAdultos").toString()),
 															Integer.parseInt(jsonData.get("precioNoche").toString())));
 				map.put("status", "201");
-				map.put("message", "OK");
+				map.put("message", "Habitacion agregada con exito");
 				result.add(map);
 				return result;
 			}
 			else {
 				map.put("status", "401");
-				map.put("message", "Product code already exist.");
+				map.put("message", "Nro de habitacion ya existe, ingrese otro nro");
 				result.add(map);
 				return result;
 			}
