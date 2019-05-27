@@ -21,7 +21,7 @@
 			<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 			<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-			<sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
+			<sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
     		<sonar.language>java</sonar.language>
 	</properties>
 
