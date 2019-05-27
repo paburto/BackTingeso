@@ -26,6 +26,9 @@ public class Habitacion implements Serializable {
     @Column(name = "idHab")
     private Long idHab;
 
+		@Column(name = "nroHabitacion")
+		private int nroHabitacion;
+
     @Column(nullable = false, name = "`tipo`")
     private String tipo;
 
@@ -53,8 +56,9 @@ public class Habitacion implements Serializable {
 
     }
 
-    public Habitacion(String tipo, int capacidadNinos,int capacidadAdultos, int precioNoche) {
+    public Habitacion(String tipo, int nroHabitacion, int capacidadNinos,int capacidadAdultos, int precioNoche) {
         this.tipo = tipo;
+				this.nroHabitacion= nroHabitacion;
         this.capacidadNinos = capacidadNinos;
         this.capacidadAdultos = capacidadAdultos;
         this.precioNoche = precioNoche;
@@ -66,6 +70,14 @@ public class Habitacion implements Serializable {
 
 	public void setIdHabitacion(Long idHab) {
 		this.idHab= idHab;
+	}
+
+	public int getNroHabitacion(){
+		return nroHabitacion;
+	}
+
+	public void setNroHabitacion(int nroHabitacion){
+		this.nroHabitacion= nroHabitacion;
 	}
 
 	public String getTipoHabitacion() {
@@ -98,4 +110,14 @@ public class Habitacion implements Serializable {
   public void setPrecioNoche(int precioNoche) {
     this.precioNoche = precioNoche;
   }
+
+	@JsonIgnore
+	public List<ReservaHabitacion> getReservasHabitaciones() {
+		return reservahabitaciones;
+	}
+	@JsonIgnore
+	public void setReservasHabitaciones(List<ReservaHabitacion> reservahabitaciones) {
+			this.reservahabitaciones = reservahabitaciones;
+	}
+
 }

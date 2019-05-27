@@ -21,7 +21,7 @@ import java.util.*;
 @Table(name="usuario")
 public class Usuario implements Serializable {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUser")
     private Long idUser;
@@ -34,6 +34,9 @@ public class Usuario implements Serializable {
 
     @Column(nullable = false, name = "correoUsuario")
     private String correoUsuario;
+
+    @Column(nullable = false, name = "rutUsuario")
+    private int rutUsuario;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUser")
@@ -50,41 +53,50 @@ public class Usuario implements Serializable {
 
     }
 
-    public Usuario(String nombreUsuario, String rolUsuario, String correoUsuario) {
+    public Usuario(String nombreUsuario, String rolUsuario, String correoUsuario, int rutUsuario) {
         this.nombreUsuario = nombreUsuario;
         this.rolUsuario = rolUsuario;
         this.correoUsuario = correoUsuario;
+        this.rutUsuario= rutUsuario;
     }
 
-	public Long getIdUsuario() {
-		return idUser;
-	}
+    public Long getIdUsuario() {
+        return idUser;
+    }
 
-	public void setIdUsuario(Long idUser) {
-		this.idUser= idUser;
-	}
+    public void setIdUsuario(Long idUser) {
+        this.idUser= idUser;
+    }
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
-	public String getRolUsuario() {
-		return rolUsuario;
-	}
+    public String getRolUsuario() {
+        return rolUsuario;
+    }
 
-	public void setRolUsuario(String rolUsuario) {
-		this.rolUsuario = rolUsuario;
-	}
+    public void setRolUsuario(String rolUsuario) {
+        this.rolUsuario = rolUsuario;
+    }
 
-  public String getCorreoUsuario(){
-    return correoUsuario;
-  }
+    public String getCorreoUsuario(){
+        return correoUsuario;
+    }
 
-  public void setCorreoUsuario(String correoUsuario){
-    this.correoUsuario = correoUsuario;
-  }
+    public void setCorreoUsuario(String correoUsuario){
+        this.correoUsuario = correoUsuario;
+    }
+
+    public int getRutUsuario(){
+        return rutUsuario;
+    }
+
+    public void setRutUsuario(int rutUsuario){
+        this.rutUsuario = rutUsuario;
+    }
 }
