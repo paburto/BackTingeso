@@ -73,7 +73,7 @@ public class HabitacionRepositoryTest {
 	
 	@Test
 	public void deleteHabitacionByIdHab() {
-		Habitacion crear = habitacionRepository.save(new Habitacion("Simple", 666, 2, 3, 20000));
+		Habitacion crear = habitacionRepository.save(new Habitacion("Simple", 9999, 2, 3, 20000));
 		long idHabitacion = crear.getIdHabitacion();
 		Habitacion delete = habitacionRepository.deleteHabitacionByIdHab(idHabitacion);
 		System.out.println(delete);
