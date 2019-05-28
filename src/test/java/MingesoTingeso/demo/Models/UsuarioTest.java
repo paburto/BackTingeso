@@ -9,8 +9,8 @@ public class UsuarioTest {
     @Test
     public void getIdUsuario() {
       Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
-      u.setIdUsuario(1);
-      assertEquals(1,u.getIdUsuario());
+      u.setIdUsuario(1L);
+      assertEquals(1L,(long)u.getIdUsuario());
     }
 
     @Test
@@ -40,8 +40,8 @@ public class UsuarioTest {
     @Test
     public void setIdUsuario() {
       Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
-      u.setIdUsuario(1);
-      assertEquals(1,u.getIdUsuario());
+      u.setIdUsuario(1L);
+      assertEquals(1L,(long)u.getIdUsuario());
     }
 
     @Test

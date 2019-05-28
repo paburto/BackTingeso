@@ -9,15 +9,15 @@ public class HabitacionTest {
     @Test
     public void getIdHabitacion() {
       Habitacion h = new Habitacion("Simple",101,2,2,6000);
-      h.setIdHabitacion(1);
-      assertEquals(1,h.getIdHabitacion());
+      h.setIdHabitacion(1L);
+      assertEquals(1L,(long)h.getIdHabitacion());
     }
 
     @Test
     public void setIdHabitacion() {
       Habitacion h = new Habitacion("Simple",101,2,2,6000);
-      h.setIdHabitacion(1);
-      assertEquals(1,h.getIdHabitacion());
+      h.setIdHabitacion(1L);
+      assertEquals(1L,(long)h.getIdHabitacion());
     }
 
     @Test

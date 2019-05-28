@@ -9,15 +9,15 @@ public class HistorialTest {
     @Test
     public void getIdHistorial() {
       Historial h = new Historial("Lorem");
-      h.setIdHistorial(1);
-      assertEquals(1,h.getIdHistorial());
+      h.setIdHistorial(1L);
+      assertEquals(1L,(long)h.getIdHistorial());
     }
 
     @Test
     public void setIdHistorial() {
       Historial h = new Historial("Lorem");
-      h.setIdHistorial(1);
-      assertEquals(1,h.getIdHistorial());
+      h.setIdHistorial(1L);
+      assertEquals(1L,(long)h.getIdHistorial());
     }
 
     @Test

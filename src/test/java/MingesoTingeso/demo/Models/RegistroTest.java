@@ -1,62 +1,149 @@
 package MingesoTingeso.demo.Models;
 
 import org.junit.Test;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import static org.junit.Assert.*;
 
-public class HistorialTest {
+public class RegistroTest {
 
     @Test
     public void getIdRegistro() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      r.setIdRegistro(1);
-      assertEquals(1,r.getIdRegistro());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          r.setIdRegistro(1L);
+          assertEquals(1L,(long)r.getIdRegistro());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getRepresentante() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      assertEquals("Edgar Blau",r.getRepresentante());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          assertEquals("Edgar Blau",r.getRepresentante());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getFechaInicio() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      assertEquals("2019-05-05",r.getFechaInicio());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          assertEquals(fechaInicio,r.getFechaInicio());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getFechaTermino() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      assertEquals("2019-05-10",r.getFechaTermino());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          assertEquals(fechaTermino,r.getFechaTermino());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setIdRegistro() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      r.setIdRegistro(1);
-      assertEquals(1,r.getIdRegistro());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          r.setIdRegistro(1L);
+          assertEquals(1L,(long)r.getIdRegistro());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setRepresentante() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      r.setRepresentante("Diego Águila");
-      assertEquals("Diego Águila",r.getRepresentante());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          r.setRepresentante("Diego Águila");
+          assertEquals("Diego Águila",r.getRepresentante());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setFechaInicio() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      r.setFechaInicio("2019-05-06");
-      assertEquals("2019-05-06",r.getFechaInicio());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          dateInString1 = "2019-05-06";
+          try{
+            fechaInicio = formatter.parse(dateInString1);
+            r.setFechaInicio(fechaInicio);
+            assertEquals(fechaInicio,r.getFechaInicio());
+          } catch (ParseException e){
+            e.printStackTrace();
+          }
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setFechaTermino() {
-      Registro r = new Registro("Edgar Blau","2019-05-05","2019-05-10");
-      r.setFechaTermino("2019-05-11");
-      assertEquals("2019-05-11",r.getFechaTermino());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString1 = "2019-05-05";
+      String dateInString2 = "2019-05-10";
+      try {
+          Date fechaInicio = formatter.parse(dateInString1);
+          Date fechaTermino = formatter.parse(dateInString2);
+          Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino);
+          dateInString2 = "2019-05-11";
+          try{
+            fechaTermino = formatter.parse(dateInString2);
+            r.setFechaTermino(fechaTermino);
+            assertEquals(fechaTermino,r.getFechaTermino());
+          } catch (ParseException e){
+            e.printStackTrace();
+          }
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
 }

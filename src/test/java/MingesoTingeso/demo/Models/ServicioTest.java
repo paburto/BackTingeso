@@ -9,8 +9,8 @@ public class ServicioTest {
     @Test
     public void getIdServicio() {
       Servicio s = new Servicio("Lorem","Servicio",1000);
-      s.setIdServicio(1);
-      assertEquals(1,s.getIdServicio());
+      s.setIdServicio(1L);
+      assertEquals(1L,(long)s.getIdServicio());
     }
 
     @Test
@@ -34,8 +34,8 @@ public class ServicioTest {
     @Test
     public void setIdServicio() {
       Servicio s = new Servicio("Lorem","Servicio",1000);
-      s.setIdServicio(1);
-      assertEquals(1,s.getIdServicio());
+      s.setIdServicio(1L);
+      assertEquals(1L,(long)s.getIdServicio());
     }
 
     @Test

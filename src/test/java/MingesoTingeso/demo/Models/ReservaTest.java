@@ -1,6 +1,9 @@
 package MingesoTingeso.demo.Models;
 
 import org.junit.Test;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import static org.junit.Assert.*;
 
@@ -9,15 +12,15 @@ public class ReservaTest {
     @Test
     public void setIdReserva() {
       Reserva r = new Reserva(1,10);
-      r.setIdReserva(2);
-      assertEquals(2,r.getIdReserva());
+      r.setIdReserva(2L);
+      assertEquals(2L,(long)r.getIdReserva());
     }
 
     @Test
     public void getIdReserva() {
       Reserva r = new Reserva(1,10);
-      r.setIdReserva(2);
-      assertEquals(2,r.getIdReserva());
+      r.setIdReserva(2L);
+      assertEquals(2L,(long)r.getIdReserva());
     }
 
     @Test
@@ -48,18 +51,32 @@ public class ReservaTest {
 
     @Test
     public void getCliente() {
-      Cliente c = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678,"2019-05-08");
-      Reserva r = new Reserva(1,10);
-      r.setCliente(c);
-      assertEquals(c,r.getCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+      String dateInString = "08/05/2019";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678, fecha);
+          Reserva r = new Reserva(1,10);
+          r.setCliente(c);
+          assertEquals(c,r.getCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setCliente() {
-      Cliente c = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678,"2019-05-08");
-      Reserva r = new Reserva(1,10);
-      r.setCliente(c);
-      assertEquals(c,r.getCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+      String dateInString = "08/05/2019";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Reserva r = new Reserva(1,10);
+          r.setCliente(c);
+          assertEquals(c,r.getCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test

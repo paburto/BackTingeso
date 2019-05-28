@@ -1,6 +1,9 @@
 package MingesoTingeso.demo.Models;
 
 import org.junit.Test;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import static org.junit.Assert.*;
 
@@ -8,67 +11,143 @@ public class ClienteTest {
 
     @Test
     public void setIdCliente() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      c.setIdCliente(1);
-      assertEquals(1,c.getIdCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          c.setIdCliente(1L);
+          assertEquals(1L,(long)c.getIdCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getIdCliente() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      c.setIdCliente(1);
-      assertEquals(1,c.getIdCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          c.setIdCliente(1L);
+          assertEquals(1L,(long)c.getIdCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getRut() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      assertEquals(75483759,c.getRut());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          assertEquals(75483759,c.getRut());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setRut() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      c.setRut(7123456);
-      assertEquals(7123456,c.getRut());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          c.setRut(7123456);
+          assertEquals(7123456,c.getRut());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getNombreCliente() {
-        Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-        assertEquals("Edgar Blau", c.getNombreCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          assertEquals("Edgar Blau", c.getNombreCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setNombreCliente() {
-        Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-        c.setNombreCliente("José Mellado");
-        assertEquals("José Mellado", c.getNombreCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          c.setNombreCliente("José Mellado");
+          assertEquals("José Mellado", c.getNombreCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getTelefonoCliente() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      assertEquals(912345678,c.getTelefonoCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          assertEquals(912345678,c.getTelefonoCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setTelefonoCliente() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      c.setTelefonoCliente(912345679);
-      assertEquals(912345679,c.getTelefonoCliente());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          c.setTelefonoCliente(912345679);
+          assertEquals(912345679,c.getTelefonoCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getFechaNacimiento() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      assertEquals("2000-10-10",c.getFechaNacimiento());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          assertEquals(fecha,c.getFechaNacimiento());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setFechaNacimiento() {
-      Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      c.setFechaNacimiento("2000-10-11");
-      assertEquals("2000-10-11",c.getFechaNacimiento());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          dateInString = "2000-10-11";
+          try{
+            fecha = formatter.parse(dateInString);
+            c.setFechaNacimiento(fecha);
+            assertEquals(fecha,c.getFechaNacimiento());
+          } catch(ParseException e){
+            e.printStackTrace();
+          }
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 }
