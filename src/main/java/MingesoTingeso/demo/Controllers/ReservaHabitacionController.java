@@ -101,7 +101,7 @@ public class ReservaHabitacionController {
 				for(ReservaHabitacion rh : reservahabitacion){
 					for(Reserva r : reserva){
 						for(Cliente c : cliente){
-							if(rh.getReserva().getIdReserva() == r.getIdReserva() && r.getCliente().getIdCliente() == c.getIdCliente()){
+							if(rh.getReserva().getIdReserva().equals(r.getIdReserva()) && r.getCliente().getIdCliente().equals(c.getIdCliente())){
 								map.put("fechaInicio", rh.getFechaInicioRH().toString());
 								map.put("fechaTermino", rh.getFechaTerminoRH().toString());
 								map.put("idHab", rh.getHabitacion().getIdHabitacion().toString());
