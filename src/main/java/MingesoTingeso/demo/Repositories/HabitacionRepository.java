@@ -19,6 +19,6 @@ List<Habitacion> findHabitacionByCapacidadAdultos(int capacidadAdultos);
 
 List<Habitacion> findHabitacionByPrecioNoche(int precioNoche);
 
-List<Habitacion> deleteHabitacionByIdHab(Long idHab);
+Habitacion deleteHabitacionByIdHab(Long idHab);
 
 }
