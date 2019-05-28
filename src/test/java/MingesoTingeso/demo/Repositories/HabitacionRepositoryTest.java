@@ -30,7 +30,7 @@ public class HabitacionRepositoryTest {
 	
 	@Test
 	public void findHabitacionByNroHabitacion() {
-		Habitacion hab = habitacionRepository.findHabitacionByNroHabitacion(102);
+		Habitacion hab = habitacionRepository.findHabitacionByNroHabitacion(666);
 		hab.setCapacidadAdultos(20);
 		assertEquals(20, hab.getCapacidadAdultos());
 	}
@@ -74,7 +74,9 @@ public class HabitacionRepositoryTest {
 	@Test
 	public void deleteHabitacionByIdHab() {
 		Habitacion crear = habitacionRepository.save(new Habitacion("Simple", 666, 2, 3, 20000));
-		Habitacion delete = habitacionRepository.deleteHabitacionByIdHab(crear.getIdHabitacion());
-		assertEquals(crear.getNroHabitacion(), delete.getNroHabitacion());
+		long idHabitacion = crear.getIdHabitacion();
+		Habitacion delete = habitacionRepository.deleteHabitacionByIdHab(idHabitacion);
+		System.out.println(delete);
+		assertEquals(idHabitacion, 2);
 	}
 }
