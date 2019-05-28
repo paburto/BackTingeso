@@ -2,10 +2,13 @@ package MingesoTingeso.demo.Repositories;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import MingesoTingeso.demo.Models.Usuario;
 import static org.junit.Assert.*;
-
+@DataJpaTest 
+@SpringBootTest(classes=UsuarioRepository.class)
 public class UsuarioRepositoryTest {
 	@Autowired
 	UsuarioRepository usuarioRepository;
