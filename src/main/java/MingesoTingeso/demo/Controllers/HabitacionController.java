@@ -85,11 +85,6 @@ public class HabitacionController {
 		}
 
 
-	@RequestMapping(value = "/precio/{precio}", method = RequestMethod.GET)
-    @ResponseBody
-    public Habitacion getHabitacionByPrecio(@PathVariable int precioNoche) {
-        return habitacionRepository.findHabitacionByPrecioNoche(precioNoche);
-    }
 
 	@CrossOrigin(origins = "*")
 	@PostMapping("/delete/{id}")

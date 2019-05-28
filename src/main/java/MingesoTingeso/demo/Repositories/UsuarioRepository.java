@@ -16,6 +16,3 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
   Usuario deleteUsuarioByIdUser(Long idUser);
 }
-
-
-

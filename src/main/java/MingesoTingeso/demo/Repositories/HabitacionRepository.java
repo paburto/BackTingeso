@@ -9,15 +9,15 @@ public interface HabitacionRepository extends JpaRepository<Habitacion, Long>{
 
 Habitacion findHabitacionByIdHab(Long idHab);
 
-Habitacion findHabitacionByNroHabitacion(int nroHabitacion); 
+Habitacion findHabitacionByNroHabitacion(int nroHabitacion);
 
-Habitacion findHabitacionByTipo(String tipo);
+List<Habitacion> findHabitacionByTipo(String tipo);
 
-Habitacion findHabitacionByCapacidadNinos(int capacidadNinos);
+List<Habitacion> findHabitacionByCapacidadNinos(int capacidadNinos);
 
-Habitacion findHabitacionByCapacidadAdultos(int capacidadAdultos);
+List<Habitacion> findHabitacionByCapacidadAdultos(int capacidadAdultos);
 
-Habitacion findHabitacionByPrecioNoche(int precioNoche);
+List<Habitacion> findHabitacionByPrecioNoche(int precioNoche);
 
 Habitacion deleteHabitacionByIdHab(Long idHab);
 
