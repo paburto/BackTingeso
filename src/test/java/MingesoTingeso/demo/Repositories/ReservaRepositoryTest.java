@@ -2,6 +2,8 @@ package MingesoTingeso.demo.Repositories;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +29,20 @@ public class ReservaRepositoryTest {
 	
 	@Test
 	public void findReservaByDescuento() {
-		Reserva r = reservaRepository.findReservaByDescuento(10);
-		r.setEstado(0);
-		assertEquals(0, r.getEstado());
+		List<Reserva> r = reservaRepository.findReservaByDescuento(10);
+		if(!r.isEmpty()) {
+			r.get(0).setEstado(0);
+			assertEquals(0, r.get(0).getEstado());
+		}
 	}
 	
 	@Test
 	public void findReservaByEstado() {
-		Reserva r = reservaRepository.findReservaByEstado(1);
-		r.setDescuento(20000);
-		assertEquals(20000, r.getDescuento());
+		List<Reserva> r = reservaRepository.findReservaByEstado(1);
+		if(!r.isEmpty()) {
+			r.get(0).setDescuento(20000);
+			assertEquals(20000, r.get(0).getDescuento());
+		}
 	}
 	
 }

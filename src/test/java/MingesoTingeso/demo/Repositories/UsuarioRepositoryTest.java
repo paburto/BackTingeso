@@ -35,11 +35,4 @@ public class UsuarioRepositoryTest {
 		assertEquals("Elba Lazo", u.getNombreUsuario());
 	}
 	
-	@Test
-	public void deleteUsuarioByIdUser() {
-		Usuario crear = usuarioRepository.save(new Usuario("usuarioTest", "user", "test@usach.cl", 189411839));
-		Usuario delete = usuarioRepository.deleteUsuarioByIdUser(crear.getIdUsuario());
-		assertEquals(crear.getNombreUsuario(), delete.getNombreUsuario());
-	}
-	
 }
