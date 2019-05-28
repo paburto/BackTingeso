@@ -70,13 +70,5 @@ public class HabitacionRepositoryTest {
 			assertEquals(520, hab.get(0).getNroHabitacion());
 		}
 	}
-	
-	@Test
-	public void deleteHabitacionByIdHab() {
-		Habitacion crear = habitacionRepository.save(new Habitacion("Simple", 9999, 2, 3, 20000));
-		long idHabitacion = crear.getIdHabitacion();
-		Habitacion delete = habitacionRepository.deleteHabitacionByIdHab(idHabitacion);
-		System.out.println(delete);
-		assertEquals(idHabitacion, 2);
-	}
+
 }
