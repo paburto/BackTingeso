@@ -29,7 +29,7 @@ public class ClienteTest {
     @Test
     public void setRut() {
       Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      c.setRut(7123456)
+      c.setRut(7123456);
       assertEquals(7123456,c.getRut());
     }
 
@@ -55,7 +55,7 @@ public class ClienteTest {
     @Test
     public void setTelefonoCliente() {
       Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,"2000-10-10");
-      c.setTelefonoCliente(912345679)
+      c.setTelefonoCliente(912345679);
       assertEquals(912345679,c.getTelefonoCliente());
     }
 
