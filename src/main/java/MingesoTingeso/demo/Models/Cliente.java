@@ -100,8 +100,8 @@ public class Cliente implements Serializable {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaVencimiento) {
-		this.fechaNacimiento = fechaVencimiento;
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 }
