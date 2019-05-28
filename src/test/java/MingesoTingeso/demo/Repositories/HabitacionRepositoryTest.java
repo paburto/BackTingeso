@@ -6,11 +6,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import MingesoTingeso.demo.Models.Habitacion;
 
 @RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration
 @SpringBootTest
 public class HabitacionRepositoryTest {
 	@Autowired
@@ -18,7 +20,7 @@ public class HabitacionRepositoryTest {
 	
 	@Test
 	public void findHabitacionByIdHab() {
-		long idTest = 1;
+		long idTest = 5;
 		Habitacion hab = habitacionRepository.findHabitacionByIdHab(idTest);
 		hab.setCapacidadAdultos(20);
 		assertEquals(20, hab.getCapacidadAdultos());
@@ -40,7 +42,7 @@ public class HabitacionRepositoryTest {
 	
 	@Test
 	public void findHabitacionByCapacidadNinos() {
-		Habitacion hab = habitacionRepository.findHabitacionByCapacidadNinos(1);
+		Habitacion hab = habitacionRepository.findHabitacionByCapacidadNinos(2);
 		hab.setPrecioNoche(20000);
 		assertEquals(20000, hab.getPrecioNoche());
 	}
