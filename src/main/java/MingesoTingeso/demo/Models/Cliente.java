@@ -23,9 +23,9 @@ import java.util.*;
 public class Cliente implements Serializable {
 
 	@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "idCliente")
-		private Long idCliente;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idCliente")
+	private Long idCliente;
 
     @Column(nullable = false, name = "`rut`")
     private int rut;
@@ -33,12 +33,11 @@ public class Cliente implements Serializable {
     @Column(nullable = false, name = "`nombreCliente`")
     private String nombreCliente;
 
-		@Column(nullable = false, name = "`correoCliente`")
-		private String correoCliente;
+    @Column(nullable = false, name = "`correoCliente`")
+	private String correoCliente;
 
     @Column(nullable = false, name = "`telefono`")
     private int telefono;
-
 
     @Column(nullable = false, name = "`fechaNacimiento`")
     private Date fechaNacimiento;
@@ -56,18 +55,18 @@ public class Cliente implements Serializable {
     }
 
     public Cliente( int rut, String nombreCliente,String correoCliente, int telefono ,Date fechaNacimiento) {
-			this.rut = rut;
+    	this.rut = rut;
         this.nombreCliente = nombreCliente;
-				this.correoCliente = correoCliente;
+        this.correoCliente = correoCliente;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
     }
 
-		public Long getIdCliente() {
+    public Long getIdCliente() {
 			return idCliente;
 		}
 
-		public void setIdCliente(Long idCliente) {
+	public void setIdCliente(Long idCliente) {
 			this.idCliente = idCliente;
 		}
 
