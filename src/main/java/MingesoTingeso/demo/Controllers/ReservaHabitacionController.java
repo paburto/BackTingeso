@@ -49,6 +49,47 @@ public class ReservaHabitacionController {
         return reshabRepository.findAll();
     }
 
+
+
+	@PostMapping("/create")
+	@ResponseBody
+	public List<HashMap<String, String>> createSimple(@RequestBody Map<String, Object> jsonData) throws ParseException {
+		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+		HashMap<String, String> map = new HashMap<>();
+		Date fechaInicio = null,fechaTermino = null;
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			fechaInicio = formato.parse(jsonData.get("fechaInicio").toString());
+			fechaTermino = formato.parse(jsonData.get("fechaTermino").toString());
+		}
+		catch (ParseException ex)
+		{
+			map.put("fechaInicio", fechaInicio.toString());
+			map.put("fechaTermino", fechaTermino.toString());
+			map.put("status", "401");
+			map.put("message", "Error al convertir date.");
+			result.add(map);
+			return result;
+		}
+		List<ReservaHabitacion> reservahabitaciones = reshabRepository.findAll();
+		for (ReservaHabitacion reserva: reservahabitaciones){
+			if(fechaInicio.after(reserva.getFechaTerminoRH()) && fechaInicio.after(reserva.getFechaTerminoRH())){
+				map.put("status", "401");
+				map.put("message", "La fecha de inicio no se puede agregar, ya que no está disponible.");
+				result.add(map);
+				return result;
+			}
+			if(fechaTermino.after(reserva.getFechaTerminoRH()) && fechaTermino.after(reserva.getFechaTerminoRH())){
+				map.put("status", "401");
+				map.put("message", "La fecha de termino no se puede agregar, ya que no está disponible.");
+				result.add(map);
+				return result;
+			}
+		}
+		return result;
+	}
+
+
 		@RequestMapping(value = "/rack" , method = RequestMethod.GET)
 	    @ResponseBody
 	    public List<HashMap<String, String>> getAllRack() {
