@@ -86,6 +86,14 @@ public class Cliente implements Serializable {
 		this.nombreCliente = nombreCliente;
 	}
 
+	public String getCorreoCliente() {
+		return correoCliente;
+	}
+
+	public void setCorreoCliente(String correoCliente) {
+		this.correoCliente = correoCliente;
+	}
+
 	public int getTelefonoCliente() {
 		return telefono;
 	}
