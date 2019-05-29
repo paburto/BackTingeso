@@ -26,10 +26,10 @@ public class ReservaHabitacion implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Column(nullable = false, name = "`fechaInicio`")
+  @Column(nullable = false, name = "fechaInicio")
   private Date fechaInicio;
 
-  @Column(nullable = false, name = "`fechaTermino`")
+  @Column(nullable = false, name = "fechaTermino")
   private Date fechaTermino;
 
   @ManyToOne(cascade = CascadeType.ALL,
