@@ -18,8 +18,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class UsuarioControllerTest {
-    @Autowired
-
+  
     @Test
     public void getAllUsuarios() {
         UsuarioController uc = new UsuarioController();

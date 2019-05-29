@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class HabitacionControllerTest {
-    @Autowired
 
     @Test
     public void getAllHabitaciones() {
@@ -40,15 +39,6 @@ public class HabitacionControllerTest {
 
     @Test
     public void update() {
-      /*
-      HabitacionController hc = new HabitacionController();
-      List<Habitacion> ha = hc.getAllHabitaciones();
-      HashMap<String, Object> map = new HashMap<>();
-      map.put("nroHabitacion",111);
-      List<HashMap<String, String>> up = hc.update(1L,map);
-      Habitacion h = ha.get(0);
-      assertEquals(111,h.getNroHabitacion());
-      */
     }
 
     @Test

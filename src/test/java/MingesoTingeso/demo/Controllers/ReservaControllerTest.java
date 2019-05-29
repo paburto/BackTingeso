@@ -22,7 +22,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class ReservaControllerTest {
-    @Autowired
 
     @Test
     public void getAllReservas() {

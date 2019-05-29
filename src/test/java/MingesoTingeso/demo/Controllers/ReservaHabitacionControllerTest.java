@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class ReservaHabitacionControllerTest {
-    @Autowired
 
     @Test
     public void getAllReservasHabitaciones() {
