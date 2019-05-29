@@ -7,7 +7,7 @@ import MingesoTingeso.demo.Models.Reserva;
 
 public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 
-  	Reserva findReservaByIdReserva(Long id);
+    Reserva findReservaByIdReserva(Long id);
 
     List<Reserva> findReservaByDescuento(int descuento);
 
@@ -15,5 +15,9 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 
   	Reserva deleteReservaByIdReserva(Long idReserva);
 
+    Reserva findReservaByCodigoReserva(int codigoReserva);
+
+    Reserva getReservaByCodigoReserva(int codigoReserva);
 
 }
+

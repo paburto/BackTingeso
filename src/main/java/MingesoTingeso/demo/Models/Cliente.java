@@ -94,7 +94,6 @@ public class Cliente implements Serializable {
 		this.telefono = telefono;
 	}
 
-
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}

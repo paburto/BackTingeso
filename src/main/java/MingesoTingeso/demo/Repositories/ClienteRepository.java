@@ -8,6 +8,6 @@ import MingesoTingeso.demo.Models.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
   Cliente findClienteByIdCliente(Long idCliente);
-
+  Cliente findClienteByRut(int rut);
 
 }

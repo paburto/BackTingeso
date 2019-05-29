@@ -22,62 +22,62 @@ import java.util.*;
 public class Habitacion implements Serializable {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idHab")
-    private Long idHab;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idHab")
+	private Long idHab;
 
-		@Column(name = "nroHabitacion")
-		private int nroHabitacion;
+	@Column(name = "nroHabitacion")
+	private int nroHabitacion;
 
-    @Column(nullable = false, name = "`tipo`")
-    private String tipo;
+	@Column(nullable = false, name = "`tipo`")
+	private String tipo;
 
-    @Column(nullable = false, name = "`capacidadNinos`")
-    private int capacidadNinos;
+	@Column(nullable = false, name = "`capacidadNinos`")
+	private int capacidadNinos;
 
-    @Column(nullable = false, name = "`capacidadAdultos`")
-    private int capacidadAdultos;
+	@Column(nullable = false, name = "`capacidadAdultos`")
+	private int capacidadAdultos;
 
-    @Column(nullable = false, name = "`precioNoche`")
-    private int precioNoche;
+	@Column(nullable = false, name = "`precioNoche`")
+	private int precioNoche;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idHab")
-    @JsonIgnore
-    private List<Registro> registros;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idHab")
+	@JsonIgnore
+	private List<Registro> registros;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idHab")
-    @JsonIgnore
-    private List<ReservaHabitacion> reservahabitaciones;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idHab")
+	@JsonIgnore
+	private List<ReservaHabitacion> reservahabitaciones;
 
 
-    public Habitacion() {
+	public Habitacion() {
 
-    }
+	}
 
-    public Habitacion(String tipo, int nroHabitacion, int capacidadNinos,int capacidadAdultos, int precioNoche) {
-        this.tipo = tipo;
-				this.nroHabitacion= nroHabitacion;
-        this.capacidadNinos = capacidadNinos;
-        this.capacidadAdultos = capacidadAdultos;
-        this.precioNoche = precioNoche;
-    }
+	public Habitacion(String tipo, int nroHabitacion, int capacidadNinos, int capacidadAdultos, int precioNoche) {
+		this.tipo = tipo;
+		this.nroHabitacion = nroHabitacion;
+		this.capacidadNinos = capacidadNinos;
+		this.capacidadAdultos = capacidadAdultos;
+		this.precioNoche = precioNoche;
+	}
 
 	public Long getIdHabitacion() {
 		return idHab;
 	}
 
 	public void setIdHabitacion(Long idHab) {
-		this.idHab= idHab;
+		this.idHab = idHab;
 	}
 
-	public int getNroHabitacion(){
+	public int getNroHabitacion() {
 		return nroHabitacion;
 	}
 
-	public void setNroHabitacion(int nroHabitacion){
-		this.nroHabitacion= nroHabitacion;
+	public void setNroHabitacion(int nroHabitacion) {
+		this.nroHabitacion = nroHabitacion;
 	}
 
 	public String getTipoHabitacion() {
@@ -85,7 +85,7 @@ public class Habitacion implements Serializable {
 	}
 
 	public void setTipoHabitacion(String tipo) {
-		this.tipo= tipo;
+		this.tipo = tipo;
 	}
 
 	public int getCapacidadNinos() {
@@ -103,21 +103,23 @@ public class Habitacion implements Serializable {
 	public void setCapacidadAdultos(int capacidadAdultos) {
 		this.capacidadAdultos = capacidadAdultos;
 	}
-  public int getPrecioNoche() {
-    return precioNoche;
-  }
 
-  public void setPrecioNoche(int precioNoche) {
-    this.precioNoche = precioNoche;
-  }
+	public int getPrecioNoche() {
+		return precioNoche;
+	}
+
+	public void setPrecioNoche(int precioNoche) {
+		this.precioNoche = precioNoche;
+	}
 
 	@JsonIgnore
 	public List<ReservaHabitacion> getReservasHabitaciones() {
 		return reservahabitaciones;
 	}
+
 	@JsonIgnore
 	public void setReservasHabitaciones(List<ReservaHabitacion> reservahabitaciones) {
-			this.reservahabitaciones = reservahabitaciones;
+		this.reservahabitaciones = reservahabitaciones;
 	}
 
 }

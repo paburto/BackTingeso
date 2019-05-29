@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import MingesoTingeso.demo.Repositories.ResHabRepository;
 
 import MingesoTingeso.demo.Models.ReservaHabitacion;
 
@@ -19,9 +20,10 @@ import MingesoTingeso.demo.Models.ReservaHabitacion;
 @ContextConfiguration
 @SpringBootTest
 public class ResHabRepositoryTest {
+	/*
 	@Autowired
 	ResHabRepository resHabRepository;
-	
+
 	@Test
 	public void findReservaHabitacionById() {
 		long idTest = 1;
@@ -37,5 +39,5 @@ public class ResHabRepositoryTest {
 	    }
 		
 	}
-	
+	*/
 }

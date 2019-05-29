@@ -20,48 +20,52 @@ import java.util.*;
 @Table(name="reserva")
 public class Reserva implements Serializable {
 
-		@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idReserva")
-    private Long idReserva;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idReserva")
+	private Long idReserva;
 
-    @Column(nullable = false, name = "`estado`")
-    private int estado;
+	@Column(nullable = false, name = "estado")
+	private int estado;
 
-		@Column(name = "`descuento`")
-		private int descuento;
+	@Column(name = "descuento")
+	private int descuento;
 
-		@ManyToOne(	fetch = FetchType.LAZY)
-		@JoinColumn(name = "idCliente")
-		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-		private Cliente cliente;
+	@Column(name = "codigoReserva")
+	private int codigoReserva;
 
-		@ManyToOne(fetch = FetchType.LAZY)
-		@JoinColumn(name = "idUser")
-		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-		private Usuario usuario;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCliente")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Cliente cliente;
 
-
-		@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-		@JoinColumn(name = "idReserva")
-		@JsonIgnore
-		private List<ReservaHabitacion> reservahabitaciones;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUser")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Usuario usuario;
 
 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idReserva")
+	@JsonIgnore
+	private List<ReservaHabitacion> reservahabitaciones;
 
-    public Reserva() {
 
-    }
+	public Reserva() {
 
-    public Reserva(int estado, int descuento) {
-        this.estado = estado;
-				this.descuento = descuento;
-    }
+	}
+
+	public Reserva(int estado,int descuento,int codigoReserva, Usuario usuario, Cliente cliente){
+		this.estado = estado;
+		this.descuento = descuento;
+		this.codigoReserva = codigoReserva;
+		this.usuario = usuario;
+		this.cliente = cliente;
+	}
 
 	public Long getIdReserva() {
 		return idReserva;
 	}
-
 
 	public void setIdReserva(Long idReserva) {
 		this.idReserva= idReserva;
@@ -81,6 +85,14 @@ public class Reserva implements Serializable {
 
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+
+	public int getCodigoReserva() {
+		return codigoReserva;
+	}
+
+	public void setCodigoReserva(int codigoReserva) {
+		this.codigoReserva = codigoReserva;
 	}
 
 	public Cliente getCliente(){

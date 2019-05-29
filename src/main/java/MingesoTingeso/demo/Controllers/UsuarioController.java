@@ -53,6 +53,7 @@ public class UsuarioController {
                     jsonData.get("rol_usuario").toString(),
                     jsonData.get("correo_usuario").toString(),
                     Integer.parseInt(jsonData.get("rut_usuario").toString())));
+            System.out.println(jsonData);
             map.put("status", "201");
             map.put("message", "OK");
             result.add(map);

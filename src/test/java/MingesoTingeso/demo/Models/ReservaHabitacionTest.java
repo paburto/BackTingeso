@@ -1,4 +1,4 @@
-package MingesoTingeso.demo.Models;
+/*package MingesoTingeso.demo.Models;
 
 import org.junit.Test;
 import java.util.Date;
@@ -184,3 +184,4 @@ public class ReservaHabitacionTest {
       }
     }
 }
+*/

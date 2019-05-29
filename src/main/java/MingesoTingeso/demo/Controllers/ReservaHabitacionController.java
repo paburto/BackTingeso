@@ -40,14 +40,13 @@ public class ReservaHabitacionController {
 	@Autowired
 	ReservaRepository reservaRepository;
 
-
 	ClienteController clienteController;
 
 	@RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public List<ReservaHabitacion> getAllReservasHabitaciones() {
-        return reshabRepository.findAll();
-    }
+	@ResponseBody
+	public List<ReservaHabitacion> getAllReservasHabitaciones() {
+		return reshabRepository.findAll();
+	}
 
 
 
@@ -120,12 +119,7 @@ public class ReservaHabitacionController {
 						}
 					}
 				}
-				return result;
-	    }
+			return result;
+		}
+	}
 
-
-
-
-
-
-}

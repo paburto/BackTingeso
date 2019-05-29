@@ -22,76 +22,78 @@ import java.util.*;
 public class ReservaHabitacion implements Serializable {
 
   @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long id;
 
-    @Column(nullable = false, name = "`fechaInicio`")
-    private Date fechaInicio;
+  @Column(nullable = false, name = "`fechaInicio`")
+  private Date fechaInicio;
 
-    @Column(nullable = false, name = "`fechaTermino`")
-    private Date fechaTermino;
+  @Column(nullable = false, name = "`fechaTermino`")
+  private Date fechaTermino;
 
-    @ManyToOne(cascade = CascadeType.ALL,
+  @ManyToOne(cascade = CascadeType.ALL,
           fetch = FetchType.LAZY)
-    @JoinColumn(name = "idReserva")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Reserva reserva;
+  @JoinColumn(name = "idReserva")
+  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+  private Reserva reserva;
 
-    @ManyToOne(cascade = CascadeType.ALL,
+  @ManyToOne(cascade = CascadeType.ALL,
           fetch = FetchType.LAZY)
-    @JoinColumn(name = "idHab")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Habitacion habitacion;
+  @JoinColumn(name = "idHab")
+  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+  private Habitacion habitacion;
 
-    public ReservaHabitacion() {
+  public ReservaHabitacion() {
 
-    }
+  }
 
-    public ReservaHabitacion(Date fechaInicio, Date fechaTermino) {
-        this.fechaInicio = fechaInicio;
-        this.fechaTermino = fechaTermino;
-    }
+  public ReservaHabitacion(Date fechaInicio, Date fechaTermino, Reserva reserva, Habitacion habitacion ) {
+    this.fechaInicio = fechaInicio;
+    this.fechaTermino = fechaTermino;
+    this.reserva = reserva;
+    this.habitacion = habitacion;
+  }
 
 
-    	public Long getIdRH() {
-    		return id;
-    	}
+  public Long getIdRH() {
+    return id;
+  }
 
-    	public void setIdRH(Long id) {
-    		this.id= id;
-    	}
+  public void setIdRH(Long id) {
+    this.id= id;
+  }
 
-    public Date getFechaInicioRH() {
-      return fechaInicio;
-    }
+  public Date getFechaInicioRH() {
+    return fechaInicio;
+  }
 
-    public void setFechaInicioRH(Date fechaInicio) {
-      this.fechaInicio = fechaInicio;
-    }
+  public void setFechaInicioRH(Date fechaInicio) {
+    this.fechaInicio = fechaInicio;
+  }
 
-    public Date getFechaTerminoRH() {
-      return fechaTermino;
-    }
+  public Date getFechaTerminoRH() {
+    return fechaTermino;
+  }
 
-    public void setFechaTerminoRH(Date fechaTermino) {
-      this.fechaTermino = fechaTermino;
-    }
+  public void setFechaTerminoRH(Date fechaTermino) {
+    this.fechaTermino = fechaTermino;
+  }
 
-    public Reserva getReserva(){
-      return reserva;
-    }
+  public Reserva getReserva(){
+    return reserva;
+  }
 
-    public void setReserva(Reserva reserva){
-      this.reserva = reserva;
-    }
+  public void setReserva(Reserva reserva){
+    this.reserva = reserva;
+  }
 
-    public Habitacion getHabitacion(){
-      return habitacion;
-    }
+  public Habitacion getHabitacion(){
+    return habitacion;
+  }
 
-    public void setHabitacion(Habitacion habitacion){
-      this.habitacion = habitacion;
-    }
+  public void setHabitacion(Habitacion habitacion){
+    this.habitacion = habitacion;
+  }
 
 }
