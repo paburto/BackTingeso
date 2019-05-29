@@ -1,4 +1,4 @@
-/*package MingesoTingeso.demo.Models;
+package MingesoTingeso.demo.Models;
 
 import org.junit.Test;
 import java.util.Date;
@@ -11,53 +11,107 @@ public class ReservaTest {
 
     @Test
     public void setIdReserva() {
-      Reserva r = new Reserva(1,10,10);
-      r.setIdReserva(2L);
-      assertEquals(2L,(long)r.getIdReserva());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          r.setIdReserva(2L);
+          assertEquals(2L,(long)r.getIdReserva());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getIdReserva() {
-      Reserva r = new Reserva(1,10,10);
-      r.setIdReserva(2L);
-      assertEquals(2L,(long)r.getIdReserva());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          r.setIdReserva(2L);
+          assertEquals(2L,(long)r.getIdReserva());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getDescuento() {
-      Reserva r = new Reserva(1,10,10);
-      assertEquals(10,r.getDescuento());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          assertEquals(10,r.getDescuento());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setDescuento() {
-      Reserva r = new Reserva(1,10,1,1,1);
-      r.setDescuento(15);
-      assertEquals(15,r.getDescuento());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          r.setDescuento(15);
+          assertEquals(15,r.getDescuento());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getEstado() {
-        Reserva r= new Reserva(1,10,10,1,1);
-        assertEquals(1, r.getEstado());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          assertEquals(1, r.getEstado());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setEstado() {
-        Reserva r= new Reserva(1,10,1,1,1);
-        r.setEstado(20);
-        assertEquals(20, r.getEstado());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          r.setEstado(20);
+          assertEquals(20, r.getEstado());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void getCliente() {
-      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-      String dateInString = "08/05/2019";
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
       try {
           Date fecha = formatter.parse(dateInString);
-          Cliente c = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678, fecha);
-          Reserva r = new Reserva(1,10);
-          r.setCliente(c);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
           assertEquals(c,r.getCliente());
       } catch (ParseException e) {
           e.printStackTrace();
@@ -66,14 +120,16 @@ public class ReservaTest {
 
     @Test
     public void setCliente() {
-      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-      String dateInString = "08/05/2019";
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
       try {
           Date fecha = formatter.parse(dateInString);
-          Cliente c = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Reserva r = new Reserva(1,10);
-          r.setCliente(c);
-          assertEquals(c,r.getCliente());
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          Cliente c2 = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          r.setCliente(c2);
+          assertEquals(c2,r.getCliente());
       } catch (ParseException e) {
           e.printStackTrace();
       }
@@ -81,18 +137,33 @@ public class ReservaTest {
 
     @Test
     public void getUsuario() {
-      Usuario u = new Usuario("José Mellado","Operador","jose.mellado@usach.cl",22345109);
-      Reserva r = new Reserva(1,10);
-      r.setUsuario(u);
-      assertEquals(u,r.getUsuario());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          assertEquals(u,r.getUsuario());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 
     @Test
     public void setUsuario() {
-      Usuario u = new Usuario("José Mellado","Operador","jose.mellado@usach.cl",22345109);
-      Reserva r = new Reserva(1,10);
-      r.setUsuario(u);
-      assertEquals(u,r.getUsuario());
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          Usuario u2 = new Usuario("José Mellado","Operador","jose.mellado@usach.cl",123456789);
+          r.setUsuario(u2);
+          assertEquals(u2,r.getUsuario());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
     }
 }
-*/
