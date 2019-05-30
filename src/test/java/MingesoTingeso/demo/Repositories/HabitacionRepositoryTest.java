@@ -70,12 +70,4 @@ public class HabitacionRepositoryTest {
 			assertEquals(520, hab.get(0).getNroHabitacion());
 		}
 	}
-
-	// @Test
-	// public void deleteHabitacionByIdHab(){
-	// 	Long id = (long)25L;
-	// 	Habitacion h = habitacionRepository.deleteHabitacionByIdHab((long)id);
-	// 	assertEquals(null,h);
-	// }
-
 }
