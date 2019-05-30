@@ -92,7 +92,7 @@ public class ReservaController {
                         map.put("estado", Integer.toString(r.getEstado()));
 
                         map.put("nroHabitacion", Integer.toString(rh.getHabitacion().getNroHabitacion()));
-
+                        map.put("idHab", rh.getHabitacion().getIdHabitacion().toString());
                         map.put("idUser", r.getUsuario().getIdUsuario().toString());
 
                         map.put("idCliente", c.getIdCliente().toString());
