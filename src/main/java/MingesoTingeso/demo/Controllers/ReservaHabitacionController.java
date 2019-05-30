@@ -140,7 +140,7 @@ public class ReservaHabitacionController {
 					return result;
 				}
 				if(fechaTermino.equals(reserva.getFechaTerminoRH()) || fechaTermino.equals(reserva.getFechaInicioRH())
-						|| fechaInicio.equals(reserva.getFechaTerminoRH()) || fechaInicio.equals(reserva.getFechaTerminoRH())){
+						|| fechaInicio.equals(reserva.getFechaTerminoRH()) || fechaInicio.equals(reserva.getFechaInicioRH())){
 					map.put("status", "401");
 					map.put("message", "Uno de los días extremos calza con un día de reserva");
 					result.add(map);
