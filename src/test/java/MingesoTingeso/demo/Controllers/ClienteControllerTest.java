@@ -22,7 +22,6 @@ public class ClienteControllerTest {
       List<Cliente> c1 = cc.getAllClientes();
       List<Cliente> c2 = cc.getAllClientes();
       assertEquals(c1.size(),c2.size());
-
     }
 
     @Test

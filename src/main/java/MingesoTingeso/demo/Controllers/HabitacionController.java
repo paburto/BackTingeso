@@ -149,10 +149,10 @@ public class HabitacionController {
 			Habitacion habitacion = habitacionRepository.findHabitacionByNroHabitacion(Integer.parseInt(jsonData.get("nroHabitacion").toString()));
 			if(habitacion == null) {
 				habitacionRepository.save(new Habitacion(jsonData.get("tipo").toString(),
-															Integer.parseInt(jsonData.get("nroHabitacion").toString()),
-															Integer.parseInt(jsonData.get("capacidadNinos").toString()),
-															Integer.parseInt(jsonData.get("capacidadAdultos").toString()),
-															Integer.parseInt(jsonData.get("precioNoche").toString())));
+				Integer.parseInt(jsonData.get("nroHabitacion").toString()),
+				Integer.parseInt(jsonData.get("capacidadNinos").toString()),
+				Integer.parseInt(jsonData.get("capacidadAdultos").toString()),
+				Integer.parseInt(jsonData.get("precioNoche").toString())));
 				map.put("status", "201");
 				map.put("message", "Habitacion agregada con exito");
 				result.add(map);
