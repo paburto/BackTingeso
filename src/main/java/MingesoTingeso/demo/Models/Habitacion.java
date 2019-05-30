@@ -41,6 +41,10 @@ public class Habitacion implements Serializable {
 	@Column(nullable = false, name = "`precioNoche`")
 	private int precioNoche;
 
+
+	/*@Column(nullable = false, name = "`estado`")
+	private int estado;*/
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idHab")
 	@JsonIgnore
@@ -56,13 +60,15 @@ public class Habitacion implements Serializable {
 
 	}
 
-	public Habitacion(String tipo, int nroHabitacion, int capacidadNinos, int capacidadAdultos, int precioNoche) {
+	public Habitacion(String tipo, int nroHabitacion, int capacidadNinos, int capacidadAdultos, int precioNoche ){
 		this.tipo = tipo;
 		this.nroHabitacion = nroHabitacion;
 		this.capacidadNinos = capacidadNinos;
 		this.capacidadAdultos = capacidadAdultos;
 		this.precioNoche = precioNoche;
+		//this.estado = estado;
 	}
+
 
 	public Long getIdHabitacion() {
 		return idHab;
@@ -112,6 +118,15 @@ public class Habitacion implements Serializable {
 		this.precioNoche = precioNoche;
 	}
 
+	/*public int getEstado(){
+		return estado;
+
+	}
+
+	public void setEstado(int estado){
+		this.estado = estado;
+	}
+*/
 	@JsonIgnore
 	public List<ReservaHabitacion> getReservasHabitaciones() {
 		return reservahabitaciones;

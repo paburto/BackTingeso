@@ -44,6 +44,61 @@ public class HabitacionController {
         return habitacionRepository.findHabitacionByIdHab(id);
     }
 
+		@CrossOrigin(origins = "*")
+		@PostMapping("/deshabilitar/{id}")
+			@ResponseBody
+			public List<HashMap<String, String>> inhabilitar(@PathVariable Long id, @RequestBody Map<String, Object> jsonData) throws ParseException {
+			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+			HashMap<String, String> map = new HashMap<>();
+			Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(id);
+
+			if(habitacion == null) {
+				map.put("status", "404");
+				map.put("message", "La habitacion no existe");
+				map.put("item", "");
+				result.add(map);
+				return result;
+			}
+			else{
+				habitacion.setTipoHabitacion(jsonData.get("tipo").toString());
+				habitacionRepository.save(habitacion);
+				map.put("status", "200");
+				map.put("message", "La Habitacion ha sido inhabilitada para reservar");
+				result.add(map);
+				return result;
+			}
+
+		}
+
+		@PostMapping("/habilitar/{id}")
+			@ResponseBody
+			public List<HashMap<String, String>> habilitar(@PathVariable Long id, @RequestBody Map<String, Object> jsonData) throws ParseException {
+			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+			HashMap<String, String> map = new HashMap<>();
+			Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(id);
+
+			if(habitacion == null) {
+				map.put("status", "404");
+				map.put("message", "La habitacion no existe");
+				map.put("item", "");
+				result.add(map);
+				return result;
+			}
+			else{
+				habitacion.setTipoHabitacion(jsonData.get("tipo").toString());
+				habitacionRepository.save(habitacion);
+				map.put("status", "200");
+				map.put("message", "La Habitacion ha sido habilitada para reservar");
+				result.add(map);
+				return result;
+			}
+
+		}
+
+
+
+
+
 		@PostMapping("/update/{id}")
 			@ResponseBody
 			public List<HashMap<String, String>> update(@PathVariable Long id, @RequestBody Map<String, Object> jsonData) throws ParseException {
