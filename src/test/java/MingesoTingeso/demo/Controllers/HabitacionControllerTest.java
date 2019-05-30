@@ -38,9 +38,8 @@ public class HabitacionControllerTest {
 
     @Test
     public void inhabilitar(){
-
     }
-    
+
     @Test
     public void update() {
     }

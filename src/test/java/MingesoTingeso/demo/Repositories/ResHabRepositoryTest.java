@@ -45,19 +45,17 @@ public class ResHabRepositoryTest {
     }
 
 	}
-	/*
-	@Test
-	public void findReservaHabitacionByReserva() {
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    String dateInString = "2000-10-10";
-    try {
-    	ReservaHabitacion rh = resHabRepository.findReservaHabitacionByReserva(1L);
-    	Date fecha = formatter.parse(dateInString);
-			rh.setFechaInicioRH(fecha);
-			assertEquals(fecha, rh.getFechaInicioRH());
-    }catch (ParseException e) {
-          e.printStackTrace();
-    }
-  }
-	*/
+	// @Test
+	// public void findReservaHabitacionByReserva() {
+  //   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+  //   String dateInString = "2000-10-10";
+  //   try {
+  //   	ReservaHabitacion rh = resHabRepository.findReservaHabitacionByReserva(1L);
+  //   	Date fecha = formatter.parse(dateInString);
+	// 		rh.setFechaInicioRH(fecha);
+	// 		assertEquals(fecha, rh.getFechaInicioRH());
+  //   }catch (ParseException e) {
+  //         e.printStackTrace();
+  //   }
+  // }
 }
