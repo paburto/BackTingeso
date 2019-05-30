@@ -30,6 +30,11 @@ public class ReservaHabitacionControllerTest {
     }
 
     @Test
+    public void update(){
+
+    }
+
+    @Test
     public void getAllRack() {
 
     }

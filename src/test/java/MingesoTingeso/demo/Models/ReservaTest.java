@@ -166,4 +166,35 @@ public class ReservaTest {
           e.printStackTrace();
       }
     }
+
+    @Test
+    public void getCodigoReserva(){
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          assertEquals(10, r.getCodigoReserva());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+    }
+
+    @Test
+    public void setCodigoReserva(){
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Reserva r = new Reserva(1,10,10,u,c);
+          r.setCodigoReserva(11);
+          assertEquals(11, r.getCodigoReserva());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+    }
 }
