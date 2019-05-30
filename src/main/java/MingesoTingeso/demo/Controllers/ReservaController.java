@@ -14,6 +14,7 @@ import java.util.Map;
 import MingesoTingeso.demo.Models.*;
 import MingesoTingeso.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.remoting.soap.SoapFaultException;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,6 +65,29 @@ public class ReservaController {
     @ResponseBody
     public Cliente getClienteById(@PathVariable Long idCliente) {
         return clienteRepository.findClienteByIdCliente(idCliente);
+    }
+
+    @RequestMapping(value = "/mostrarReservas/", method = RequestMethod.GET)
+    @ResponseBody
+
+    public List<Reserva>  getReservasFuturas() {
+
+        List<Reserva> reservas =  new ArrayList<Reserva>();;
+
+        List<ReservaHabitacion> reservadehabitaciones = resHabRepository.findAll();
+        LocalDate localDate = LocalDate.now();
+        Date actual = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        for (ReservaHabitacion r: reservadehabitaciones){
+            if (r.getFechaInicioRH().after(actual)){
+                reservas.add(r.getReserva());
+            }
+        }
+        List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("status", "200");
+        map.put("message", "OK.");
+        result.add(map);
+        return reservas;
     }
 
     @PostMapping("/create")
