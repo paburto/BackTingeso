@@ -44,12 +44,7 @@ public class ReservaRepositoryTest {
 			assertEquals(20000, r.get(0).getDescuento());
 		}
 	}
-
-	// @Test
-	// public void deleteReservaByIdReserva(){
-	//
-	// }
-
+	
 	@Test
 	public void findReservaByCodigoReserva(){
 		Reserva r = reservaRepository.findReservaByCodigoReserva(666);

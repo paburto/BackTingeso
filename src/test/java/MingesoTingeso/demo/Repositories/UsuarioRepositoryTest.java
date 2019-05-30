@@ -34,10 +34,4 @@ public class UsuarioRepositoryTest {
 		Usuario u = usuarioRepository.findUsuarioByRutUsuario(191472584);
 		assertEquals("Elba Lazo", u.getNombreUsuario());
 	}
-
-	// @Test
-	// public void deleteUsuarioByIdUser(){
-	//
-	// }
-
 }
