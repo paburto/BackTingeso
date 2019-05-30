@@ -18,10 +18,11 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class UsuarioControllerTest {
-  
+    @Autowired
+    UsuarioController uc;
+
     @Test
     public void getAllUsuarios() {
-        UsuarioController uc = new UsuarioController();
         List<Usuario> ua = uc.getAllUsuarios();
         Usuario u  = ua.get(0);
         assertEquals(1L, (long)u.getIdUsuario());
@@ -29,7 +30,6 @@ public class UsuarioControllerTest {
 
     @Test
     public void getUsuarioById() {
-      UsuarioController uc = new UsuarioController();
       Usuario u = uc.getUsuarioById(1L);
       assertEquals(1L, (long)u.getIdUsuario());
     }

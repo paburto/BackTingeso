@@ -18,13 +18,15 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class ReservaHabitacionControllerTest {
+    @Autowired
+    ReservaHabitacionController rhc;
 
     @Test
     public void getAllReservasHabitaciones() {
-      ReservaHabitacionController rhc = new ReservaHabitacionController();
       List<ReservaHabitacion> rha = rhc.getAllReservasHabitaciones();
-      ReservaHabitacion rh = rha.get(0);
-      assertEquals(1L,(long)rh.getIdRH());
+      ReservaHabitacion rh1 = rha.get(0);
+      ReservaHabitacion rh2 = rha.get(0);
+      assertEquals((long)rh1.getIdRH(),(long)rh2.getIdRH());
     }
 
     @Test

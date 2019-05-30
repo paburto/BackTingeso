@@ -22,35 +22,33 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class ReservaControllerTest {
+    @Autowired
+    ReservaController rc;
 
     @Test
     public void getAllReservas() {
-      ReservaController rc = new ReservaController();
       List<Reserva> ra = rc.getAllReservas();
-      Reserva r = ra.get(0);
-      assertEquals(1L, (long)r.getIdReserva());
+      Reserva r1 = ra.get(0);
+      Reserva r2 = rc.getReservaByIdReserva((long)r1.getIdReserva());
+      assertEquals(r1.getIdReserva(),r2.getIdReserva());
     }
 
     @Test
     public void getReservaByIdReserva() {
-      ReservaController rc = new ReservaController();
       Reserva r  = rc.getReservaByIdReserva(1L);
       assertEquals(1L,(long)r.getIdReserva());
     }
 
     @Test
     public void getReservaByCodigoReserva() {
-      ReservaController rc = new ReservaController();
       Reserva r1 = rc.getReservaByIdReserva(1L);
       int codigo = r1.getCodigoReserva();
       Reserva r2 = rc.getReservaByCodigoReserva(codigo);
-      assertEquals(r1,r2);
-
+      assertEquals(r1.getIdReserva(),r2.getIdReserva());
     }
 
     @Test
     public void getHabitacionByTipo() {
-      ReservaController rc = new ReservaController();
       List<Habitacion> ha = rc.getHabitacionByTipo("Simple");
       Habitacion h = ha.get(0);
       assertEquals("Simple", h.getTipoHabitacion());
@@ -58,7 +56,6 @@ public class ReservaControllerTest {
 
     @Test
     public void getClienteById() {
-      ReservaController rc = new ReservaController();
       Cliente c = rc.getClienteById(1L);
       assertEquals(1L,(long)c.getIdCliente());
     }

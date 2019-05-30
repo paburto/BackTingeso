@@ -24,7 +24,9 @@ import MingesoTingeso.demo.Models.Reserva;
 public class ResHabRepositoryTest {
 	@Autowired
 	ResHabRepository resHabRepository;
+	@Autowired
   HabitacionRepository habRepository;
+	@Autowired
   ReservaRepository resRepository;
 
   @Test
@@ -43,7 +45,7 @@ public class ResHabRepositoryTest {
     }
 
 	}
-
+	/*
 	@Test
 	public void findReservaHabitacionByReserva() {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,4 +59,5 @@ public class ResHabRepositoryTest {
           e.printStackTrace();
     }
   }
+	*/
 }

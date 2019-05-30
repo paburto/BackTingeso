@@ -19,22 +19,22 @@ import MingesoTingeso.demo.Models.Habitacion;
 public class HabitacionRepositoryTest {
 	@Autowired
 	HabitacionRepository habitacionRepository;
-	
+
 	@Test
 	public void findHabitacionByIdHab() {
-		long idTest = 5;
-		Habitacion hab = habitacionRepository.findHabitacionByIdHab(idTest);
+		Habitacion hab = habitacionRepository.findHabitacionByIdHab(1L);
 		hab.setCapacidadAdultos(20);
 		assertEquals(20, hab.getCapacidadAdultos());
 	}
-	
+
 	@Test
 	public void findHabitacionByNroHabitacion() {
+		
 		Habitacion hab = habitacionRepository.findHabitacionByNroHabitacion(666);
 		hab.setCapacidadAdultos(20);
 		assertEquals(20, hab.getCapacidadAdultos());
 	}
-	
+
 	@Test
 	public void findHabitacionByTipo() {
 		List<Habitacion> hab = habitacionRepository.findHabitacionByTipo("Simple");
@@ -43,7 +43,7 @@ public class HabitacionRepositoryTest {
 			assertEquals(10, hab.get(0).getCapacidadNinos());
 		}
 	}
-	
+
 	@Test
 	public void findHabitacionByCapacidadNinos() {
 		List<Habitacion> hab = habitacionRepository.findHabitacionByCapacidadNinos(2);
@@ -52,7 +52,7 @@ public class HabitacionRepositoryTest {
 			assertEquals(20000, hab.get(0).getPrecioNoche());
 		}
 	}
-	
+
 	@Test
 	public void findHabitacionByCapacidadAdultos() {
 		List<Habitacion> hab = habitacionRepository.findHabitacionByCapacidadAdultos(2);
@@ -61,7 +61,7 @@ public class HabitacionRepositoryTest {
 			assertEquals(40000, hab.get(0).getPrecioNoche());
 		}
 	}
-	
+
 	@Test
 	public void findHabitacionByPrecioNoche() {
 		List<Habitacion> hab = habitacionRepository.findHabitacionByPrecioNoche(50000);
