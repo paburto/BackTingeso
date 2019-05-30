@@ -75,8 +75,6 @@ public class ReservaController {
         List<ReservaHabitacion> reservahabitacion = resHabRepository.findAll();
         List<Reserva> reserva = reservaRepository.findAll();
         List<Cliente> cliente = clienteRepository.findAll();
-
-        List<ReservaHabitacion> reservadehabitaciones = resHabRepository.findAll();
         LocalDate localDate = LocalDate.now();
         Date actual = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 

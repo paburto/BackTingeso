@@ -54,7 +54,7 @@ public class HabitacionControllerTest {
     	map.put("capacidadNinos", h1.get(0).getCapacidadNinos());
     	map.put("capacidadAdultos", h1.get(0).getCapacidadAdultos());
     	map.put("precioNoche", h1.get(0).getPrecioNoche());
-		List<HashMap<String, String>> hab = hc.update((long)29, map);
+		List<HashMap<String, String>> hab = hc.update(h1.get(0).getIdHabitacion(), map);
 		assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
     }
 
