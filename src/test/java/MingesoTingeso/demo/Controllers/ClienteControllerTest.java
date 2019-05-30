@@ -17,19 +17,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration
 @SpringBootTest
 public class ClienteControllerTest {
     @Autowired
     ClienteController clienteController;
     @Autowired
     private MockMvc mockMvc;
-    
+
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.standaloneSetup(clienteController).build();
     }
-   
+
     @Test
     public void getAllClientes() throws Exception {
     	clienteController = mock(ClienteController.class);
