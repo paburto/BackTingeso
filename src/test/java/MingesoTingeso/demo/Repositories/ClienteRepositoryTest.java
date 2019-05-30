@@ -16,12 +16,19 @@ import static org.junit.Assert.*;
 public class ClienteRepositoryTest {
 	@Autowired
 	ClienteRepository clienteRepository;
-	
+
 	@Test
 	public void findClienteByIdCliente() {
-		long idTest = 1;	
+		long idTest = 1;
 		Cliente c = clienteRepository.findClienteByIdCliente(idTest);
 		c.setNombreCliente("Juan Perez");
 		assertEquals("Juan Perez", c.getNombreCliente());
+	}
+
+	@Test
+	public void findClienteByRut(){
+		Cliente c = clienteRepository.findClienteByRut(18123456);
+		assertEquals(18123456,c.getRut());
+
 	}
 }

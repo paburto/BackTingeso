@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class UsuarioRepositoryTest {
 	@Autowired
 	UsuarioRepository usuarioRepository;
-	
+
 	@Test
 	public void findUsuarioByIdUser() {
 		long idTest = 1;
@@ -22,17 +22,22 @@ public class UsuarioRepositoryTest {
 		u.setCorreoUsuario("tingeso@usach.cl");
 		assertEquals("tingeso@usach.cl", u.getCorreoUsuario());
 	}
-	
+
 	@Test
 	public void findUsuarioByCorreoUsuario() {
 		Usuario u = usuarioRepository.findUsuarioByCorreoUsuario("aiura@tingeso.com");
 		assertEquals("Aquiles Brinco", u.getNombreUsuario());
 	}
-	
+
 	@Test
 	public void findUsuarioByRutUsuario() {
 		Usuario u = usuarioRepository.findUsuarioByRutUsuario(191472584);
 		assertEquals("Elba Lazo", u.getNombreUsuario());
 	}
-	
+
+	// @Test
+	// public void deleteUsuarioByIdUser(){
+	//
+	// }
+
 }

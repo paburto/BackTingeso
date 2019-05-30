@@ -54,7 +54,6 @@ public class HabitacionController {
 			if(habitacion == null) {
 				map.put("status", "404");
 				map.put("message", "La habitacion no existe");
-				map.put("item", "");
 				result.add(map);
 				return result;
 			}
@@ -62,41 +61,12 @@ public class HabitacionController {
 				habitacion.setTipoHabitacion(jsonData.get("tipo").toString());
 				habitacionRepository.save(habitacion);
 				map.put("status", "200");
-				map.put("message", "La Habitacion ha sido inhabilitada para reservar");
+				map.put("message", "Operación realizada con exito");
 				result.add(map);
 				return result;
 			}
 
 		}
-
-		@PostMapping("/habilitar/{id}")
-			@ResponseBody
-			public List<HashMap<String, String>> habilitar(@PathVariable Long id, @RequestBody Map<String, Object> jsonData) throws ParseException {
-			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
-			HashMap<String, String> map = new HashMap<>();
-			Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(id);
-
-			if(habitacion == null) {
-				map.put("status", "404");
-				map.put("message", "La habitacion no existe");
-				map.put("item", "");
-				result.add(map);
-				return result;
-			}
-			else{
-				habitacion.setTipoHabitacion(jsonData.get("tipo").toString());
-				habitacionRepository.save(habitacion);
-				map.put("status", "200");
-				map.put("message", "La Habitacion ha sido habilitada para reservar");
-				result.add(map);
-				return result;
-			}
-
-		}
-
-
-
-
 
 		@PostMapping("/update/{id}")
 			@ResponseBody
@@ -108,7 +78,6 @@ public class HabitacionController {
 			if(habitacion == null) {
 				map.put("status", "404");
 				map.put("message", "La habitacion no existe");
-				map.put("item", "");
 				result.add(map);
 				return result;
 			}
@@ -118,7 +87,6 @@ public class HabitacionController {
 				if (h != null){
 					map.put("status", "404");
 					map.put("message", "Nro de habitacion ya existe, ingrese otro nro");
-					map.put("item", "");
 					result.add(map);
 					return result;
 				}
@@ -150,7 +118,6 @@ public class HabitacionController {
 		if(habitacion == null) {
 			map.put("status", "404");
 			map.put("message", "Habitacion no existe");
-			map.put("item", "");
 			result.add(map);
 			return result;
 		}
@@ -161,7 +128,6 @@ public class HabitacionController {
 				if(rh.getFechaTerminoRH().compareTo(objDate) > 0){
 					map.put("status", "404");
 					map.put("message", "No se puede borrar esta habitacion, hay reservas pendientes");
-					map.put("item", "");
 					result.add(map);
 					return result;
 				}

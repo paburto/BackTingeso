@@ -29,7 +29,7 @@ public class HabitacionRepositoryTest {
 
 	@Test
 	public void findHabitacionByNroHabitacion() {
-		
+
 		Habitacion hab = habitacionRepository.findHabitacionByNroHabitacion(666);
 		hab.setCapacidadAdultos(20);
 		assertEquals(20, hab.getCapacidadAdultos());
@@ -70,5 +70,12 @@ public class HabitacionRepositoryTest {
 			assertEquals(520, hab.get(0).getNroHabitacion());
 		}
 	}
+
+	// @Test
+	// public void deleteHabitacionByIdHab(){
+	// 	Long id = (long)25L;
+	// 	Habitacion h = habitacionRepository.deleteHabitacionByIdHab((long)id);
+	// 	assertEquals(null,h);
+	// }
 
 }

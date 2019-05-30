@@ -150,4 +150,31 @@ public class ClienteTest {
           e.printStackTrace();
       }
     }
+
+    @Test
+    public void getCorreoCliente(){
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          assertEquals("edgar.blau@usach.cl", c.getCorreoCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+    }
+
+    @Test
+    public void setCorreoCliente(){
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dateInString = "2000-10-10";
+      try {
+          Date fecha = formatter.parse(dateInString);
+          Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
+          c.setCorreoCliente("diego.aguila@usach.cl");
+          assertEquals("diego.aguila@usach.cl",c.getCorreoCliente());
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+    }
 }

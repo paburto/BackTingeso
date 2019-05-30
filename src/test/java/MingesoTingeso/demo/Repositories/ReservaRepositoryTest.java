@@ -18,7 +18,7 @@ import MingesoTingeso.demo.Models.Reserva;
 public class ReservaRepositoryTest {
 	@Autowired
 	ReservaRepository reservaRepository;
-	
+
 	@Test
 	public void findReservaByIdReserva() {
 		long idTest = 1;
@@ -26,7 +26,7 @@ public class ReservaRepositoryTest {
 		r.setDescuento(1000);
 		assertEquals(1000, r.getDescuento());
 	}
-	
+
 	@Test
 	public void findReservaByDescuento() {
 		List<Reserva> r = reservaRepository.findReservaByDescuento(10);
@@ -35,7 +35,7 @@ public class ReservaRepositoryTest {
 			assertEquals(0, r.get(0).getEstado());
 		}
 	}
-	
+
 	@Test
 	public void findReservaByEstado() {
 		List<Reserva> r = reservaRepository.findReservaByEstado(1);
@@ -44,5 +44,22 @@ public class ReservaRepositoryTest {
 			assertEquals(20000, r.get(0).getDescuento());
 		}
 	}
-	
+
+	// @Test
+	// public void deleteReservaByIdReserva(){
+	//
+	// }
+
+	@Test
+	public void findReservaByCodigoReserva(){
+		Reserva r = reservaRepository.findReservaByCodigoReserva(666);
+		assertEquals(666,r.getCodigoReserva());
+	}
+
+	@Test
+	public void getReservaByCodigoReserva(){
+		Reserva r = reservaRepository.getReservaByCodigoReserva(666);
+		assertEquals(666,r.getCodigoReserva());
+	}
+
 }
