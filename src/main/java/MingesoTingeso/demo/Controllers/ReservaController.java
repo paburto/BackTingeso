@@ -110,7 +110,6 @@ public class ReservaController {
         else if(fechaInicio.after(fechaTermino)){
             map.put("status", "401");
             map.put("message", "La fecha de inicio no puede estar después de la fecha de termino.");
-            map.put("código: ", jsonData.get("codigoReserva").toString());
             result.add(map);
             return result;
         }

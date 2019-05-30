@@ -1,6 +1,8 @@
 package MingesoTingeso.demo.Controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,6 +10,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import MingesoTingeso.demo.Models.Habitacion;
+import MingesoTingeso.demo.Repositories.HabitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +44,12 @@ public class ReservaHabitacionController {
 	@Autowired
 	ReservaRepository reservaRepository;
 
+	@Autowired
 	ClienteController clienteController;
+
+	@Autowired
+	HabitacionRepository habitacionRepository;
+
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
@@ -50,43 +59,112 @@ public class ReservaHabitacionController {
 
 
 
-	@PostMapping("/create")
+
+	@PostMapping("/update/{codigoReserva}")
 	@ResponseBody
-	public List<HashMap<String, String>> createSimple(@RequestBody Map<String, Object> jsonData) throws ParseException {
+	public List<HashMap<String, String>> update(@PathVariable int codigoReserva, @RequestBody Map<String, Object> jsonData) throws ParseException {
 		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+		System.out.println(jsonData);
+		Reserva reservaU = reservaRepository.findReservaByCodigoReserva(codigoReserva);
+		int auxEstado = reservaU.getEstado();
 		HashMap<String, String> map = new HashMap<>();
-		Date fechaInicio = null,fechaTermino = null;
-		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			fechaInicio = formato.parse(jsonData.get("fechaInicio").toString());
-			fechaTermino = formato.parse(jsonData.get("fechaTermino").toString());
+
+
+		Long idReserva = reservaU.getIdReserva();
+		List<ReservaHabitacion> reservahabitaciones = reshabRepository.findAll();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.now();
+		Date actual = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date fechaInicio = new Date(),fechaTermino = new Date();
+
+
+
+
+		Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(Long.parseLong(jsonData.get("IdHab").toString()));
+
+		if(habitacion==null){
+			map.put("status", "401");
+			map.put("message", "Error, la habitación ingresada no existe.");
+			result.add(map);
+			return result;
 		}
-		catch (ParseException ex)
-		{
-			map.put("fechaInicio", fechaInicio.toString());
-			map.put("fechaTermino", fechaTermino.toString());
+		try {
+			fechaInicio = formatter.parse(jsonData.get("fechaInicio").toString());
+			fechaTermino = formatter.parse(jsonData.get("fechaTermino").toString());
+		}
+		catch (ParseException ex) {
 			map.put("status", "401");
 			map.put("message", "Error al convertir date.");
 			result.add(map);
 			return result;
 		}
-		List<ReservaHabitacion> reservahabitaciones = reshabRepository.findAll();
+
+		reservaU.setEstado(0);
+		if(fechaInicio.before(actual)){
+			map.put("status", "401");
+			map.put("message", "Error: La fecha de inicio debe ser mayor a la actual.");
+			result.add(map);
+			return result;
+		}
+		else if(fechaInicio.after(fechaTermino)){
+			map.put("status", "401");
+			map.put("message", "La fecha de inicio no puede estar después de la fecha de termino.");
+			result.add(map);
+			return result;
+		}
 		for (ReservaHabitacion reserva: reservahabitaciones){
-			if(fechaInicio.after(reserva.getFechaTerminoRH()) && fechaInicio.after(reserva.getFechaTerminoRH())){
-				map.put("status", "401");
-				map.put("message", "La fecha de inicio no se puede agregar, ya que no está disponible.");
-				result.add(map);
-				return result;
+			if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString())) && reserva.getReserva().getEstado()==1){
+
+				if(fechaInicio.after(reserva.getFechaInicioRH()) && fechaInicio.before(reserva.getFechaTerminoRH())){
+					map.put("status", "401");
+					map.put("message", "La fecha de inicio no se puede agregar, ya que no está disponible.");
+					result.add(map);
+					return result;
+				}
+				if(fechaTermino.after(reserva.getFechaInicioRH()) && fechaTermino.before(reserva.getFechaTerminoRH())){
+					map.put("status", "401");
+					map.put("message", "La fecha de termino no se puede agregar, ya que no está disponible.");
+					result.add(map);
+					return result;
+				}
+				if(reserva.getFechaInicioRH().after(fechaInicio) && reserva.getFechaInicioRH().before(fechaTermino)){
+					map.put("status", "401");
+					map.put("message", "Existe una reserva dentro de este periodo (i).");
+					result.add(map);
+					return result;
+				}
+				if(reserva.getFechaTerminoRH().after(fechaInicio) && reserva.getFechaTerminoRH().before(fechaTermino)){
+					map.put("status", "401");
+					map.put("message", "Existe una reserva dentro de este periodo (T)..");
+					result.add(map);
+					return result;
+				}
+				if(fechaTermino.equals(reserva.getFechaTerminoRH()) || fechaTermino.equals(reserva.getFechaInicioRH())
+						|| fechaInicio.equals(reserva.getFechaTerminoRH()) || fechaInicio.equals(reserva.getFechaTerminoRH())){
+					map.put("status", "401");
+					map.put("message", "Uno de los días extremos calza con un día de reserva");
+					result.add(map);
+					return result;
+				}
 			}
-			if(fechaTermino.after(reserva.getFechaTerminoRH()) && fechaTermino.after(reserva.getFechaTerminoRH())){
-				map.put("status", "401");
-				map.put("message", "La fecha de termino no se puede agregar, ya que no está disponible.");
-				result.add(map);
-				return result;
+			if (reserva.getReserva().getIdReserva().equals(idReserva)){
+				reserva.setFechaInicioRH(fechaInicio);
+				reserva.setFechaTerminoRH(fechaTermino);
+				reshabRepository.save(reserva);
 			}
 		}
+
+		reservaU.setEstado(auxEstado);
+
+
+
+		map.put("status", "201");
+		map.put("message", "OK");
+		result.add(map);
 		return result;
 	}
+
+
 
 
 		@RequestMapping(value = "/rack" , method = RequestMethod.GET)
