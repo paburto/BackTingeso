@@ -7,35 +7,38 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.MockMvc;
+
 
 import java.util.List;
 import MingesoTingeso.demo.Models.Cliente;
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
-public class ClienteControllerTest extends AbstractTest{
+public class ClienteControllerTest {
     @Autowired
     ClienteController cc;
-
+    @Autowired
+    private MockMvc mockMvc;
+   
     @Test
     public void getAllClientes() throws Exception {
-      String uri = "http://159.203.94.72:8060/backend/clientes";
-      MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
-         .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-      
-      int status = mvcResult.getResponse().getStatus();
-      assertEquals(200, status);
+    	this.mockMvc.perform(get("/clientes")
+    	           .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+    	           .andExpect(status().isOk())
+    	           .andExpect(content().contentType("application/json"));
     }
 
     @Test
-    public void getNombreClienteById() {
-      List<Cliente> cs = cc.getAllClientes();
-      Cliente c1 = cs.get(0);
-      String nombreC1 = cc.getNombreClienteById(1L);
-      assertEquals(nombreC1, c1.getNombreCliente());
+    public void getNombreClienteById() throws Exception {
+    	this.mockMvc.perform(get("/clientes/1")
+ 	           .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+ 	           .andExpect(status().isOk())
+ 	           .andExpect(content().contentType("application/json"));
     }
 }
