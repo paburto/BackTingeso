@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/reservas")
 public class ReservaController {
     @Autowired
+    SendMailController enviar;
+
+    @Autowired
     ReservaRepository reservaRepository;
 
     @Autowired
@@ -260,10 +263,9 @@ public class ReservaController {
         reservaU.setEstado(Integer.parseInt(jsonData.get("estado").toString()));
         reservaU.setDescuento(Integer.parseInt(jsonData.get("descuento").toString()));
         reservaRepository.save(reservaU);
-/**
-        SendMailController enviar;
+
         enviar.sendMail(jsonData.get("correo").toString(), "Se ha actualizado el usuario", "Se ha actualizado su usuario.");
- */
+
         map.put("status", "201");
         map.put("message", "OK");
         result.add(map);
