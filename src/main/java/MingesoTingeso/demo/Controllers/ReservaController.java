@@ -67,27 +67,47 @@ public class ReservaController {
         return clienteRepository.findClienteByIdCliente(idCliente);
     }
 
-    @RequestMapping(value = "/mostrarReservas/", method = RequestMethod.GET)
+    @RequestMapping(value = "/mostrarReservas" , method = RequestMethod.GET)
     @ResponseBody
-
-    public List<Reserva>  getReservasFuturas() {
-
-        List<Reserva> reservas =  new ArrayList<Reserva>();;
+    public List<HashMap<String, String>> getAllRackP() {
+        List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map = new HashMap<>();
+        List<ReservaHabitacion> reservahabitacion = resHabRepository.findAll();
+        List<Reserva> reserva = reservaRepository.findAll();
+        List<Cliente> cliente = clienteRepository.findAll();
 
         List<ReservaHabitacion> reservadehabitaciones = resHabRepository.findAll();
         LocalDate localDate = LocalDate.now();
         Date actual = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        for (ReservaHabitacion r: reservadehabitaciones){
-            if (r.getFechaInicioRH().after(actual)){
-                reservas.add(r.getReserva());
+
+
+
+        for(ReservaHabitacion rh : reservahabitacion){
+            for(Reserva r : reserva){
+                for(Cliente c : cliente){
+                    if(rh.getReserva().getIdReserva().equals(r.getIdReserva()) && r.getCliente().getIdCliente().equals(c.getIdCliente()) && rh.getFechaInicioRH().after(actual)){
+                        map.put("idReserva", rh.getReserva().getIdReserva().toString());
+                        map.put("codigoReserva", Integer.toString(r.getCodigoReserva()));
+                        map.put("descuento", Integer.toString(r.getDescuento()));
+                        map.put("estado", Integer.toString(r.getEstado()));
+
+                        map.put("nroHabitacion", Integer.toString(rh.getHabitacion().getNroHabitacion()));
+
+                        map.put("idUser", r.getUsuario().getIdUsuario().toString());
+
+                        map.put("idCliente", c.getIdCliente().toString());
+                        map.put("nombreCliente", c.getNombreCliente());
+                        map.put("rut", Integer.toString(c.getRut()));
+
+                        map.put("fechaInicio", rh.getFechaInicioRH().toString());
+                        map.put("fechaTermino", rh.getFechaTerminoRH().toString());
+                        result.add(map);
+                        map = new HashMap<>();
+                    }
+                }
             }
         }
-        List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> map = new HashMap<>();
-        map.put("status", "200");
-        map.put("message", "OK.");
-        result.add(map);
-        return reservas;
+        return result;
     }
 
     @PostMapping("/create")
