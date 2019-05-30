@@ -44,7 +44,6 @@ public class HabitacionController {
         return habitacionRepository.findHabitacionByIdHab(id);
     }
 
-		@CrossOrigin(origins = "*")
 		@PostMapping("/deshabilitar/{id}")
 			@ResponseBody
 			public List<HashMap<String, String>> inhabilitar(@PathVariable Long id, @RequestBody Map<String, Object> jsonData) throws ParseException {
