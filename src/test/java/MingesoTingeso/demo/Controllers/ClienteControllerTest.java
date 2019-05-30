@@ -4,8 +4,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import java.util.List;
 import MingesoTingeso.demo.Models.Cliente;
 import static org.junit.Assert.*;
@@ -13,16 +17,18 @@ import static org.junit.Assert.*;
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
-public class ClienteControllerTest {
+public class ClienteControllerTest extends AbstractTest{
     @Autowired
     ClienteController cc;
 
     @Test
-    public void getAllClientes() {
-      List<Cliente> c1 = cc.getAllClientes();
-      List<Cliente> c2 = cc.getAllClientes();
-      assertEquals(c1.size(),c2.size());
-
+    public void getAllClientes() throws Exception {
+      String uri = "/backend/clientes";
+      MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+         .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+      
+      int status = mvcResult.getResponse().getStatus();
+      assertEquals(200, status);
     }
 
     @Test
