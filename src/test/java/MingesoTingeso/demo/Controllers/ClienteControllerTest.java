@@ -23,7 +23,7 @@ public class ClienteControllerTest extends AbstractTest{
 
     @Test
     public void getAllClientes() throws Exception {
-      String uri = "/backend/clientes";
+      String uri = "http://159.203.94.72:8060/backend/clientes";
       MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
          .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
       
