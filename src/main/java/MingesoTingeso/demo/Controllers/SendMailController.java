@@ -25,14 +25,12 @@ public class SendMailController {
     }
 */
     @PostMapping
-    public List<HashMap<String, String>> sendMail(@RequestBody Map<String, Object> jsonData) throws ParseException {
+    public List<HashMap<String, String>> sendMail(String correo, String asunto, String mensaje) throws ParseException {
 
         List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> map = new HashMap<>();
-        String mail= new String();
 
-        mail = jsonData.get("correo").toString();
-        if (mail== null){
+        if (correo == null && asunto==null && mensaje==null){
             map.put("status", "401");
             map.put("message", "Error correo nulo.");
             result.add(map);
@@ -40,8 +38,7 @@ public class SendMailController {
         }
 
         //String message = body +"\n\n Datos de contacto: " + "\nNombre: " + name + "\nE-mail: " + mail;
-        mailService.sendMail("noresponder.alaya@gmail.com",mail,"Reserva Hotelería","Ha hecho una reserva para Hoteles Mingeso.");
-
+        mailService.sendMail("noresponder.alaya@gmail.com",correo,asunto,mensaje);
 
 
         map.put("status", "200");

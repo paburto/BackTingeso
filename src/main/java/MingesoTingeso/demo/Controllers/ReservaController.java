@@ -252,6 +252,7 @@ public class ReservaController {
         }
         editar.setRut(Integer.parseInt(jsonData.get("rut").toString()));
         editar.setNombreCliente(jsonData.get("nombre").toString());
+        editar.setCorreoCliente(jsonData.get("correo").toString());
         editar.setTelefonoCliente(Integer.parseInt(jsonData.get("telefono").toString()));
         editar.setFechaNacimiento(formatter.parse(jsonData.get("fechaNacimiento").toString()));
         clienteRepository.save(editar);
@@ -259,7 +260,10 @@ public class ReservaController {
         reservaU.setEstado(Integer.parseInt(jsonData.get("estado").toString()));
         reservaU.setDescuento(Integer.parseInt(jsonData.get("descuento").toString()));
         reservaRepository.save(reservaU);
-
+/**
+        SendMailController enviar;
+        enviar.sendMail(jsonData.get("correo").toString(), "Se ha actualizado el usuario", "Se ha actualizado su usuario.");
+ */
         map.put("status", "201");
         map.put("message", "OK");
         result.add(map);
