@@ -67,8 +67,7 @@ public class ReservaControllerTest {
     @Test
     public void getAllRackP() {
     	List<HashMap<String, String>> rack = rc.getAllRackP();
-    	List<HashMap<String, String>> rack2 = rc.getAllRackP();
-    	assertEquals(rack.size(), rack2.size());
+    	assertTrue(rack.size() > 0);
     }
 
     @Test
@@ -111,7 +110,6 @@ public class ReservaControllerTest {
     	List<Habitacion> hab = hc.getAllHabitaciones();
     	List<Reserva> re = rc.getAllReservas();
     	Random random = new Random();
-    	int randomInt = random.nextInt(10000) + 1000;
     	int minDay = (int) LocalDate.of(2019, 7, 7).toEpochDay();
     	int maxDay = (int) LocalDate.of(2022, 12, 12).toEpochDay();
     	int promDay = minDay - maxDay - 1;
