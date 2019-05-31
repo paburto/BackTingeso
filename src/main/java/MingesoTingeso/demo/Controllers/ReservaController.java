@@ -111,6 +111,8 @@ public class ReservaController {
         return result;
     }
 
+
+
     @PostMapping("/create")
     @ResponseBody
     public List<HashMap<String, String>> create(@RequestBody Map<String, Object> jsonData) throws ParseException {
@@ -160,7 +162,7 @@ public class ReservaController {
         }
         for (ReservaHabitacion reserva: reservahabitaciones){
             if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString()))
-                    && reserva.getReserva().getEstado()==1 && reserva.getHabitacion().getTipoHabitacion().equals("Inhabilitada")){
+                    && reserva.getReserva().getEstado()==1 && !reserva.getHabitacion().getTipoHabitacion().equals("Inhabilitada")){
 
                 if(fechaInicio.after(reserva.getFechaInicioRH()) && fechaInicio.before(reserva.getFechaTerminoRH())){
                     map.put("status", "401");
@@ -190,6 +192,14 @@ public class ReservaController {
                 || fechaInicio.equals(reserva.getFechaTerminoRH()) || fechaInicio.equals(reserva.getFechaInicioRH())){
                     map.put("status", "401");
                     map.put("message", "Uno de los días extremos calza con un día de reserva");
+                    result.add(map);
+                    return result;
+                }
+            }
+            else if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString()))){
+                if (reserva.getHabitacion().getTipoHabitacion().equals("Inhabilitada")){
+                    map.put("status", "401");
+                    map.put("message", "La habitación seleccionada está anulada.");
                     result.add(map);
                     return result;
                 }
