@@ -409,9 +409,10 @@ public class ReservaController {
     }
 
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/delete/{codigoReserva}")
     @ResponseBody
-    public List<HashMap<String, String>> update(@PathVariable int codigoReserva) throws ParseException {
+    public List<HashMap<String, String>> anularR(@PathVariable int codigoReserva) throws ParseException {
 
         List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> map = new HashMap<>();

@@ -98,7 +98,7 @@ public class UsuarioController {
     @CrossOrigin(origins = "*")
     @PostMapping("/delete/{id}")
     @ResponseBody
-    public List<HashMap<String, String>> update(@PathVariable Long id) throws ParseException {
+    public List<HashMap<String, String>> delete(@PathVariable Long id) throws ParseException {
         List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> map = new HashMap<>();
         Usuario usuario = usuarioRepository.findUsuarioByIdUser(id);
