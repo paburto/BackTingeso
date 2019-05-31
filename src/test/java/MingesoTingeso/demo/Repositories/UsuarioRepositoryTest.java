@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import java.util.List;
 import MingesoTingeso.demo.Models.Usuario;
 import static org.junit.Assert.*;
 @RunWith( SpringJUnit4ClassRunner.class )
@@ -17,21 +17,22 @@ public class UsuarioRepositoryTest {
 
 	@Test
 	public void findUsuarioByIdUser() {
-		long idTest = 1;
-		Usuario u = usuarioRepository.findUsuarioByIdUser(idTest);
-		u.setCorreoUsuario("tingeso@usach.cl");
-		assertEquals("tingeso@usach.cl", u.getCorreoUsuario());
+		List<Usuario> lu = usuarioRepository.findAll();
+		long id = lu.get(0).getIdUsuario();
+		assertEquals(id, (long)usuarioRepository.findUsuarioByIdUser(id).getIdUsuario());
 	}
 
 	@Test
 	public void findUsuarioByCorreoUsuario() {
-		Usuario u = usuarioRepository.findUsuarioByCorreoUsuario("aiura@tingeso.com");
-		assertEquals("Aquiles Brinco", u.getNombreUsuario());
+		List<Usuario> lu = usuarioRepository.findAll();
+		String correo = lu.get(0).getCorreoUsuario();
+		assertEquals(correo, usuarioRepository.findUsuarioByCorreoUsuario(correo).getCorreoUsuario());
 	}
 
 	@Test
 	public void findUsuarioByRutUsuario() {
-		Usuario u = usuarioRepository.findUsuarioByRutUsuario(191472584);
-		assertEquals("Elba Lazo", u.getNombreUsuario());
+		List<Usuario> lu = usuarioRepository.findAll();
+		int rut = lu.get(0).getRutUsuario();
+		assertEquals(rut, usuarioRepository.findUsuarioByRutUsuario(rut).getRutUsuario());
 	}
 }
