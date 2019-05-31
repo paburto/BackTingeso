@@ -409,7 +409,6 @@ public class ReservaController {
     }
 
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/delete/{codigoReserva}")
     @ResponseBody
     public List<HashMap<String, String>> update(@PathVariable int codigoReserva) throws ParseException {
@@ -419,12 +418,19 @@ public class ReservaController {
         Reserva reserva = reservaRepository.findReservaByCodigoReserva(codigoReserva);
         if(reserva == null) {
             map.put("status", "404");
+            map.put("codigoReserva;", String.valueOf(codigoReserva));
             map.put("message", "Reserva no existe!.");
             map.put("item", "");
             result.add(map);
             return result;
         }
         else {
+            if(reserva.getEstado()==0){
+                map.put("status", "200");
+                map.put("message", "La reserva ya estaba anulada!!.");
+                result.add(map);
+                return result;
+            }
             reserva.setEstado(0);
             reservaRepository.save(reserva);
             map.put("status", "200");
