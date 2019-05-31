@@ -13,14 +13,7 @@ import java.util.Map;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Repositories.HabitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import MingesoTingeso.demo.Models.ReservaHabitacion;
 import MingesoTingeso.demo.Models.Cliente;
@@ -172,12 +165,10 @@ public class ReservaHabitacionController {
 	}
 
 
-
-	@PostMapping("/mostrar")
+	@RequestMapping(value="/{fechaInit}/{fechaTerm}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<HashMap<String, String>> mostrar(@RequestBody Map<String, Object> jsonData) throws ParseException {
+	public List<HashMap<String, String>> mostrar(@PathVariable String fechaInit, @PathVariable String fechaTerm) throws ParseException {
 		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
-		System.out.println(jsonData);
 		HashMap<String, String> map = new HashMap<>();
 
 
@@ -193,8 +184,8 @@ public class ReservaHabitacionController {
 
 
 		try {
-			fechaInicio = formatter.parse(jsonData.get("fechaInicio").toString());
-			fechaTermino = formatter.parse(jsonData.get("fechaTermino").toString());
+			fechaInicio = formatter.parse(fechaInit);
+			fechaTermino = formatter.parse(fechaTerm);
 		}
 		catch (ParseException ex) {
 			map.put("status", "401");
@@ -248,6 +239,7 @@ public class ReservaHabitacionController {
 				}
 			}
 		 	if (aux==0 && !hab.getTipoHabitacion().equals("Inhabilitada")){
+				map.put("idHabitacion", String.valueOf(hab.getIdHabitacion()));
 				map.put("nroHabitacion", String.valueOf(hab.getNroHabitacion()));
 				map.put("capacidadNinos", String.valueOf(hab.getCapacidadNinos()));
 				map.put("capacidadAdultos", String.valueOf(hab.getCapacidadAdultos()));
