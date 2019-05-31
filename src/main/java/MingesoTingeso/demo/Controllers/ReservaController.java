@@ -35,6 +35,8 @@ public class ReservaController {
     @Autowired
     HabitacionRepository habitacionRepository;
 
+    Random randomGenerator = new Random();
+
     @RequestMapping(value="", method = RequestMethod.GET)
     @ResponseBody
     public List<Reserva> getAllReservas() {
@@ -227,7 +229,7 @@ public class ReservaController {
                 reserva,
                 habitacion));
 
-        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Usuario Creado", "Se ha creado una cuenta cliente en nuestro sitio web.");
+        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", "Se ha creado una reserva en nuestro sitio web.");
 
 
         map.put("status", "201");
@@ -295,7 +297,7 @@ public class ReservaController {
         }
 
         Reserva aux = new Reserva();
-        Random randomGenerator = new Random();
+
         Habitacion habitacion;
         int randomInt;
         Reserva reserva;
@@ -327,7 +329,7 @@ public class ReservaController {
                     habitacion));
 
         }
-        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Usuario Creado", "Se ha creado una cuenta cliente en nuestro sitio web.");
+        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", "Se ha creado una reserva en nuestro sitio web.");
 
 
         map.put("status", "201");
