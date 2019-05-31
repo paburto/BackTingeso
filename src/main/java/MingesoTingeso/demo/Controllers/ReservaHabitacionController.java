@@ -113,7 +113,8 @@ public class ReservaHabitacionController {
 			return result;
 		}
 		for (ReservaHabitacion reserva: reservahabitaciones){
-			if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString())) && reserva.getReserva().getEstado()==1){
+			if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString()))
+					&& reserva.getReserva().getEstado()==1 && reserva.getHabitacion().getTipoHabitacion().equals("Inhabilitada")){
 
 				if(fechaInicio.after(reserva.getFechaInicioRH()) && fechaInicio.before(reserva.getFechaTerminoRH())){
 					map.put("status", "401");

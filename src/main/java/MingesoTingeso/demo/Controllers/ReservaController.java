@@ -159,7 +159,8 @@ public class ReservaController {
             return result;
         }
         for (ReservaHabitacion reserva: reservahabitaciones){
-            if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString())) && reserva.getReserva().getEstado()==1){
+            if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString()))
+                    && reserva.getReserva().getEstado()==1 && reserva.getHabitacion().getTipoHabitacion().equals("Inhabilitada")){
 
                 if(fechaInicio.after(reserva.getFechaInicioRH()) && fechaInicio.before(reserva.getFechaTerminoRH())){
                     map.put("status", "401");
@@ -221,6 +222,9 @@ public class ReservaController {
                 reserva,
                 habitacion));
 
+        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Usuario Creado", "Se ha creado una cuenta cliente en nuestro sitio web.");
+
+
         map.put("status", "201");
         map.put("message", "OK");
         result.add(map);
@@ -264,7 +268,7 @@ public class ReservaController {
         reservaU.setDescuento(Integer.parseInt(jsonData.get("descuento").toString()));
         reservaRepository.save(reservaU);
 
-        enviar.sendMail(jsonData.get("correo").toString(), "Se ha actualizado el usuario", "Se ha actualizado su usuario.");
+        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Usuario Modificado", "Se ha modificado una cuenta cliente en nuestro sitio web.");
 
         map.put("status", "201");
         map.put("message", "OK");
