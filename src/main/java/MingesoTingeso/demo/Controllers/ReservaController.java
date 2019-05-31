@@ -306,26 +306,28 @@ public class ReservaController {
                 randomInt = randomGenerator.nextInt(50) + 1;
                 aux = reservaRepository.findReservaByCodigoReserva(randomInt);
             }while(aux!=null);
-            /**
-            reserva =reservaRepository.save(new Reserva(Integer.parseInt(jsonData.get(1).toString()),
+
+            reserva =reservaRepository.save(new Reserva(1,
                     descuento,
                     randomInt,
                     usuario2,
                     cliente));
-            habitacion = habitacionRepository.findHabitacionByIdHab(i);
+
+
+             habitacion = habitacionRepository.findHabitacionByIdHab(i);
             if(habitacion==null){
                 map.put("status", "401");
                 map.put("message", "Error, la habitación ingresada no existe.");
                 result.add(map);
                 return result;
             }
-            reservaHabitacion = resHabRepository.save(new ReservaHabitacion(fechaInicio,
+            resHabRepository.save(new ReservaHabitacion(fechaInicio,
                     fechaTermino,
                     reserva,
                     habitacion));
-             */
+
         }
-        //enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Usuario Creado", "Se ha creado una cuenta cliente en nuestro sitio web.");
+        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Usuario Creado", "Se ha creado una cuenta cliente en nuestro sitio web.");
 
 
         map.put("status", "201");
