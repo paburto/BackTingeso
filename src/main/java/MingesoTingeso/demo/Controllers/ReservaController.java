@@ -409,7 +409,6 @@ public class ReservaController {
     }
 
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/delete/{codigoReserva}")
     @ResponseBody
     public List<HashMap<String, String>> update(@PathVariable int codigoReserva) throws ParseException {
