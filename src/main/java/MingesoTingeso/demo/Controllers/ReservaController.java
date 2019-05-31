@@ -287,15 +287,16 @@ public class ReservaController {
         Reserva reserva = reservaRepository.findReservaByIdReserva(id);
         if(reserva == null) {
             map.put("status", "404");
-            map.put("message", "Reserva does not exist!.");
+            map.put("message", "Reserva no existe!.");
             map.put("item", "");
             result.add(map);
             return result;
         }
         else {
-            reservaRepository.deleteById(id);
+            reserva.setEstado(0);
+            reservaRepository.save(reserva);
             map.put("status", "200");
-            map.put("message", "OK, reserva erased!.");
+            map.put("message", "OK, anulada!.");
             result.add(map);
             return result;
         }
