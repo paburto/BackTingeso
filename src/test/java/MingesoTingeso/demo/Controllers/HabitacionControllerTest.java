@@ -32,8 +32,10 @@ public class HabitacionControllerTest {
 
     @Test
     public void getHabitacionById() {
-      Habitacion h = hc.getHabitacionById(1L);
-      assertEquals(1L,(long)h.getIdHabitacion());
+        List<Habitacion> h1 = hc.getAllHabitaciones();
+        long id = h1.get(0).getIdHabitacion();
+        Habitacion h = hc.getHabitacionById(id);
+        assertEquals(id,(long)h.getIdHabitacion());
     }
 
     @Test

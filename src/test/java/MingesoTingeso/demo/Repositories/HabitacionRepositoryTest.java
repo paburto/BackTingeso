@@ -22,17 +22,18 @@ public class HabitacionRepositoryTest {
 
 	@Test
 	public void findHabitacionByIdHab() {
-		Habitacion hab = habitacionRepository.findHabitacionByIdHab(1L);
-		hab.setCapacidadAdultos(20);
-		assertEquals(20, hab.getCapacidadAdultos());
+		List<Habitacion> h1 = habitacionRepository.findAll();
+		long id = h1.get(0).getIdHabitacion();
+		Habitacion h = habitacionRepository.findHabitacionByIdHab(id);
+		assertEquals(id,(long)h.getIdHabitacion());
 	}
 
 	@Test
 	public void findHabitacionByNroHabitacion() {
-
-		Habitacion hab = habitacionRepository.findHabitacionByNroHabitacion(666);
-		hab.setCapacidadAdultos(20);
-		assertEquals(20, hab.getCapacidadAdultos());
+		List<Habitacion> h1 = habitacionRepository.findAll();
+		int nro = h1.get(0).getNroHabitacion();
+		Habitacion hab = habitacionRepository.findHabitacionByNroHabitacion(nro);
+		assertEquals(nro, hab.getNroHabitacion());
 	}
 
 	@Test

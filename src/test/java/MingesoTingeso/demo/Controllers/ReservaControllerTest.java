@@ -39,16 +39,18 @@ public class ReservaControllerTest {
 
     @Test
     public void getReservaByIdReserva() {
-      Reserva r  = rc.getReservaByIdReserva(1L);
-      assertEquals(1L,(long)r.getIdReserva());
+        List<Reserva> ra = rc.getAllReservas();
+        long id = ra.get(0).getIdReserva();
+        Reserva r2 = rc.getReservaByIdReserva(id);
+        assertEquals(id,(long)r2.getIdReserva());
     }
 
     @Test
     public void getReservaByCodigoReserva() {
-      Reserva r1 = rc.getReservaByIdReserva(1L);
-      int codigo = r1.getCodigoReserva();
+        List<Reserva> ra = rc.getAllReservas();
+      int codigo = ra.get(0).getCodigoReserva();
       Reserva r2 = rc.getReservaByCodigoReserva(codigo);
-      assertEquals(r1.getIdReserva(),r2.getIdReserva());
+      assertEquals(codigo,r2.getCodigoReserva());
     }
 
     @Test

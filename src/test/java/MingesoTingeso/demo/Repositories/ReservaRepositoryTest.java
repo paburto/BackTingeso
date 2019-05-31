@@ -21,40 +21,37 @@ public class ReservaRepositoryTest {
 
 	@Test
 	public void findReservaByIdReserva() {
-		long idTest = 1;
-		Reserva r = reservaRepository.findReservaByIdReserva(idTest);
-		r.setDescuento(1000);
-		assertEquals(1000, r.getDescuento());
+		List<Reserva> lr = reservaRepository.findAll();
+		long id = lr.get(0).getIdReserva();
+		assertEquals(id, (long)reservaRepository.findReservaByIdReserva(id).getIdReserva());
 	}
 
 	@Test
 	public void findReservaByDescuento() {
-		List<Reserva> r = reservaRepository.findReservaByDescuento(10);
-		if(!r.isEmpty()) {
-			r.get(0).setEstado(0);
-			assertEquals(0, r.get(0).getEstado());
-		}
+		List<Reserva> lr = reservaRepository.findAll();
+		int descuento = lr.get(0).getDescuento();
+		assertEquals(descuento, reservaRepository.findReservaByDescuento(descuento).get(0).getDescuento());
 	}
 
 	@Test
 	public void findReservaByEstado() {
-		List<Reserva> r = reservaRepository.findReservaByEstado(1);
-		if(!r.isEmpty()) {
-			r.get(0).setDescuento(20000);
-			assertEquals(20000, r.get(0).getDescuento());
-		}
+		List<Reserva> lr = reservaRepository.findAll();
+		int estado = lr.get(0).getEstado();
+		assertEquals(estado, reservaRepository.findReservaByEstado(estado).get(0).getEstado());
 	}
 	
 	@Test
 	public void findReservaByCodigoReserva(){
-		Reserva r = reservaRepository.findReservaByCodigoReserva(666);
-		assertEquals(666,r.getCodigoReserva());
+		List<Reserva> lr = reservaRepository.findAll();
+		int codigo = lr.get(0).getCodigoReserva();
+		assertEquals(codigo, reservaRepository.findReservaByCodigoReserva(codigo).getCodigoReserva());
 	}
 
 	@Test
 	public void getReservaByCodigoReserva(){
-		Reserva r = reservaRepository.getReservaByCodigoReserva(666);
-		assertEquals(666,r.getCodigoReserva());
+		List<Reserva> lr = reservaRepository.findAll();
+		int codigo = lr.get(0).getCodigoReserva();
+		assertEquals(codigo, reservaRepository.getReservaByCodigoReserva(codigo).getCodigoReserva());
 	}
 
 }
