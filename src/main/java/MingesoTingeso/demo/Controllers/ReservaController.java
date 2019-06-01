@@ -202,17 +202,16 @@ public class ReservaController {
                 }
             }
         }
-        Reserva aux = reservaRepository.findReservaByCodigoReserva(Integer.parseInt(jsonData.get("codigoReserva").toString()));
-        if(aux!= null){
-            map.put("status", "401");
-            map.put("message", "Error, el código de reserva ya existe.");
-            map.put("código: ", jsonData.get("codigoReserva").toString());
-            result.add(map);
-            return result;
-        }
+        Reserva aux = new Reserva();
+
+        int randomInt;
+        do {
+            randomInt = randomGenerator.nextInt(50) + 1;
+            aux = reservaRepository.findReservaByCodigoReserva(randomInt);
+        }while(aux!=null);
         Reserva reserva =reservaRepository.save(new Reserva(Integer.parseInt(jsonData.get("estado").toString()),
                 Integer.parseInt(jsonData.get("descuento").toString()),
-                Integer.parseInt(jsonData.get("codigoReserva").toString()),
+                randomInt,
                 usuario2,
                 cliente));
 
