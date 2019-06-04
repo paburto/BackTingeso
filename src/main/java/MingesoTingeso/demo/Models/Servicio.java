@@ -35,6 +35,9 @@ public class Servicio implements Serializable {
     @Column(nullable = false, name = "`precioServicio`")
     private int precioServicio;
 
+		@Column(nullable = false, name = "`categoriaServicio`")
+    private String categoriaServicio;
+
     @ManyToMany
     private Set<Registro> registros;
 
@@ -42,10 +45,11 @@ public class Servicio implements Serializable {
 
     }
 
-    public Servicio(String descripcion, String nombreServicio, int precioServicio) {
+    public Servicio(String descripcion, String nombreServicio, int precioServicio, String categoriaServicio) {
         this.descripcion = descripcion;
         this.nombreServicio = nombreServicio;
-        this.precioServicio= precioServicio;
+        this.precioServicio = precioServicio;
+				this.categoriaServicio = categoriaServicio;
     }
 
 	public Long getIdServicio() {
@@ -78,6 +82,14 @@ public class Servicio implements Serializable {
 
 	public void setPrecio(int precioServicio) {
 		this.precioServicio = precioServicio;
+	}
+
+	public String getCategoriaServicio(){
+		return categoriaServicio;
+	}
+
+	public void setCategoriaServicio(String categoriaServicio){
+		this.categoriaServicio = categoriaServicio;
 	}
 
 }
