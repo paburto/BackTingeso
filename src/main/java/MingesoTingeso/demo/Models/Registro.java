@@ -51,10 +51,11 @@ public class Registro implements Serializable {
 
     }
 
-    public Registro(String representante, Date fechaInicio,  Date fechaTermino) {
+    public Registro(String representante, Date fechaInicio,  Date fechaTermino, Habitacion habitacion) {
         this.representante = representante;
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
+        this.habitacion = habitacion;
     }
 
 	public Long getIdRegistro() {
@@ -88,6 +89,14 @@ public class Registro implements Serializable {
 
 	public void setFechaTermino(Date fechaTermino) {
 		this.fechaTermino = fechaTermino;
+	}
+
+	public Habitacion getHabitacion(){
+    	return habitacion;
+	}
+
+	public void setHabitacion(Habitacion habitacion){
+    	this.habitacion = habitacion;
 	}
 
 }

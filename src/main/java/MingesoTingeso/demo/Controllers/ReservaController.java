@@ -35,7 +35,7 @@ public class ReservaController {
     @Autowired
     HabitacionRepository habitacionRepository;
 
-    Random randomGenerator = new Random();
+    private Random randomGenerator = new Random();
 
     @RequestMapping(value="", method = RequestMethod.GET)
     @ResponseBody
