@@ -44,7 +44,8 @@ public class RegistroController {
     @GetMapping("/idHabitacion")
     @ResponseBody
     public List<Registro> getByidHabitacion(@PathVariable Long idHab){
-        return registroRepository.findRegistroByIdHab(idHab);
+        Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(idHab);
+        return registroRepository.findRegistroByHabitacion(habitacion);
     }
 
     @GetMapping("/representante")

@@ -9,8 +9,6 @@ import java.util.List;
 public interface RegistroRepository extends JpaRepository<Registro, Long> {
     Registro findRegistroByIdRegistro(Long idRegistro);
 
-    List<Registro> findRegistroByIdHab(Long idHab);
-
     List<Registro> findRegistroByRepresentante(String representante);
 
     List<Registro> findRegistroByHabitacion(Habitacion habitacion);

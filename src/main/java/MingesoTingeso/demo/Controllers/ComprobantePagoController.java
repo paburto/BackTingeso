@@ -50,7 +50,7 @@ public class ComprobantePagoController {
         return null;
     }
 
-    @GetMapping("/create")
+    @PostMapping("/create")
     @ResponseBody
     public List<HashMap<String, Object>> create(@RequestBody Map<String, Object> jsonData) throws ParseException{
         List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
