@@ -49,7 +49,7 @@ public class ReservaController {
         return reservaRepository.findReservaByIdReserva(id);
     }
 
-    @RequestMapping(value = "/codigoReserva/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/codigoReserva/{codigoReserva}", method = RequestMethod.GET)
     @ResponseBody
     public Reserva getReservaByCodigoReserva(@PathVariable int codigoReserva) {
         return reservaRepository.findReservaByCodigoReserva(codigoReserva);
