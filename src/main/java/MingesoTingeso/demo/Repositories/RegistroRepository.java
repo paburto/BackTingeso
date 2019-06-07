@@ -1,5 +1,6 @@
 package MingesoTingeso.demo.Repositories;
 
+import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Registro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,6 @@ public interface RegistroRepository extends JpaRepository<Registro, Long> {
     List<Registro> findRegistroByIdHab(Long idHab);
 
     List<Registro> findRegistroByRepresentante(String representante);
+
+    List<Registro> findRegistroByHabitacion(Habitacion habitacion);
 }

@@ -15,7 +15,7 @@ public class ComprobantePago implements Serializable {
     private Long id;
 
     @Column(nullable = false, name = "`total`")
-    private int total;
+    private Long total;
 
     @Column(nullable = false, name = "`detalle`")
     private String detalle;
@@ -32,7 +32,7 @@ public class ComprobantePago implements Serializable {
 
     }
 
-    public ComprobantePago(int total, String detalle, LocalDateTime fecha, Registro registro){
+    public ComprobantePago(Long total, String detalle, LocalDateTime fecha, Registro registro){
         this.total = total;
         this.detalle = detalle;
         this.fecha = fecha;
@@ -47,11 +47,11 @@ public class ComprobantePago implements Serializable {
         this.id = id;
     }
 
-    public int getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 
