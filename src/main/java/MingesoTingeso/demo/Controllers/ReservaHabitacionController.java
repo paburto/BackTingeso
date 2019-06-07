@@ -280,6 +280,7 @@ public class ReservaHabitacionController {
 							map.put("idCliente", c.getIdCliente().toString());
 							map.put("nombreCliente", c.getNombreCliente());
 							map.put("rut", Integer.toString(c.getRut()));
+							map.put("codigoReserva",toString(r.getCodigoReserva()));
 							map.put("telefono", Integer.toString(c.getTelefonoCliente()));
 							map.put("fechaNacimiento", c.getFechaNacimiento().toString());
 							result.add(map);
