@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 import MingesoTingeso.demo.Models.Cliente;
 import static org.junit.Assert.*;
-
+/**
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
@@ -31,4 +31,4 @@ public class ClienteControllerTest {
       String nombreC1 = cc.getNombreClienteById(1L);
       assertEquals(nombreC1, c1.getNombreCliente());
     }
-}
+}**/

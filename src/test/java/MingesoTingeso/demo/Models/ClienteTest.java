@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import static org.junit.Assert.*;
-
+/**
 public class ClienteTest {
 
     @Test
@@ -178,3 +178,4 @@ public class ClienteTest {
       }
     }
 }
+ **/

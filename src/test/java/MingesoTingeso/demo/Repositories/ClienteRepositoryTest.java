@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import MingesoTingeso.demo.Models.Cliente;
 import static org.junit.Assert.*;
-
+/**
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
@@ -31,4 +31,4 @@ public class ClienteRepositoryTest {
 		assertEquals(18123456,c.getRut());
 
 	}
-}
+}**/
