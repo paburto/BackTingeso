@@ -99,4 +99,19 @@ public class Registro implements Serializable {
     	this.habitacion = habitacion;
 	}
 
+	public Set<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(Set<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public Set<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(Set<Servicio> servicios) {
+		this.servicios = servicios;
+	}
 }
