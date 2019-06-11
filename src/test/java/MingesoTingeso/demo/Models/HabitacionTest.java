@@ -101,7 +101,7 @@ public class HabitacionTest {
           Date fechaTermino = formatter.parse(dateInString2);
           Date fechaCliente = formatter.parse(dateInString3);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fechaCliente);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           Habitacion h = new Habitacion("Simple",101,2,2,6000);
           ReservaHabitacion rh = new ReservaHabitacion(fechaInicio,fechaTermino,r,h);
@@ -126,7 +126,7 @@ public class HabitacionTest {
           Date fechaTermino = formatter.parse(dateInString2);
           Date fechaCliente = formatter.parse(dateInString3);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fechaCliente);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           Habitacion h = new Habitacion("Simple",101,2,2,6000);
           ReservaHabitacion rh = new ReservaHabitacion(fechaInicio,fechaTermino,r,h);

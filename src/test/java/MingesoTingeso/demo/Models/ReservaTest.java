@@ -16,7 +16,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           r.setIdReserva(2L);
           assertEquals(2L,(long)r.getIdReserva());
@@ -32,7 +32,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           r.setIdReserva(2L);
           assertEquals(2L,(long)r.getIdReserva());
@@ -48,7 +48,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           assertEquals(10,r.getDescuento());
       } catch (ParseException e) {
@@ -63,7 +63,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           r.setDescuento(15);
           assertEquals(15,r.getDescuento());
@@ -79,7 +79,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           assertEquals(1, r.getEstado());
       } catch (ParseException e) {
@@ -94,7 +94,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           r.setEstado(20);
           assertEquals(20, r.getEstado());
@@ -110,7 +110,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           assertEquals(c,r.getCliente());
       } catch (ParseException e) {
@@ -125,7 +125,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           Cliente c2 = new Cliente(23948432,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
           r.setCliente(c2);
@@ -142,7 +142,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           assertEquals(u,r.getUsuario());
       } catch (ParseException e) {
@@ -157,9 +157,9 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
-          Usuario u2 = new Usuario("José Mellado","Operador","jose.mellado@usach.cl",123456789);
+          Usuario u2 = new Usuario("José Mellado","Operador","jose.mellado@usach.cl",123456789, "tingeso");
           r.setUsuario(u2);
           assertEquals(u2,r.getUsuario());
       } catch (ParseException e) {
@@ -174,7 +174,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           assertEquals(10, r.getCodigoReserva());
       } catch (ParseException e) {
@@ -189,7 +189,7 @@ public class ReservaTest {
       try {
           Date fecha = formatter.parse(dateInString);
           Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fecha);
-          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789);
+          Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
           Reserva r = new Reserva(1,10,10,u,c);
           r.setCodigoReserva(11);
           assertEquals(11, r.getCodigoReserva());
