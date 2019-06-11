@@ -291,5 +291,11 @@ public class ReservaHabitacionController {
 			}
 		return result;
 	}
+
+	@RequestMapping(value = "/reserva/{idReserva}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ReservaHabitacion> getReservaHabitacionByIdReserva(@PathVariable Long idReserva){
+		return getReservaHabitacionByIdReserva(idReserva);
+	}
 }
 

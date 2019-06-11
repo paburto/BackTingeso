@@ -9,6 +9,5 @@ import MingesoTingeso.demo.Models.ReservaHabitacion;
 public interface ResHabRepository extends JpaRepository<ReservaHabitacion, Long>{
 	List<ReservaHabitacion> findReservaHabitacionByHabitacion(Habitacion habitacion);
 	ReservaHabitacion findReservaHabitacionByReserva(Long idReserva);
-
-
+	List<ReservaHabitacion> findByIdReserva(Long idReserva);
 }
