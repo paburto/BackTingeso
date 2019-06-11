@@ -38,6 +38,9 @@ public class Usuario implements Serializable {
     @Column(nullable = false, name = "rutUsuario")
     private int rutUsuario;
 
+    @Column(nullable = false, name = "password")
+    private String password;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "idUser")
     @JsonIgnore
@@ -53,11 +56,12 @@ public class Usuario implements Serializable {
 
     }
 
-    public Usuario(String nombreUsuario, String rolUsuario, String correoUsuario, int rutUsuario) {
+    public Usuario(String nombreUsuario, String rolUsuario, String correoUsuario, int rutUsuario, String password) {
         this.nombreUsuario = nombreUsuario;
         this.rolUsuario = rolUsuario;
         this.correoUsuario = correoUsuario;
         this.rutUsuario= rutUsuario;
+        this.password = password;
     }
 
     public Long getIdUsuario() {
@@ -98,5 +102,37 @@ public class Usuario implements Serializable {
 
     public void setRutUsuario(int rutUsuario){
         this.rutUsuario = rutUsuario;
+    }
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Historial> getHistoriales() {
+        return historiales;
+    }
+
+    public void setHistoriales(List<Historial> historiales) {
+        this.historiales = historiales;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }

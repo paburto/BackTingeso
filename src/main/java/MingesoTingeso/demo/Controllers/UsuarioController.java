@@ -10,6 +10,8 @@ import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,13 @@ import MingesoTingeso.demo.Repositories.UsuarioRepository;
 public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
@@ -52,7 +61,8 @@ public class UsuarioController {
             usuarioRepository.save(new Usuario(jsonData.get("nombre_usuario").toString(),
                     jsonData.get("rol_usuario").toString(),
                     jsonData.get("correo_usuario").toString(),
-                    Integer.parseInt(jsonData.get("rut_usuario").toString())));
+                    Integer.parseInt(jsonData.get("rut_usuario").toString()),
+                    jsonData.get("password").toString()));
             System.out.println(jsonData);
             map.put("status", "201");
             map.put("message", "OK");
@@ -63,6 +73,41 @@ public class UsuarioController {
             map.put("status", "401");
             map.put("message", "User rut already exist.");
             map.put("item", usuario.getNombreUsuario());
+            result.add(map);
+            return result;
+        }
+    }
+
+    @PostMapping("/login")
+    public List<HashMap<String, Object>> login(@RequestBody Map<String, Object> jsonData){
+        HashMap<String, Object> map = new HashMap<>();
+        List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+        Usuario user = usuarioRepository.findUsuarioByCorreoUsuario(jsonData.get("email").toString());
+        if(user != null) {
+            boolean passwordMatch = bCryptPasswordEncoder.matches(jsonData.get("password").toString(), user.getPassword());
+            if(passwordMatch) {
+                map.put("status", 200);
+                map.put("message", "OK");
+                map.put("login", "true");
+                map.put("id", user.getIdUsuario());
+                map.put("name", user.getNombreUsuario());
+                map.put("email", user.getCorreoUsuario());
+                map.put("role", user.getRolUsuario());
+                result.add(map);
+                return result;
+            }
+            else {
+                map.put("status", 403);
+                map.put("message", "PASSWORD DOES NOT MATCH.");
+                map.put("login", "false");
+                result.add(map);
+                return result;
+            }
+        }
+        else {
+            map.put("status", 404);
+            map.put("message", "USER DOES NOT EXIST.");
+            map.put("login", "false");
             result.add(map);
             return result;
         }

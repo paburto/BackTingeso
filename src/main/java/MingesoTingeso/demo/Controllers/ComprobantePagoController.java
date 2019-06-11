@@ -56,16 +56,16 @@ public class ComprobantePagoController {
         List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> map = new HashMap<>();
         Registro registro = registroRepository.findRegistroByIdRegistro(Long.parseLong(jsonData.get("idRegistro").toString()));
-        List<ReservaHabitacion> rh = resHabRepository.findReservaHabitacionByHabitacion(registro.getHabitacion());
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Instant inicio = formatter.parse(jsonData.get("fechaInicio").toString()).toInstant();
-        Instant termino = formatter.parse(jsonData.get("fechaTermino").toString()).toInstant();
-        Set<Servicio> servicios = registro.getServicios();
-        Long total = registro.getHabitacion().getPrecioNoche()*ChronoUnit.DAYS.between(inicio, termino) + 1;
-        for(Servicio sh : servicios){
-            total = total + sh.getPrecio();
-        }
         if(registro != null){
+            List<ReservaHabitacion> rh = resHabRepository.findReservaHabitacionByHabitacion(registro.getHabitacion());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Instant inicio = formatter.parse(jsonData.get("fechaInicio").toString()).toInstant();
+            Instant termino = formatter.parse(jsonData.get("fechaTermino").toString()).toInstant();
+            Set<Servicio> servicios = registro.getServicios();
+            long total = registro.getHabitacion().getPrecioNoche()*ChronoUnit.DAYS.between(inicio, termino) + 1;
+            for(Servicio sh : servicios){
+                total = total + sh.getPrecio();
+            }
             LocalDateTime timeNow = LocalDateTime.now();
             String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion());
             ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
