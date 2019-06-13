@@ -9,14 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.ReservaHabitacion;
@@ -43,6 +36,12 @@ public class HabitacionController {
     public Habitacion getHabitacionById(@PathVariable Long id) {
         return habitacionRepository.findHabitacionByIdHab(id);
     }
+
+		@RequestMapping(value = "/nroHabitacion/{nroHabitacion}", method = RequestMethod.GET)
+		@ResponseBody
+		public Habitacion getHabitacionByNroHabitacion(@PathVariable int nroHabitacion) {
+				return habitacionRepository.findHabitacionByNroHabitacion(nroHabitacion);
+		}
 
 		@PostMapping("/deshabilitar/{id}")
 			@ResponseBody
