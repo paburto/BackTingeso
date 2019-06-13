@@ -28,13 +28,13 @@ public class RegistroController {
         return registroRepository.findAll();
     }
 
-    @GetMapping("/codigoHabitacion")
+    @RequestMapping(value = "/nroHabitacion/{nro}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Registro> getByCodigoHabitacion(@PathVariable int codigoHabitacion){
+    public List<Registro> getByCodigoHabitacion(@PathVariable int nro){
         List<Registro> newRegistro = new ArrayList<>();
         List<Registro> data = registroRepository.findAll();
         for(Registro registro : data){
-            if(registro.getHabitacion().getNroHabitacion() == codigoHabitacion){
+            if(registro.getHabitacion().getNroHabitacion() == nro){
                 newRegistro.add(registro);
             }
         }
@@ -82,4 +82,3 @@ public class RegistroController {
     }
 
 }
-
