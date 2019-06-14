@@ -28,7 +28,7 @@ public class ServicioController {
 	@Autowired
 	ServicioRepository servicioRepository;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public List<Servicio> getAllServicios() {
         return servicioRepository.findAll();
