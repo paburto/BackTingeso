@@ -292,10 +292,15 @@ public class ReservaHabitacionController {
 		return result;
 	}
 
-	@RequestMapping(value = "/reserva/{idReserva}", method = RequestMethod.GET)
+	@RequestMapping(value = "/habitacion/{idReserva}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ReservaHabitacion> getReservaHabitacionByIdReserva(@PathVariable Long idReserva){
-		return getReservaHabitacionByIdReserva(idReserva);
+	public List<Habitacion> getHabitacionByIdReserva(@PathVariable Long idReserva){
+		List<ReservaHabitacion> lrh = reshabRepository.findReservaHabitacionByIdReserva(idReserva);
+		List<Habitacion> lh = new ArrayList<Habitacion>();
+		for(int i = 0; i<lrh.size(); i++){
+			lh.add(habitacionRepository.findHabitacionByIdHab(lh.get(i).getIdHabitacion()));
+		}
+		return lh;
 	}
 }
 

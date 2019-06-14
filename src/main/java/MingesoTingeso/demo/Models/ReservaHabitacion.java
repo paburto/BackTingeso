@@ -44,9 +44,6 @@ public class ReservaHabitacion implements Serializable {
   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   private Habitacion habitacion;
 
-  public ReservaHabitacion() {
-
-  }
 
   public ReservaHabitacion(Date fechaInicio, Date fechaTermino, Reserva reserva, Habitacion habitacion ) {
     this.fechaInicio = fechaInicio;
@@ -55,6 +52,9 @@ public class ReservaHabitacion implements Serializable {
     this.habitacion = habitacion;
   }
 
+  public ReservaHabitacion(){
+
+  }
 
   public Long getIdRH() {
     return id;
