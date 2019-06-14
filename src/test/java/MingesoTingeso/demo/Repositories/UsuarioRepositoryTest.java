@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class UsuarioRepositoryTest {
-	@Autowired
+	/*@Autowired
 	UsuarioRepository usuarioRepository;
 
 	@Test
@@ -34,5 +34,5 @@ public class UsuarioRepositoryTest {
 		List<Usuario> lu = usuarioRepository.findAll();
 		int rut = lu.get(0).getRutUsuario();
 		assertEquals(rut, usuarioRepository.findUsuarioByRutUsuario(rut).getRutUsuario());
-	}
+	}*/
 }

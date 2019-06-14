@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class UsuarioControllerTest {
-    @Autowired
+    /*@Autowired
     UsuarioController uc;
     @Test
     public void getAllUsuarios() {
@@ -48,5 +48,5 @@ public class UsuarioControllerTest {
     @Test
     public void delete() {
 
-    }
+    }*/
 }

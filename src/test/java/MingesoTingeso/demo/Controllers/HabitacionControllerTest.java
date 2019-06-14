@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class HabitacionControllerTest {
-    @Autowired
+   /* @Autowired
     HabitacionController hc;
     @Test
     public void getAllHabitaciones() {
@@ -57,7 +57,7 @@ public class HabitacionControllerTest {
     	map.put("capacidadAdultos", h1.get(0).getCapacidadAdultos());
     	map.put("precioNoche", h1.get(0).getPrecioNoche());
 		List<HashMap<String, String>> hab = hc.update(h1.get(0).getIdHabitacion(), map);
-		assertEquals(200, Integer.parseInt(hab.get(0).get("status")));*/
+		assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
     }
 
     @Test
@@ -77,5 +77,5 @@ public class HabitacionControllerTest {
     @Test
     public void delete() {
 
-    }
+    }*/
 }

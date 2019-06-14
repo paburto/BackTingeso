@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class ReservaHabitacionControllerTest {
-    @Autowired
+   /* @Autowired
     ReservaHabitacionController rhc;
 
     @Test
@@ -37,5 +37,5 @@ public class ReservaHabitacionControllerTest {
     @Test
     public void getAllRack() {
 
-    }
+    }*/
 }

@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class ReservaControllerTest {
-    @Autowired
+  /*  @Autowired
     ReservaController rc;
     @Autowired
     HabitacionController hc;
@@ -69,7 +69,7 @@ public class ReservaControllerTest {
     @Test
     public void getAllRackP() {
     	/*List<HashMap<String, String>> rack = rc.getAllRackP();
-    	assertTrue(rack.size() > 0);*/
+    	assertTrue(rack.size() > 0);
     }
 
     @Test
@@ -85,5 +85,5 @@ public class ReservaControllerTest {
     @Test
     public void update() throws ParseException {
 
-    }
+    }*/
 }
