@@ -13,12 +13,12 @@ import java.text.ParseException;
 import MingesoTingeso.demo.Models.ReservaHabitacion;
 
 import static org.junit.Assert.*;
-
+/*
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
 public class ReservaHabitacionControllerTest {
-   /* @Autowired
+    @Autowired
     ReservaHabitacionController rhc;
 
     @Test
@@ -37,5 +37,6 @@ public class ReservaHabitacionControllerTest {
     @Test
     public void getAllRack() {
 
-    }*/
+    }
 }
+*/

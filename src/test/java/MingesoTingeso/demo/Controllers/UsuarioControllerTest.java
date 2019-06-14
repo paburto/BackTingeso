@@ -13,12 +13,12 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
+/*
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
 public class UsuarioControllerTest {
-    /*@Autowired
+    @Autowired
     UsuarioController uc;
     @Test
     public void getAllUsuarios() {
@@ -48,5 +48,5 @@ public class UsuarioControllerTest {
     @Test
     public void delete() {
 
-    }*/
-}
+    }
+}*/

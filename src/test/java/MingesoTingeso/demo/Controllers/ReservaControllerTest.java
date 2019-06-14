@@ -19,12 +19,12 @@ import java.time.LocalDate;
 import java.text.ParseException;
 
 import static org.junit.Assert.*;
-
+ /*
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
 public class ReservaControllerTest {
-  /*  @Autowired
+     @Autowired
     ReservaController rc;
     @Autowired
     HabitacionController hc;
@@ -85,5 +85,6 @@ public class ReservaControllerTest {
     @Test
     public void update() throws ParseException {
 
-    }*/
+    }
 }
+*/

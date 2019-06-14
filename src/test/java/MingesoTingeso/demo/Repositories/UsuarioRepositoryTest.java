@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import MingesoTingeso.demo.Models.Usuario;
 import static org.junit.Assert.*;
-@RunWith( SpringJUnit4ClassRunner.class )
+/*@RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
 public class UsuarioRepositoryTest {
-	/*@Autowired
+	@Autowired
 	UsuarioRepository usuarioRepository;
 
 	@Test
@@ -34,5 +34,6 @@ public class UsuarioRepositoryTest {
 		List<Usuario> lu = usuarioRepository.findAll();
 		int rut = lu.get(0).getRutUsuario();
 		assertEquals(rut, usuarioRepository.findUsuarioByRutUsuario(rut).getRutUsuario());
-	}*/
+	}
 }
+*/
