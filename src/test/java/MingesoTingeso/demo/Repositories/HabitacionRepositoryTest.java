@@ -12,12 +12,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import MingesoTingeso.demo.Models.Habitacion;
-
+/*
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
 public class HabitacionRepositoryTest {
-	/*@Autowired
+	@Autowired
 	HabitacionRepository habitacionRepository;
 
 	@Test
@@ -70,5 +70,5 @@ public class HabitacionRepositoryTest {
 			hab.get(0).setNroHabitacion(520);
 			assertEquals(520, hab.get(0).getNroHabitacion());
 		}
-	}*/
-}
+	}
+}*/

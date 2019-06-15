@@ -263,7 +263,7 @@ public class ReservaHabitacionController {
 	public List<HashMap<String, String>> getAllRack() {
 			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 			HashMap<String, String> map = new HashMap<>();
-	List<ReservaHabitacion> reservahabitacion = reshabRepository.findAll();
+			List<ReservaHabitacion> reservahabitacion = reshabRepository.findAll();
 			List<Reserva> reserva = reservaRepository.findAll();
 			List<Cliente> cliente = clienteRepository.findAll();
 			for(ReservaHabitacion rh : reservahabitacion){
@@ -292,14 +292,14 @@ public class ReservaHabitacionController {
 		return result;
 	}
 
-	@RequestMapping(path = "/habitacion/{idReserva}", method = RequestMethod.GET)
+	@RequestMapping(value = "/habitacion/{idReserva}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Habitacion> getHabitacionByIdReserva(@PathVariable Long idReserva){
 		Reserva reserva = reservaRepository.findReservaByIdReserva(idReserva);
-		List<ReservaHabitacion> lrh = reshabRepository.findAllReservaHabitacionByReserva(reserva);
-		List<Habitacion> lh = new ArrayList<Habitacion>();
+		List<ReservaHabitacion> lrh = reshabRepository.findByReserva(reserva);
+		List<Habitacion> lh = new ArrayList<>();
 		for(int i = 0; i<lrh.size(); i++){
-			lh.add(habitacionRepository.findHabitacionByIdHab(lh.get(i).getIdHabitacion()));
+			lh.add(lrh.get(i).getHabitacion());
 		}
 		return lh;
 	}

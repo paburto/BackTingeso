@@ -6,10 +6,13 @@ import MingesoTingeso.demo.Models.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import MingesoTingeso.demo.Models.ReservaHabitacion;
+import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
+@Repository
+@Transactional
 public interface ResHabRepository extends JpaRepository<ReservaHabitacion, Long>{
 	List<ReservaHabitacion> findReservaHabitacionByHabitacion(Habitacion habitacion);
-	ReservaHabitacion findReservaHabitacionByReserva(Long idReserva);
-	List<ReservaHabitacion> findAllReservaHabitacionByReserva(Reserva reserva);
-	List<ReservaHabitacion> findReservaHabitacionByIdReserva(Long idReserva);
+	List<ReservaHabitacion> findByReserva(Reserva reserva);
 }

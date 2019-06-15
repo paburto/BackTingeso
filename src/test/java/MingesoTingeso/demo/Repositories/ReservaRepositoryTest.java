@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
+/*
 import MingesoTingeso.demo.Models.Reserva;
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
 public class ReservaRepositoryTest {
-	/*@Autowired
+	@Autowired
 	ReservaRepository reservaRepository;
 
 	@Test
@@ -53,5 +53,4 @@ public class ReservaRepositoryTest {
 		int codigo = lr.get(0).getCodigoReserva();
 		assertEquals(codigo, reservaRepository.getReservaByCodigoReserva(codigo).getCodigoReserva());
 	}
-*/
-}
+}*/
