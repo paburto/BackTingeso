@@ -50,7 +50,8 @@ public class RegistroServicioController {
 
   @RequestMapping(value = "/registro/{id}", method = RequestMethod.GET)
   @ResponseBody
-  public List<RegistroServicio> getRegistroServicioByIdRegistro(@PathVariable Registro r) {
+  public List<RegistroServicio> getRegistroServicioByIdRegistro(@PathVariable Long id) {
+			Registro r = registroRepository.findRegistroByIdRegistro(id);
       return registroServicioRepository.findRegistroServicioByRegistro(r);
   }
 
