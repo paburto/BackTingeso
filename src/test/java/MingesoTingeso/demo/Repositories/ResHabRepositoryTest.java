@@ -47,7 +47,7 @@ public class ResHabRepositoryTest {
         List<ReservaHabitacion> h = reshabrepository.findReservaHabitacionByHabitacion(aux);
 
 
-        List<ReservaHabitacion> esperado = reshabrepository.findReservaHabitacionByHabitacion(aux);
+        List<ReservaHabitacion> esperado = reshabrepository.findAll();
         List<ReservaHabitacion> h1 = reshabrepository.findAll();
         for (ReservaHabitacion rh: h1){
             if (rh.getHabitacion().equals(aux)){
@@ -66,7 +66,7 @@ public class ResHabRepositoryTest {
         List<ReservaHabitacion> h = reshabrepository.findByReserva(aux);
 
 
-        List<ReservaHabitacion> esperado = reshabrepository.findByReserva(aux);
+        List<ReservaHabitacion> esperado = reshabrepository.findAll();
         List<ReservaHabitacion> h1 = reshabrepository.findAll();
         for (ReservaHabitacion rh: h1){
             if (!rh.getReserva().equals(aux)){
