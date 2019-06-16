@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
-public class RegistroServicioRepositoryTest {/*
+public class RegistroServicioRepositoryTest {
     @Autowired
     RegistroServicioRepository registroServicioRepository;
     @Autowired
@@ -57,5 +57,5 @@ public class RegistroServicioRepositoryTest {/*
             }
         }
         assertArrayEquals(esperado, h);
-    }*/
+    }
 }

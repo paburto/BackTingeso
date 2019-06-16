@@ -11,11 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 import static org.junit.Assert.*;
-
+/*
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
-public class ComprobantePagoRepositoryTest {/*
+public class ComprobantePagoRepositoryTest {
     @Autowired
     ComprobantePagoRepository comprobantePagoRepository;
 
@@ -24,5 +24,5 @@ public class ComprobantePagoRepositoryTest {/*
         List<ComprobantePago> lu = comprobantePagoRepository.findAll();
         long id = lu.get(0).getId();
         assertEquals(id, (long)comprobantePagoRepository.findComprobantePagoById(id).getId());
-    }*/
-}
+    }
+}*/
