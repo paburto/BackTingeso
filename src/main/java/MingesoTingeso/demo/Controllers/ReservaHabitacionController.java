@@ -13,6 +13,8 @@ import java.util.Map;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Repositories.HabitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import MingesoTingeso.demo.Models.ReservaHabitacion;
@@ -292,16 +294,28 @@ public class ReservaHabitacionController {
 		return result;
 	}
 
-	@RequestMapping(value = "/habitacion/{idReserva}", method = RequestMethod.GET)
+	@RequestMapping(value = "/habitaciones/{idReserva}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Habitacion> getHabitacionByIdReserva(@PathVariable Long idReserva){
-		Reserva reserva = reservaRepository.findReservaByIdReserva(idReserva);
+	public List<HashMap<String,String>> getHabitacionesByIdReserva(@PathVariable Long idReserva){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		Reserva reserva = reservaRepository.findByIdReserva(idReserva);
 		List<ReservaHabitacion> lrh = reshabRepository.findByReserva(reserva);
-		List<Habitacion> lh = new ArrayList<>();
+		List<HashMap<String,String>> listaHabitaciones = new ArrayList<>();
+		HashMap<String,String> map;
 		for(int i = 0; i<lrh.size(); i++){
-			lh.add(lrh.get(i).getHabitacion());
+			map = new HashMap<>();
+			Habitacion h = lrh.get(i).getHabitacion();
+			map.put("idHab", h.getIdHabitacion().toString());
+			map.put("tipoHabitacion",h.getTipoHabitacion());
+			map.put("precioNoche",Integer.toString(h.getPrecioNoche()));
+			map.put("nroHabitacion",Integer.toString(h.getNroHabitacion()));
+			map.put("capacidadNinos",Integer.toString(h.getCapacidadNinos()));
+			map.put("capacidadAdultos",Integer.toString(h.getCapacidadAdultos()));
+			map.put("fechaInicio",formatter.format(lrh.get(i).getFechaInicioRH()));
+			map.put("fechaTermino",formatter.format(lrh.get(i).getFechaTerminoRH()));
+			listaHabitaciones.add(map);
 		}
-		return lh;
+		return listaHabitaciones;
 	}
 }
 

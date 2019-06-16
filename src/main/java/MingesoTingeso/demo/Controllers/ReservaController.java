@@ -37,7 +37,7 @@ public class ReservaController {
 
     private Random randomGenerator = new Random();
 
-    @RequestMapping(value="", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Reserva> getAllReservas() {
         return reservaRepository.findAll();
@@ -46,7 +46,24 @@ public class ReservaController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Reserva getReservaByIdReserva(@PathVariable Long id) {
-        return reservaRepository.findReservaByIdReserva(id);
+        return reservaRepository.findByIdReserva(id);
+    }
+
+    @RequestMapping(value = "conUsuario/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public HashMap<String,String> getReservaConUsuario(@PathVariable Long id){
+        Reserva reserva = reservaRepository.findByIdReserva(id);
+        Cliente cliente = reserva.getCliente();
+        HashMap<String,String> map;
+        map = new HashMap<>();
+        map.put("idReserva", reserva.getIdReserva().toString());
+        map.put("idCliente", cliente.getIdCliente().toString());
+        map.put("descuento",Integer.toString(reserva.getDescuento()));
+        map.put("codigoReserva",Integer.toString(reserva.getCodigoReserva()));
+        map.put("nombreCliente",cliente.getNombreCliente());
+        map.put("correoCliente",cliente.getCorreoCliente());
+        map.put("rutCliente", Integer.toString(cliente.getRut()));
+        return map;
     }
 
     @RequestMapping(value = "/codigoReserva/{codigoReserva}", method = RequestMethod.GET)
@@ -61,7 +78,7 @@ public class ReservaController {
         return habitacionRepository.findHabitacionByTipo(tipo);
     }
 
-    @RequestMapping(value = "/{idCliente}", method = RequestMethod.GET)
+    @RequestMapping(value = "/byCliente/{idCliente}", method = RequestMethod.GET)
     @ResponseBody
     public Cliente getClienteById(@PathVariable Long idCliente) {
         return clienteRepository.findClienteByIdCliente(idCliente);
