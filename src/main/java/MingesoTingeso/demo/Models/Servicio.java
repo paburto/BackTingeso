@@ -38,9 +38,6 @@ public class Servicio implements Serializable {
 		@Column(nullable = false, name = "`categoriaServicio`")
     private String categoriaServicio;
 
-    @ManyToMany
-    private Set<Registro> registros;
-
     public Servicio() {
 
     }

@@ -4,6 +4,8 @@ import MingesoTingeso.demo.Models.*;
 import MingesoTingeso.demo.Repositories.ComprobantePagoRepository;
 import MingesoTingeso.demo.Repositories.RegistroRepository;
 import MingesoTingeso.demo.Repositories.ResHabRepository;
+import MingesoTingeso.demo.Repositories.RegistroServicioRepository;
+import MingesoTingeso.demo.Repositories.ServicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
@@ -25,6 +27,12 @@ public class ComprobantePagoController {
 
     @Autowired
     ResHabRepository resHabRepository;
+
+    @Autowired
+    RegistroServicioRepository registroServicioRepository;
+
+    @Autowired
+    ServicioRepository servicioRepository;
 
     @GetMapping("/")
     @ResponseBody
@@ -61,7 +69,13 @@ public class ComprobantePagoController {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Instant inicio = formatter.parse(jsonData.get("fechaInicio").toString()).toInstant();
             Instant termino = formatter.parse(jsonData.get("fechaTermino").toString()).toInstant();
-            Set<Servicio> servicios = registro.getServicios();
+            List<RegistroServicio> rs = registroServicioRepository.findRegistroServicioByRegistro(registro);
+            Set<Servicio> servicios = new HashSet<Servicio>();
+            for(RegistroServicio registroServicio : rs){
+                if(registroServicio.getRegistro().getIdRegistro().equals(registro.getIdRegistro())){
+                    servicios.add(registroServicio.getServicio());
+                }
+            }
             long total = registro.getHabitacion().getPrecioNoche()*ChronoUnit.DAYS.between(inicio, termino) + 1;
             for(Servicio sh : servicios){
                 total = total + sh.getPrecio();

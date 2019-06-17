@@ -60,8 +60,8 @@ public class RegistroServicioController {
 		public List<HashMap<String, String>> create(@RequestBody Map<String, Object> jsonData) throws ParseException {
   		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
   		HashMap<String, String> map = new HashMap<>();
-			Long idRegistro = new Long(Integer.parseInt(jsonData.get("idRegistro").toString()));
-			Long idServicio = new Long(Integer.parseInt(jsonData.get("idServicio").toString()));
+			Long idRegistro = Long.parseLong(jsonData.get("idRegistro").toString());
+			Long idServicio = Long.parseLong(jsonData.get("idServicio").toString());
 			Registro r = registroRepository.findRegistroByIdRegistro(idRegistro);
 			Servicio s = servicioRepository.findServicioByIdServicio(idServicio);
 			if(r != null){
