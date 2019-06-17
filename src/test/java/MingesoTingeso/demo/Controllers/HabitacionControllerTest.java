@@ -58,19 +58,18 @@ public class HabitacionControllerTest {
         List<Habitacion> h1 = hc.getAllHabitaciones();
         HashMap<String, Object> map = new HashMap<>();
         Habitacion aux = h1.get(0);
-        map.put("nroHabitacion", aux.getNroHabitacion());
+        map.put("nroHabitacion", -2);
         map.put("tipo", aux.getTipoHabitacion());
         map.put("capacidadNinos", aux.getCapacidadNinos());
         map.put("capacidadAdultos", aux.getCapacidadAdultos());
         map.put("precioNoche", aux.getPrecioNoche());
-        List<HashMap<String, String>> hab = hc.update((long)18, map);
+        List<HashMap<String, String>> hab = hc.update(aux.getIdHabitacion(), map);
         assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
     }
 
     @Test
     public void create() throws ParseException {
         Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(10000) + 1000;
         HashMap<String, Object> map = new HashMap<>();
         map.put("tipo", "Inhabilitada");
         map.put("nroHabitacion", -1);
