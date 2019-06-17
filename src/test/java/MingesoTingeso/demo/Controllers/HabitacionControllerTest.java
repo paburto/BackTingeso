@@ -1,3 +1,5 @@
+
+
 package MingesoTingeso.demo.Controllers;
 
 import MingesoTingeso.demo.Models.Habitacion;
@@ -16,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import static org.junit.Assert.*;
-/*
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
@@ -25,9 +26,9 @@ public class HabitacionControllerTest {
     HabitacionController hc;
     @Test
     public void getAllHabitaciones() {
-      List<Habitacion> h1 = hc.getAllHabitaciones();
-      List<Habitacion> h2 = hc.getAllHabitaciones();
-      assertEquals(h1.size(),h2.size());
+        List<Habitacion> h1 = hc.getAllHabitaciones();
+        List<Habitacion> h2 = hc.getAllHabitaciones();
+        assertEquals(h1.size(),h2.size());
     }
 
     @Test
@@ -39,39 +40,44 @@ public class HabitacionControllerTest {
     }
 
     @Test
-    public void inhabilitar() throws ParseException{
-    	HashMap<String, Object> map = new HashMap<>();
-    	map.put("tipo", "Simple");
-    	List<Habitacion> h1 = hc.getAllHabitaciones();
-    	List<HashMap<String, String>> ih = hc.inhabilitar(h1.get(0).getIdHabitacion(), map);
-    	assertEquals(200, Integer.parseInt(ih.get(0).get("status")));
+    public void getHabitacionByNroHabitacion() {
+        assertEquals(1,1);
     }
 
-	@Test
+    @Test
+    public void inhabilitar() throws ParseException{
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("tipo", "Simple");
+        List<Habitacion> h1 = hc.getAllHabitaciones();
+        List<HashMap<String, String>> ih = hc.inhabilitar(h1.get(0).getIdHabitacion(), map);
+        assertEquals(200, Integer.parseInt(ih.get(0).get("status")));
+    }
+
+    @Test
     public void update() throws ParseException {
-		/*List<Habitacion> h1 = hc.getAllHabitaciones();
-		HashMap<String, Object> map = new HashMap<>();
-    	map.put("tipo", h1.get(0).getTipoHabitacion());
-    	map.put("nroHabitacion", h1.get(0).getNroHabitacion());
-    	map.put("capacidadNinos", h1.get(0).getCapacidadNinos());
-    	map.put("capacidadAdultos", h1.get(0).getCapacidadAdultos());
-    	map.put("precioNoche", h1.get(0).getPrecioNoche());
-		List<HashMap<String, String>> hab = hc.update(h1.get(0).getIdHabitacion(), map);
-		assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
+        List<Habitacion> h1 = hc.getAllHabitaciones();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("tipo", h1.get(0).getTipoHabitacion());
+        map.put("nroHabitacion", h1.get(0).getNroHabitacion());
+        map.put("capacidadNinos", h1.get(0).getCapacidadNinos());
+        map.put("capacidadAdultos", h1.get(0).getCapacidadAdultos());
+        map.put("precioNoche", h1.get(0).getPrecioNoche());
+        List<HashMap<String, String>> hab = hc.update(h1.get(0).getIdHabitacion(), map);
+        assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
     }
 
     @Test
     public void create() throws ParseException {
-    	Random randomGenerator = new Random();
-    	int randomInt = randomGenerator.nextInt(10000) + 1000;
-    	HashMap<String, Object> map = new HashMap<>();
-    	map.put("tipo", "Inhabilitada");
-    	map.put("nroHabitacion", randomInt);
-    	map.put("capacidadNinos", 2);
-    	map.put("capacidadAdultos", 2);
-    	map.put("precioNoche", 60000);
-    	List<HashMap<String, String>> cr = hc.create(map);
-    	assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
+        Random randomGenerator = new Random();
+        int randomInt = randomGenerator.nextInt(10000) + 1000;
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("tipo", "Inhabilitada");
+        map.put("nroHabitacion", randomInt);
+        map.put("capacidadNinos", 2);
+        map.put("capacidadAdultos", 2);
+        map.put("precioNoche", 60000);
+        List<HashMap<String, String>> cr = hc.create(map);
+        assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
     }
 
     @Test
@@ -79,4 +85,3 @@ public class HabitacionControllerTest {
 
     }
 }
-*/
