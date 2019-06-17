@@ -53,7 +53,6 @@ public class ReservaHabitacion implements Serializable {
   }
 
   public ReservaHabitacion(){
-
   }
 
   public Long getIdRH() {
@@ -95,5 +94,4 @@ public class ReservaHabitacion implements Serializable {
   public void setHabitacion(Habitacion habitacion){
     this.habitacion = habitacion;
   }
-
 }

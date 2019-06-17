@@ -66,7 +66,8 @@ public class RegistroController {
 
     @PostMapping(value = "/create")
     @ResponseBody
-    public Registro create(@RequestBody List<Map<String, String>> data, @RequestParam(value = "idHab") Long idHab, @RequestParam(value = "fechaInicio") String fechaInicio, @RequestParam(value ="fechaTermino") final String fechaTermino) throws ParseException {
+    public Registro create(@RequestBody List<Map<String, String>> data, @RequestParam(value = "idHab") Long idHab, @RequestParam(value = "fechaInicio") String fechaInicio,
+                           @RequestParam(value ="fechaTermino")  String fechaTermino, @RequestParam(value="descuento") Integer descuento) throws ParseException {
         Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(idHab);
         Registro registro = new Registro();
         String representante = "";
@@ -80,6 +81,8 @@ public class RegistroController {
         registro.setFechaTermino(formatter.parse(fechaTermino));
         registro.setHabitacion(habitacion);
         registro.setRepresentante(representante);
+        float desc = descuento/100f;
+        registro.setPrecio(Math.round(habitacion.getPrecioNoche()-habitacion.getPrecioNoche()*desc));
         registroRepository.save(registro);
         ClienteRegistro cr;
         Cliente cliente;

@@ -35,6 +35,9 @@ public class Registro implements Serializable {
     @Column(nullable = false, name = "fechaTermino")
     private Date fechaTermino;
 
+	@Column(name = "precio")
+	private Integer precio;
+
     @ManyToOne(cascade = CascadeType.ALL,
 					fetch = FetchType.LAZY)
 		@JoinColumn(name = "idHab")
@@ -102,5 +105,13 @@ public class Registro implements Serializable {
 
 	public void setServicios(Set<Servicio> servicios) {
 		this.servicios = servicios;
+	}
+
+	public Integer getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Integer precio) {
+		this.precio = precio;
 	}
 }
