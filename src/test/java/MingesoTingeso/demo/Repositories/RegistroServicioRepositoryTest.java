@@ -1,4 +1,4 @@
-package MingesoTingeso.demo.Repositories;
+/*package MingesoTingeso.demo.Repositories;
 
 import MingesoTingeso.demo.Models.Registro;
 import MingesoTingeso.demo.Models.RegistroServicio;
@@ -59,3 +59,4 @@ public class RegistroServicioRepositoryTest {
         assertArrayEquals(esperado, h);
     }
 }
+*/
