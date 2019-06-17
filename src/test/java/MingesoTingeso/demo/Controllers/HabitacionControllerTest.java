@@ -71,15 +71,11 @@ public class HabitacionControllerTest {
     }
 
     @Test
-    public void delete() {
+    public void delete() throws ParseException {
         int aux = -1;
         Habitacion hab = hr.findHabitacionByNroHabitacion(aux);
-        List<HashMap<String, String>> cr = null;
-        try {
-            cr = hc.update(hab.getIdHabitacion());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Long id = hab.getIdHabitacion();
+        List<HashMap<String, String>> cr = hc.update(id);
         assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
     }
 
