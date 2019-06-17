@@ -1,13 +1,26 @@
 package MingesoTingeso.demo.Models;
 
+import MingesoTingeso.demo.Repositories.ServicioRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.Set;
 
 import static org.junit.Assert.*;
-/**
+
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration
+@SpringBootTest
 public class RegistroTest {
+    @Autowired
+    ServicioRepository servicioRepository;
 
     @Test
     public void getIdRegistro() {
@@ -73,6 +86,24 @@ public class RegistroTest {
           e.printStackTrace();
       }
     }
+
+    @Test
+    public void getHabitacion() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            assertEquals(h,r.getHabitacion());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Test
     public void setIdRegistro() {
@@ -154,5 +185,22 @@ public class RegistroTest {
       }
     }
 
+    @Test
+    public void setHabitacion() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            h = new Habitacion("Simple",1112,2,2,8000);
+            r.setHabitacion(h);
+            assertEquals(h,r.getHabitacion());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
-**/
