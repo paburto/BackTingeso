@@ -261,30 +261,18 @@ public class ReservaHabitacionController {
 			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 			HashMap<String, String> map = new HashMap<>();
 			List<ReservaHabitacion> reservahabitacion = reshabRepository.findAll();
-			List<Reserva> reserva = reservaRepository.findAll();
-			List<Cliente> cliente = clienteRepository.findAll();
 			for(ReservaHabitacion rh : reservahabitacion){
-				for(Reserva r : reserva){
-					for(Cliente c : cliente){
-						if(rh.getReserva().getIdReserva().equals(r.getIdReserva()) && r.getCliente().getIdCliente().equals(c.getIdCliente())){
-							map.put("fechaInicio", rh.getFechaInicioRH().toString());
-							map.put("fechaTermino", rh.getFechaTerminoRH().toString());
-							map.put("nroHabitacion", Integer.toString(rh.getHabitacion().getNroHabitacion()));
-							map.put("idReserva", rh.getReserva().getIdReserva().toString());
-							map.put("descuento", Integer.toString(r.getDescuento()));
-							map.put("estado", Integer.toString(r.getEstado()));
-							map.put("idUser", r.getUsuario().getIdUsuario().toString());
-							map.put("idCliente", c.getIdCliente().toString());
-							map.put("nombreCliente", c.getNombreCliente());
-							map.put("rut", Integer.toString(c.getRut()));
-							map.put("codigoReserva",Integer.toString(r.getCodigoReserva()));
-							map.put("telefono", Integer.toString(c.getTelefonoCliente()));
-							map.put("fechaNacimiento", c.getFechaNacimiento().toString());
-							result.add(map);
-							map = new HashMap<>();
-						}
-					}
-				}
+				map.put("tipo", "reserva");
+				map.put("fechaInicio", rh.getFechaInicioRH().toString());
+				map.put("fechaTermino", rh.getFechaTerminoRH().toString());
+				map.put("nroHabitacion", Integer.toString(rh.getHabitacion().getNroHabitacion()));
+				map.put("estado", Integer.toString(rh.getReserva().getEstado()));
+				map.put("rutCliente", rh.getReserva().getCliente().getIdCliente().toString());
+				map.put("nombreCliente", rh.getReserva().getCliente().getNombreCliente());
+				map.put("rut", Integer.toString(rh.getReserva().getCliente().getRut()));
+				map.put("codigoReserva",Integer.toString(rh.getReserva().getCodigoReserva()));
+				result.add(map);
+				map = new HashMap<>();
 			}
 		return result;
 	}
