@@ -3,6 +3,7 @@
 package MingesoTingeso.demo.Controllers;
 
 import MingesoTingeso.demo.Models.Habitacion;
+import MingesoTingeso.demo.Repositories.HabitacionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import static org.junit.Assert.*;
 public class HabitacionControllerTest {
     @Autowired
     HabitacionController hc;
+    @Autowired
+    HabitacionRepository hr;
     @Test
     public void getAllHabitaciones() {
         List<Habitacion> h1 = hc.getAllHabitaciones();
@@ -68,6 +71,19 @@ public class HabitacionControllerTest {
     }
 
     @Test
+    public void delete() {
+        int aux = -1;
+        Habitacion hab = hr.findHabitacionByNroHabitacion(aux);
+        List<HashMap<String, String>> cr = null;
+        try {
+            cr = hc.update(hab.getIdHabitacion());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
+    }
+
+    @Test
     public void create() throws ParseException {
         Random randomGenerator = new Random();
         HashMap<String, Object> map = new HashMap<>();
@@ -80,8 +96,5 @@ public class HabitacionControllerTest {
         assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
     }
 
-    @Test
-    public void delete() {
 
-    }
 }
