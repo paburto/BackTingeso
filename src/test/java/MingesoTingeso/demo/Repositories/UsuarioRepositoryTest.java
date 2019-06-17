@@ -17,7 +17,9 @@ public class UsuarioRepositoryTest {
 
 	@Test
 	public void findUsuarioByIdUser() {
-	    long fid=41;
+		List<Usuario> us = usuarioRepository.findAll();
+		Usuario x = us.get(0);
+	    long fid=x.getIdUser();
 		Usuario user = usuarioRepository.findUsuarioByIdUser(fid);
 		long aux =user.getIdUser();
 		assertEquals(fid, aux);

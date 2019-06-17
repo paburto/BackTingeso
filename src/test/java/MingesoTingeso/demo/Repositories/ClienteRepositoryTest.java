@@ -19,7 +19,8 @@ public class ClienteRepositoryTest {
 
 	@Test
 	public void findClienteByIdCliente() {
-		long idTest = 1;
+		Cliente aux = clienteRepository.findAll().get(0);
+		long idTest = aux.getIdCliente();
 		Cliente c = clienteRepository.findClienteByIdCliente(idTest);
 		long comp = c.getIdCliente();
 		assertEquals(idTest, comp);
@@ -27,8 +28,10 @@ public class ClienteRepositoryTest {
 
 	@Test
 	public void findClienteByRut(){
-		Cliente c = clienteRepository.findClienteByRut(18123456);
-		assertEquals(18123456,c.getRut());
+		Cliente aux = clienteRepository.findAll().get(0);
+		int rutTest = aux.getRut();
+		Cliente c = clienteRepository.findClienteByRut(rutTest);
+		assertEquals(rutTest,c.getRut());
 
 	}
 }
