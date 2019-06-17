@@ -69,16 +69,20 @@ public class RegistroController {
     public Registro create(@RequestBody List<Map<String, String>> data, @RequestParam(value = "idHab") Long idHab, @RequestParam(value = "fechaInicio") String fechaInicio, @RequestParam(value ="fechaTermino") final String fechaTermino) throws ParseException {
         Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(idHab);
         Registro registro = new Registro();
+        String representante = "";
+        for(int i = 0; i<data.size(); i++){
+            if(data.get(i).get("representante").equals("si")){
+                representante = data.get(i).get("nombre");
+            }
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         registro.setFechaInicio(formatter.parse(fechaInicio));
         registro.setFechaTermino(formatter.parse(fechaTermino));
         registro.setHabitacion(habitacion);
-        registro.setRepresentante("");
+        registro.setRepresentante(representante);
         registroRepository.save(registro);
         ClienteRegistro cr;
         Cliente cliente;
-        System.out.println(fechaInicio+fechaTermino);
-        String aux;
         for(int i = 0; i<data.size(); i++){
             cliente = new Cliente();
             cliente.setNombreCliente(data.get(i).get("nombre"));
@@ -87,11 +91,6 @@ public class RegistroController {
             cliente.setRut(Integer.parseInt(data.get(i).get("rut")));
             cliente.setTelefonoCliente(Integer.parseInt(data.get(i).get("telefono")));
             clienteRepository.save(cliente);
-            aux = data.get(i).get("representante");
-            if(aux == "si"){
-                registro.setRepresentante(aux);
-                registroRepository.save(registro);
-            }
             clienteRegistroRepository.save(new ClienteRegistro(cliente,registro));
         }
         return registro;

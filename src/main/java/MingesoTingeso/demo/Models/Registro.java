@@ -39,7 +39,7 @@ public class Registro implements Serializable {
 					fetch = FetchType.LAZY)
 		@JoinColumn(name = "idHab")
 		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-		private Habitacion habitacion;
+	private Habitacion habitacion;
 
     @ManyToMany(mappedBy="registros")
     private Set<Servicio> servicios;
