@@ -72,8 +72,11 @@ public class ReservaControllerTest {
     @Test
     public void getAllRackP() {
     	List<HashMap<String, String>> rack;
-        Hibernate.initialize(rack = rc.getAllRackP());
-    	assertTrue(rack.size() > 0);
+        rack = rc.getAllRackP();
+        if (rack == null) {
+            assertEquals(true, rack == null);
+        }
+        assertEquals(true, rack.size() > 0);
     }
 
     @Test
