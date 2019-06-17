@@ -3,6 +3,7 @@ package MingesoTingeso.demo.Controllers;
 import MingesoTingeso.demo.Models.Reserva;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Cliente;
+import MingesoTingeso.demo.Repositories.ReservaRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.time.LocalDate;
 import java.text.ParseException;
 
 import static org.junit.Assert.*;
- /*
+
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
@@ -28,7 +29,8 @@ public class ReservaControllerTest {
     ReservaController rc;
     @Autowired
     HabitacionController hc;
-
+    @Autowired
+    ReservaRepository rr;
     @Test
     public void getAllReservas() {
       List<Reserva> ra = rc.getAllReservas();
@@ -68,7 +70,7 @@ public class ReservaControllerTest {
     
     @Test
     public void getAllRackP() {
-    	/*List<HashMap<String, String>> rack = rc.getAllRackP();
+    	List<HashMap<String, String>> rack = rc.getAllRackP();
     	assertTrue(rack.size() > 0);
     }
 
@@ -86,5 +88,13 @@ public class ReservaControllerTest {
     public void update() throws ParseException {
 
     }
+
+    @Test
+    public void anularR() throws ParseException {
+        List<Reserva> aux = rr.findAll();
+        Reserva reserv = aux.get(0);
+        List<HashMap<String, String>> test = rc.anularR(reserv.getCodigoReserva());
+        assertEquals(200, Integer.parseInt(test.get(0).get("status")));
+
+    }
 }
-*/
