@@ -27,7 +27,7 @@ public class Cliente implements Serializable {
 	@Column(name = "idCliente")
 	private Long idCliente;
 
-    @Column(nullable = false, name = "`rut`")
+    @Column(nullable = false, name = "`rut`", unique = true)
     private int rut;
 
     @Column(nullable = false, name = "`nombreCliente`")

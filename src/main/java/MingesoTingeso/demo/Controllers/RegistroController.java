@@ -84,15 +84,19 @@ public class RegistroController {
         float desc = descuento/100f;
         registro.setPrecio(Math.round(habitacion.getPrecioNoche()-habitacion.getPrecioNoche()*desc));
         registroRepository.save(registro);
-        ClienteRegistro cr;
+        int rut;
         Cliente cliente;
         for(int i = 0; i<data.size(); i++){
-            cliente = new Cliente();
-            cliente.setNombreCliente(data.get(i).get("nombre"));
-            cliente.setFechaNacimiento(formatter.parse(data.get(i).get("fechaNacimiento")));
-            cliente.setCorreoCliente(data.get(i).get("correo"));
-            cliente.setRut(Integer.parseInt(data.get(i).get("rut")));
-            cliente.setTelefonoCliente(Integer.parseInt(data.get(i).get("telefono")));
+            rut = Integer.parseInt(data.get(i).get("rut"));
+            cliente = clienteRepository.findClienteByRut(rut);
+            if(cliente == null){
+                cliente = new Cliente();
+                cliente.setRut(rut);
+                cliente.setNombreCliente(data.get(i).get("nombre"));
+                cliente.setFechaNacimiento(formatter.parse(data.get(i).get("fechaNacimiento")));
+                cliente.setCorreoCliente(data.get(i).get("correo"));
+                cliente.setTelefonoCliente(Integer.parseInt(data.get(i).get("telefono")));
+            }
             clienteRepository.save(cliente);
             clienteRegistroRepository.save(new ClienteRegistro(cliente,registro));
         }
