@@ -38,14 +38,10 @@ public class Registro implements Serializable {
 	@Column(name = "precio")
 	private Integer precio;
 
-    @ManyToOne(cascade = CascadeType.ALL,
-					fetch = FetchType.LAZY)
-		@JoinColumn(name = "idHab")
-		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name = "idHab")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Habitacion habitacion;
-
-    @ManyToMany(mappedBy="registros")
-    private Set<Servicio> servicios;
 
     public Registro() {
 
@@ -97,14 +93,6 @@ public class Registro implements Serializable {
 
 	public void setHabitacion(Habitacion habitacion){
     	this.habitacion = habitacion;
-	}
-
-	public Set<Servicio> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(Set<Servicio> servicios) {
-		this.servicios = servicios;
 	}
 
 	public Integer getPrecio() {
