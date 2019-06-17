@@ -64,10 +64,24 @@ public class RegistroServicioController {
 			Long idServicio = new Long(Integer.parseInt(jsonData.get("idServicio").toString()));
 			Registro r = registroRepository.findRegistroByIdRegistro(idRegistro);
 			Servicio s = servicioRepository.findServicioByIdServicio(idServicio);
-  		registroServicioRepository.save(new RegistroServicio(r,s));
-  		map.put("status", "201");
-  		map.put("message", "RegistroServicio agregado con exito");
-  		result.add(map);
-  		return result;
+			if(r != null){
+				if(s != null){
+		  		registroServicioRepository.save(new RegistroServicio(r,s));
+		  		map.put("status", "201");
+		  		map.put("message", "RegistroServicio agregado con exito");
+		  		result.add(map);
+		  		return result;
+				} else {
+					map.put("status", "401");
+					map.put("message", "No existe un servicio con ese id.");
+					result.add(map);
+					return result;
+				}
+			} else {
+				map.put("status", "401");
+				map.put("message", "No existe un registro con ese id.");
+				result.add(map);
+				return result;
+			}
 		}
 }
