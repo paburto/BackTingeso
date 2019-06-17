@@ -2,19 +2,14 @@ package MingesoTingeso.demo.Models;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.util.*;
 
 
 @Entity
@@ -31,6 +26,9 @@ public class ReservaHabitacion implements Serializable {
 
   @Column(nullable = false, name = "fechaTermino")
   private Date fechaTermino;
+
+  @Column(name = "activa")
+  private boolean activa;
 
   @ManyToOne(cascade = CascadeType.ALL,
           fetch = FetchType.LAZY)
@@ -50,9 +48,11 @@ public class ReservaHabitacion implements Serializable {
     this.fechaTermino = fechaTermino;
     this.reserva = reserva;
     this.habitacion = habitacion;
+    this.activa = true;
   }
 
   public ReservaHabitacion(){
+    this.activa = true;
   }
 
   public Long getIdRH() {
@@ -94,4 +94,13 @@ public class ReservaHabitacion implements Serializable {
   public void setHabitacion(Habitacion habitacion){
     this.habitacion = habitacion;
   }
+
+  public boolean isActiva() {
+    return activa;
+  }
+
+  public void setActiva(boolean activa) {
+    this.activa = activa;
+  }
+
 }

@@ -7,14 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Repositories.HabitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import MingesoTingeso.demo.Models.ReservaHabitacion;
@@ -23,7 +21,7 @@ import MingesoTingeso.demo.Models.Reserva;
 import MingesoTingeso.demo.Repositories.ClienteRepository;
 import MingesoTingeso.demo.Repositories.ResHabRepository;
 import MingesoTingeso.demo.Repositories.ReservaRepository;
-import MingesoTingeso.demo.Controllers.ClienteController;
+
 
 
 @CrossOrigin(origins = "*")
@@ -40,13 +38,10 @@ public class ReservaHabitacionController {
 	ReservaRepository reservaRepository;
 
 	@Autowired
-	ClienteController clienteController;
-
-	@Autowired
 	HabitacionRepository habitacionRepository;
 
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	@ResponseBody
 	public List<ReservaHabitacion> getAllReservasHabitaciones() {
 		return reshabRepository.findAll();
@@ -167,7 +162,7 @@ public class ReservaHabitacionController {
 	}
 
 
-	@RequestMapping(value="/{fechaInit}/{fechaTerm}", method = RequestMethod.GET)
+	@GetMapping(value="/{fechaInit}/{fechaTerm}")
 	@ResponseBody
 	public List<HashMap<String, String>> mostrar(@PathVariable String fechaInit, @PathVariable String fechaTerm) throws ParseException {
 		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
@@ -260,7 +255,7 @@ public class ReservaHabitacionController {
 
 
 
-	@RequestMapping(value = "/rack" , method = RequestMethod.GET)
+	@GetMapping(value = "/rack")
 	@ResponseBody
 	public List<HashMap<String, String>> getAllRack() {
 			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
@@ -294,12 +289,13 @@ public class ReservaHabitacionController {
 		return result;
 	}
 
-	@RequestMapping(value = "/habitaciones/{idReserva}", method = RequestMethod.GET)
+	@GetMapping(value = "/habitaciones/{idReserva}")
 	@ResponseBody
 	public List<HashMap<String,String>> getHabitacionesByIdReserva(@PathVariable Long idReserva){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		Reserva reserva = reservaRepository.findByIdReserva(idReserva);
-		List<ReservaHabitacion> lrh = reshabRepository.findByReserva(reserva);
+		List<ReservaHabitacion> lrh = reshabRepository.findByReservaAndActiva(reserva,true);
+		float desc = reserva.getDescuento()/100f;
 		List<HashMap<String,String>> listaHabitaciones = new ArrayList<>();
 		HashMap<String,String> map;
 		for(int i = 0; i<lrh.size(); i++){
@@ -308,6 +304,7 @@ public class ReservaHabitacionController {
 			map.put("idHab", h.getIdHabitacion().toString());
 			map.put("tipoHabitacion",h.getTipoHabitacion());
 			map.put("precioNoche",Integer.toString(h.getPrecioNoche()));
+			map.put("precioConDescuento", Integer.toString(Math.round(h.getPrecioNoche()-h.getPrecioNoche()*desc)));
 			map.put("nroHabitacion",Integer.toString(h.getNroHabitacion()));
 			map.put("capacidadNinos",Integer.toString(h.getCapacidadNinos()));
 			map.put("capacidadAdultos",Integer.toString(h.getCapacidadAdultos()));
@@ -316,6 +313,17 @@ public class ReservaHabitacionController {
 			listaHabitaciones.add(map);
 		}
 		return listaHabitaciones;
+	}
+
+	@GetMapping(value = "/desactivar")
+	@ResponseBody
+	public HttpStatus desactivar(@RequestParam("idHab") Long idHab, @RequestParam("idReserva") Long idReserva){
+		Reserva reserva = reservaRepository.findByIdReserva(idReserva);
+		Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(idHab);
+		ReservaHabitacion reservaHabitacion  = reshabRepository.findByReservaAndHabitacion(reserva,habitacion);
+		reservaHabitacion.setActiva(false);
+		reshabRepository.save(reservaHabitacion);
+		return  HttpStatus.OK;
 	}
 }
 

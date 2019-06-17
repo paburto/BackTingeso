@@ -38,7 +38,7 @@ public class RegistroController {
         return registroRepository.findAll();
     }
 
-    @RequestMapping(value = "/nroHabitacion/{nro}", method = RequestMethod.GET)
+    @GetMapping(value = "/nroHabitacion/{nro}")
     @ResponseBody
     public List<Registro> getByCodigoHabitacion(@PathVariable int nro){
         List<Registro> newRegistro = new ArrayList<>();
