@@ -26,6 +26,7 @@ public class RegistroServicio implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Servicio servicio;
 
+    public RegistroServicio(){}
     public RegistroServicio(Registro registro, Servicio servicio) {
         this.registro = registro;
         this.servicio = servicio;
@@ -38,11 +39,11 @@ public class RegistroServicio implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public Registro getRegistro() {
       return registro;
     }
-    
+
     public void setRegistro(Registro registro) {
       this.registro = registro;
     }
