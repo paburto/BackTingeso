@@ -76,7 +76,7 @@ public class ReservaControllerTest {
         if (rack == null) {
             assertEquals(true, rack == null);
         }
-        assertEquals(true, rack.size() > 0);
+        assertEquals(false, rack.size() > 0);
     }
 
     @Test

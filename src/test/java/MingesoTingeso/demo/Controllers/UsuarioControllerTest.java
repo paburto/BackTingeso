@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/*
+
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
@@ -49,4 +49,4 @@ public class UsuarioControllerTest {
     public void delete() {
 
     }
-}*/
+}
