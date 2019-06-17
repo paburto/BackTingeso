@@ -4,6 +4,7 @@ import MingesoTingeso.demo.Models.Reserva;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Cliente;
 import MingesoTingeso.demo.Repositories.ReservaRepository;
+import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +68,11 @@ public class ReservaControllerTest {
       Cliente c = rc.getClienteById(1L);
       assertEquals(1L,(long)c.getIdCliente());
     }
-    
+
     @Test
     public void getAllRackP() {
-    	List<HashMap<String, String>> rack = rc.getAllRackP();
+    	List<HashMap<String, String>> rack;
+        Hibernate.initialize(rack = rc.getAllRackP());
     	assertTrue(rack.size() > 0);
     }
 
