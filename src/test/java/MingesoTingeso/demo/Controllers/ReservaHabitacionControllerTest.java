@@ -13,7 +13,7 @@ import java.text.ParseException;
 import MingesoTingeso.demo.Models.ReservaHabitacion;
 
 import static org.junit.Assert.*;
-/*
+
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
@@ -39,4 +39,3 @@ public class ReservaHabitacionControllerTest {
 
     }
 }
-*/
