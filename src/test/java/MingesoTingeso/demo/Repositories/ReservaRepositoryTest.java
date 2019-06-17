@@ -20,40 +20,37 @@ public class ReservaRepositoryTest {
 	@Autowired
 	ReservaRepository reservaRepository;
 
-    @Autowired
-    List<Reserva> lr;
-
-	@Before
-    public void before(){
-        List<Reserva> lr = reservaRepository.findAll();
-    }
-
 	@Test
 	public void findReservaByIdReserva() {
+		List<Reserva> lr = reservaRepository.findAll();
 		long id = lr.get(0).getIdReserva();
 		assertEquals(id, (long)reservaRepository.findByIdReserva(id).getIdReserva());
 	}
 
 	@Test
 	public void findReservaByDescuento() {
+		List<Reserva> lr = reservaRepository.findAll();
 		int descuento = lr.get(0).getDescuento();
 		assertEquals(descuento, reservaRepository.findReservaByDescuento(descuento).get(0).getDescuento());
 	}
 
 	@Test
 	public void findReservaByEstado() {
+		List<Reserva> lr = reservaRepository.findAll();
 		int estado = lr.get(0).getEstado();
 		assertEquals(estado, reservaRepository.findReservaByEstado(estado).get(0).getEstado());
 	}
 	
 	@Test
 	public void findReservaByCodigoReserva(){
+		List<Reserva> lr = reservaRepository.findAll();
 		int codigo = lr.get(0).getCodigoReserva();
 		assertEquals(codigo, reservaRepository.findReservaByCodigoReserva(codigo).getCodigoReserva());
 	}
 
 	@Test
 	public void getReservaByCodigoReserva(){
+		List<Reserva> lr = reservaRepository.findAll();
 		int codigo = lr.get(0).getCodigoReserva();
 		assertEquals(codigo, reservaRepository.getReservaByCodigoReserva(codigo).getCodigoReserva());
 	}
