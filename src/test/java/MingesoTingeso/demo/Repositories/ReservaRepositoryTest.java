@@ -31,7 +31,7 @@ public class ReservaRepositoryTest {
 	@Test
 	public void findReservaByIdReserva() {
 		long id = lr.get(0).getIdReserva();
-		assertEquals(id, (long)reservaRepository.findReservaByIdReserva(id).getIdReserva());
+		assertEquals(id, (long)reservaRepository.findByIdReserva(id).getIdReserva());
 	}
 
 	@Test

@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import MingesoTingeso.demo.Models.Habitacion;
-/*
+
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
@@ -44,7 +44,7 @@ public class HabitacionRepositoryTest {
 			assertEquals(10, hab.get(0).getCapacidadNinos());
 		}
 	}
-
+/*
 	@Test
 	public void findHabitacionByCapacidadNinos() {
 		List<Habitacion> hab = habitacionRepository.findHabitacionByCapacidadNinos(2);
@@ -70,5 +70,5 @@ public class HabitacionRepositoryTest {
 			hab.get(0).setNroHabitacion(520);
 			assertEquals(520, hab.get(0).getNroHabitacion());
 		}
-	}
-}*/
+	}*/
+}
