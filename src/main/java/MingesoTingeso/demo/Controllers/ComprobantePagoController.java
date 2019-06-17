@@ -72,7 +72,7 @@ public class ComprobantePagoController {
             List<RegistroServicio> rs = registroServicioRepository.findRegistroServicioByRegistro(registro);
             Set<Servicio> servicios = new HashSet<Servicio>();
             for(RegistroServicio registroServicio : rs){
-                if(registroServicio.getRegistro().getIdRegistro() == registro.getIdRegistro()){
+                if(registroServicio.getRegistro().getIdRegistro().equals(registro.getIdRegistro())){
                     servicios.add(registroServicio.getServicio());
                 }
             }
