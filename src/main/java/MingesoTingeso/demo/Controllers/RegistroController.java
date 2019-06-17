@@ -1,7 +1,11 @@
 package MingesoTingeso.demo.Controllers;
 
+import MingesoTingeso.demo.Models.Cliente;
+import MingesoTingeso.demo.Models.ClienteRegistro;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Registro;
+import MingesoTingeso.demo.Repositories.ClienteRegistroRepository;
+import MingesoTingeso.demo.Repositories.ClienteRepository;
 import MingesoTingeso.demo.Repositories.HabitacionRepository;
 import MingesoTingeso.demo.Repositories.RegistroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,12 @@ public class RegistroController {
 
     @Autowired
     HabitacionRepository habitacionRepository;
+
+    @Autowired
+    ClienteRepository clienteRepository;
+
+    @Autowired
+    ClienteRegistroRepository clienteRegistroRepository;
 
     @GetMapping("/")
     @ResponseBody
@@ -54,31 +64,39 @@ public class RegistroController {
         return registroRepository.findRegistroByRepresentante(representante);
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create")
     @ResponseBody
-    public List<HashMap<String, Object>> create(@RequestBody Map<String, Object> jsonData) throws ParseException {
-        List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-        HashMap<String, Object> map = new HashMap<>();
-
-        Habitacion hab = habitacionRepository.findHabitacionByNroHabitacion(Integer.parseInt(jsonData.get("numeroHabitacion").toString()));
-        if(hab != null){
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaInicio = new Date();
-            Date fechaTermino = new Date();
-            fechaInicio = formatter.parse(jsonData.get("fechaInicio").toString());
-            fechaTermino = formatter.parse(jsonData.get("fechaTermino").toString());
-            registroRepository.save(new Registro(jsonData.get("representante").toString(), fechaInicio, fechaTermino, hab));
-            map.put("status", 201);
-            map.put("message", "OK.");
-            result.add(map);
-            return result;
+    public Registro create(@RequestBody List<Map<String, String>> data, @RequestParam(value = "idHab") Long idHab, @RequestParam(value = "fechaInicio") String fechaInicio, @RequestParam(value ="fechaTermino") final String fechaTermino) throws ParseException {
+        Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(idHab);
+        Registro registro = new Registro();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        registro.setFechaInicio(formatter.parse(fechaInicio));
+        registro.setFechaTermino(formatter.parse(fechaTermino));
+        registro.setHabitacion(habitacion);
+        registro.setRepresentante("");
+        registroRepository.save(registro);
+        ClienteRegistro cr;
+        Cliente cliente;
+        System.out.println(fechaInicio+fechaTermino);
+        String aux;
+        for(int i = 0; i<data.size(); i++){
+            cliente = new Cliente();
+            cliente.setNombreCliente(data.get(i).get("nombre"));
+            cliente.setFechaNacimiento(formatter.parse(data.get(i).get("fechaNacimiento")));
+            cliente.setCorreoCliente(data.get(i).get("correo"));
+            cliente.setRut(Integer.parseInt(data.get(i).get("rut")));
+            cliente.setTelefonoCliente(Integer.parseInt(data.get(i).get("telefono")));
+            clienteRepository.save(cliente);
+            aux = data.get(i).get("representante");
+            if(aux == "si"){
+                registro.setRepresentante(aux);
+                registroRepository.save(registro);
+            }
+            clienteRegistroRepository.save(new ClienteRegistro(cliente,registro));
         }
-        else{
-            map.put("status", 401);
-            map.put("message", "No existe una habitacion con ese numero de habitacion.");
-            result.add(map);
-            return result;
-        }
+        return registro;
     }
+
+
 
 }

@@ -17,9 +17,10 @@ public class UsuarioRepositoryTest {
 
 	@Test
 	public void findUsuarioByIdUser() {
-		List<Usuario> lu = usuarioRepository.findAll();
-		long id = lu.get(0).getIdUsuario();
-		assertEquals(id, (long)usuarioRepository.findUsuarioByIdUser(id).getIdUsuario());
+	    long fid=41;
+		Usuario user = usuarioRepository.findUsuarioByIdUser(fid);
+		long aux =user.getIdUser();
+		assertEquals(fid, aux);
 	}
 
 	@Test
