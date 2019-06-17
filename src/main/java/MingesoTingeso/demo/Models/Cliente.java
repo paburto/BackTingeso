@@ -47,9 +47,6 @@ public class Cliente implements Serializable {
     @JsonIgnore
     private List<Reserva> reservas;
 
-    @ManyToMany
-    private Set<Registro> registros;
-
     public Cliente() {
 
     }

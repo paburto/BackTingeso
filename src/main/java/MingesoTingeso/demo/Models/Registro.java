@@ -26,13 +26,13 @@ public class Registro implements Serializable {
     @Column(name = "idRegistro")
     private Long idRegistro;
 
-    @Column(nullable = false, name = "`representante`")
+    @Column(name = "representante", nullable = true)
     private String representante;
 
-    @Column(nullable = false, name = "`fechaInicio`")
+    @Column(nullable = false, name = "fechaInicio")
     private Date fechaInicio;
 
-    @Column(nullable = false, name = "`fechaTermino`")
+    @Column(nullable = false, name = "fechaTermino")
     private Date fechaTermino;
 
     @ManyToOne(cascade = CascadeType.ALL,
@@ -40,9 +40,6 @@ public class Registro implements Serializable {
 		@JoinColumn(name = "idHab")
 		@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 		private Habitacion habitacion;
-
-    @ManyToMany(mappedBy="registros")
-    private Set<Cliente> clientes;
 
     @ManyToMany(mappedBy="registros")
     private Set<Servicio> servicios;
@@ -97,14 +94,6 @@ public class Registro implements Serializable {
 
 	public void setHabitacion(Habitacion habitacion){
     	this.habitacion = habitacion;
-	}
-
-	public Set<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(Set<Cliente> clientes) {
-		this.clientes = clientes;
 	}
 
 	public Set<Servicio> getServicios() {
