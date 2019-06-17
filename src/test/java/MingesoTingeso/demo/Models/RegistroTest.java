@@ -216,7 +216,8 @@ public class RegistroTest {
             h = new Habitacion("Simple",1112,2,2,8000);
             int xd = 8500;
             r.setPrecio(xd);
-            assertEquals(xd,r.getPrecio());
+            int exp = r.getPrecio();
+            assertEquals(xd, exp);
         } catch (ParseException e) {
             e.printStackTrace();
         }
