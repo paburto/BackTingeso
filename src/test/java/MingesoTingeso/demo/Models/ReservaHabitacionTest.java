@@ -11,9 +11,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import static org.junit.Assert.*;
-@RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration
-@SpringBootTest
+
 public class ReservaHabitacionTest {
 
     @Test
