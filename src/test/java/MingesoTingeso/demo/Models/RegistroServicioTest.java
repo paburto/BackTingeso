@@ -50,7 +50,7 @@ public class RegistroServicioTest {
 
             RegistroServicio rs = new RegistroServicio(r,s);
             rs.setServicio(s);
-            assertEquals(r,rs.getServicio());
+            assertEquals(s,rs.getServicio());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -111,7 +111,7 @@ public class RegistroServicioTest {
 
             RegistroServicio rs = new RegistroServicio(r,s);
             rs.setServicio(s);
-            assertEquals(r,rs.getServicio());
+            assertEquals(s,rs.getServicio());
         } catch (ParseException e) {
             e.printStackTrace();
         }
