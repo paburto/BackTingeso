@@ -57,12 +57,13 @@ public class HabitacionControllerTest {
     public void update() throws ParseException {
         List<Habitacion> h1 = hc.getAllHabitaciones();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("tipo", h1.get(0).getTipoHabitacion());
-        map.put("nroHabitacion", h1.get(0).getNroHabitacion());
-        map.put("capacidadNinos", h1.get(0).getCapacidadNinos());
-        map.put("capacidadAdultos", h1.get(0).getCapacidadAdultos());
-        map.put("precioNoche", h1.get(0).getPrecioNoche());
-        List<HashMap<String, String>> hab = hc.update(h1.get(0).getIdHabitacion(), map);
+        Habitacion aux = h1.get(0);
+        map.put("nroHabitacion", aux.getNroHabitacion());
+        map.put("tipo", aux.getTipoHabitacion());
+        map.put("capacidadNinos", aux.getCapacidadNinos());
+        map.put("capacidadAdultos", aux.getCapacidadAdultos());
+        map.put("precioNoche", aux.getPrecioNoche());
+        List<HashMap<String, String>> hab = hc.update((long)18, map);
         assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
     }
 
@@ -72,7 +73,7 @@ public class HabitacionControllerTest {
         int randomInt = randomGenerator.nextInt(10000) + 1000;
         HashMap<String, Object> map = new HashMap<>();
         map.put("tipo", "Inhabilitada");
-        map.put("nroHabitacion", randomInt);
+        map.put("nroHabitacion", -1);
         map.put("capacidadNinos", 2);
         map.put("capacidadAdultos", 2);
         map.put("precioNoche", 60000);
