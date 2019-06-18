@@ -23,7 +23,12 @@
 			<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 			<sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
     		<sonar.language>java</sonar.language>
-			<sonar.exclusions>src/main/java/MingesoTingeso/demo/Controllers/*</sonar.exclusions>
+			<sonar.exclusions>
+				src/main/java/MingesoTingeso/demo/Controllers/ComprobantePagoController.java,
+				src/main/java/MingesoTingeso/demo/Services/*,
+				src/main/java/MingesoTingeso/demo/Controllers/SendMailController.java,
+				src/main/java/MingesoTingeso/demo/Controllers/ReservaHabitacionController.java
+			</sonar.exclusions>
 
 	</properties>
 

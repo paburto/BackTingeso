@@ -71,44 +71,51 @@ public class ComprobantePagoController {
                 Instant inicio = formatter.parse(json.get("fechaInicio").toString()).toInstant();
                 Instant termino = formatter.parse(json.get("fechaTermino").toString()).toInstant();
                 List<RegistroServicio> rs = registroServicioRepository.findRegistroServicioByRegistro(registro);
-                Set<Servicio> servicios = new HashSet<Servicio>();
+                List<Servicio> servicios = new ArrayList<>();
                 for(RegistroServicio registroServicio : rs){
                     if(registroServicio.getRegistro().getIdRegistro().equals(registro.getIdRegistro())){
                         servicios.add(registroServicio.getServicio());
                     }
                 }
-                long total = registro.getHabitacion().getPrecioNoche()*ChronoUnit.DAYS.between(inicio, termino) + 1;
+                long totalDias = ChronoUnit.DAYS.between(inicio, termino);
+                long total = registro.getHabitacion().getPrecioNoche()*totalDias;
                 for(Servicio sh : servicios){
                     total = total + sh.getPrecio();
                 }
                 LocalDateTime timeNow = LocalDateTime.now();
-                String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion());
+                String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
                 ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
                 map.put("status", 201);
                 map.put("data", resultado);
                 map.put("message", "OK.");
                 result.add(map);
+                map = new HashMap<>();
             }
             else{
                 map.put("status", 401);
                 map.put("data", null);
                 map.put("message", "No existe un registro con ese id.");
                 result.add(map);
+                map = new HashMap<>();
             }
         }
         return result;
     }
 
-    private String createDetails(Set<Servicio> servicios, Instant inicio, Instant termino, Habitacion habitacion){
-        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + "\r\nDesde: " + inicio + "\r\nHasta: " + termino + "\r\nTotal de dias: " + ChronoUnit.DAYS.between(inicio, termino) + 1 + "\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*ChronoUnit.DAYS.between(inicio, termino) + 1 + "\r\nServicios:\r\n";
+    private String createDetails(List<Servicio> servicios, Instant inicio, Instant termino, Habitacion habitacion, long totalDias, long totalFinal){
+        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + ":\r\nDesde: " + inicio + "\r\nHasta: " + termino + "\r\nTotal de dias: " + totalDias + "\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "\r\nServicios:\r\n";
+        int totalServicios = 0;
         if(servicios.size() > 0){
             for(Servicio serv : servicios){
                 detalles = detalles +  serv.getNombreServicio() + " Precio: " + serv.getPrecio() + "\r\n";
+                totalServicios = totalServicios + serv.getPrecio();
             }
+            detalles = detalles + "Total a pagar: " + totalFinal;
             return detalles;
         }
         else{
-            detalles = detalles + "No ha consumido servicios.";
+            detalles = detalles + "No ha consumido servicios.\r\n";
+            detalles = detalles + "Total a pagar: " + totalFinal;
             return detalles;
         }
     }
