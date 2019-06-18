@@ -281,7 +281,7 @@ public class ReservaHabitacionController {
 	@GetMapping(value = "/habitaciones/{idReserva}")
 	@ResponseBody
 	public List<HashMap<String,String>> getHabitacionesByIdReserva(@PathVariable Long idReserva){
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Reserva reserva = reservaRepository.findByIdReserva(idReserva);
 		List<ReservaHabitacion> lrh = reshabRepository.findByReservaAndActiva(reserva,true);
 		float desc = reserva.getDescuento()/100f;

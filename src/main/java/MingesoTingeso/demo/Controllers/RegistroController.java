@@ -76,7 +76,7 @@ public class RegistroController {
                 representante = data.get(i).get("nombre");
             }
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         registro.setFechaInicio(formatter.parse(fechaInicio));
         registro.setFechaTermino(formatter.parse(fechaTermino));
         registro.setHabitacion(habitacion);
