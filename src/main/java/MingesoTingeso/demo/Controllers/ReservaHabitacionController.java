@@ -9,19 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import MingesoTingeso.demo.Models.Habitacion;
-import MingesoTingeso.demo.Repositories.HabitacionRepository;
+import MingesoTingeso.demo.Models.*;
+import MingesoTingeso.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import MingesoTingeso.demo.Models.ReservaHabitacion;
-import MingesoTingeso.demo.Models.Cliente;
-import MingesoTingeso.demo.Models.Reserva;
-import MingesoTingeso.demo.Repositories.ClienteRepository;
-import MingesoTingeso.demo.Repositories.ResHabRepository;
-import MingesoTingeso.demo.Repositories.ReservaRepository;
-
 
 
 @CrossOrigin(origins = "*")
@@ -32,7 +24,7 @@ public class ReservaHabitacionController {
 	ResHabRepository reshabRepository;
 
 	@Autowired
-	ClienteRepository clienteRepository;
+	RegistroRepository registroRepository;
 
 	@Autowired
 	ReservaRepository reservaRepository;
@@ -260,17 +252,26 @@ public class ReservaHabitacionController {
 	public List<HashMap<String, String>> getAllRack() {
 			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 			HashMap<String, String> map = new HashMap<>();
-			List<ReservaHabitacion> reservahabitacion = reshabRepository.findAll();
+			List<ReservaHabitacion> reservahabitacion = reshabRepository.findByActiva(true);
+			List<Registro> registros = registroRepository.findAll();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			for(ReservaHabitacion rh : reservahabitacion){
 				map.put("tipo", "reserva");
-				map.put("fechaInicio", rh.getFechaInicioRH().toString());
-				map.put("fechaTermino", rh.getFechaTerminoRH().toString());
+				map.put("fechaInicio", formatter.format(rh.getFechaInicioRH()));
+				map.put("fechaTermino", formatter.format(rh.getFechaTerminoRH()));
 				map.put("nroHabitacion", Integer.toString(rh.getHabitacion().getNroHabitacion()));
-				map.put("estado", Integer.toString(rh.getReserva().getEstado()));
-				map.put("rutCliente", rh.getReserva().getCliente().getIdCliente().toString());
 				map.put("nombreCliente", rh.getReserva().getCliente().getNombreCliente());
-				map.put("rut", Integer.toString(rh.getReserva().getCliente().getRut()));
-				map.put("codigoReserva",Integer.toString(rh.getReserva().getCodigoReserva()));
+				map.put("codigo",Integer.toString(rh.getReserva().getCodigoReserva()));
+				result.add(map);
+				map = new HashMap<>();
+			}
+			for(Registro r: registros){
+				map.put("tipo", "registro");
+				map.put("fechaInicio", formatter.format(r.getFechaInicio()));
+				map.put("fechaTermino", formatter.format(r.getFechaTermino()));
+				map.put("nroHabitacion", Integer.toString(r.getHabitacion().getNroHabitacion()));
+				map.put("nombreCliente", r.getRepresentante());
+				map.put("codigo", "0");
 				result.add(map);
 				map = new HashMap<>();
 			}

@@ -12,4 +12,6 @@ public interface RegistroRepository extends JpaRepository<Registro, Long> {
     List<Registro> findRegistroByRepresentante(String representante);
 
     List<Registro> findRegistroByHabitacion(Habitacion habitacion);
+
+    List<Registro> findAll();
 }
