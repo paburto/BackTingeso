@@ -3,6 +3,7 @@ package MingesoTingeso.demo.Controllers;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Registro;
 import MingesoTingeso.demo.Repositories.RegistroRepository;
+import org.hibernate.LazyInitializationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,12 @@ public class RegistroControllerTest {
 
     @Test
     public void getByCodigoHabitacion() {
-        List<Registro> recib = rc.getByCodigoHabitacion(100);
-        assertEquals(true, recib.size()>=0);
+        try {
+            List<Registro> recib = rc.getByCodigoHabitacion(100);
+            assertEquals(true, recib.size()>=0);
+        }catch (LazyInitializationException e){
+            e.printStackTrace();
+        }
     }
 
     @Test
