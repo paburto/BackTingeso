@@ -110,22 +110,6 @@ public class HabitacionControllerTest {
     }
 
     @Test
-    public void delete() throws ParseException {
-        int aux = -1;
-        Habitacion hab = hr.findHabitacionByNroHabitacion(aux);
-        Long id = hab.getIdHabitacion();
-        List<HashMap<String, String>> cr;
-        cr = hc.update((long)-400);
-        assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
-        try{
-            cr = hc.update((long)-2);
-            assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
-        }catch (LazyInitializationException e){
-            e.printStackTrace();
-        }
-    }
-
-    @Test
     public void create() throws ParseException {
         HashMap<String, Object> map = new HashMap<>();
         map.put("tipo", "Inhabilitada");
@@ -135,9 +119,12 @@ public class HabitacionControllerTest {
         map.put("precioNoche", 60000);
         List<HashMap<String, String>> cr = hc.create(map);
         assertEquals(401, Integer.parseInt(cr.get(0).get("status")));
+        cr = hc.update((long)-2);
+        assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
+        cr = hc.create(map);
+        assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
+
     }
-
-
 
     @Test
     public void update() throws ParseException {
@@ -152,6 +139,22 @@ public class HabitacionControllerTest {
         assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
         hab = hc.update((long)-1000, map);
         assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
+    }
+
+    @Test
+    public void delete() throws ParseException {
+        int aux = -1;
+        Habitacion hab = hr.findHabitacionByNroHabitacion(aux);
+        Long id = hab.getIdHabitacion();
+        List<HashMap<String, String>> cr;
+        cr = hc.update((long)-400);
+        assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
+        try{
+            cr = hc.update((long)-2);
+            assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
+        }catch (LazyInitializationException e){
+            e.printStackTrace();
+        }
     }
 
 
