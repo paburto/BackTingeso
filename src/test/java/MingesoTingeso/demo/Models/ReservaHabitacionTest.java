@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class ReservaHabitacionTest {
 
     @Test
-    public void ReservaHabitacion() {
+    public void isActiva() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateInString1 = "2019-05-05";
         String dateInString2 = "2019-05-10";
@@ -29,8 +29,8 @@ public class ReservaHabitacionTest {
             Reserva r = new Reserva(1,10,10,u,c);
             Habitacion h = new Habitacion("Simple",101,2,2,6000);
             ReservaHabitacion rh = new ReservaHabitacion(fechaInicio,fechaTermino,r,h);
-            rh.setIdRH(1L);
-            assertEquals(1L,(long)rh.getIdRH());
+            rh.setActiva(true);
+            assertEquals(true,rh.isActiva());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -194,34 +194,6 @@ public class ReservaHabitacionTest {
     }
 
     @Test
-    public void isActiva() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String dateInString1 = "2019-05-05";
-        String dateInString2 = "2019-05-10";
-        String dateInString3 = "2000-10-10";
-        try {
-            Date fechaInicio = formatter.parse(dateInString1);
-            Date fechaTermino = formatter.parse(dateInString2);
-            Date fechaCliente = formatter.parse(dateInString3);
-            Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fechaCliente);
-            Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
-            Reserva r = new Reserva(1,10,10,u,c);
-            Habitacion h = new Habitacion("Simple",101,2,2,6000);
-            ReservaHabitacion rh = new ReservaHabitacion(fechaInicio,fechaTermino,r,h);
-            String dateInString4 = "2019-05-06";
-            try{
-                fechaInicio = formatter.parse(dateInString4);
-                rh.setFechaInicioRH(fechaInicio);
-                assertEquals(fechaInicio,rh.getFechaInicioRH());
-            } catch (ParseException e){
-                e.printStackTrace();
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
     public void setFechaTerminoRH() {
       SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
       String dateInString1 = "2019-05-05";
@@ -310,9 +282,8 @@ public class ReservaHabitacionTest {
             Reserva r = new Reserva(1,10,10,u,c);
             Habitacion h = new Habitacion("Simple",101,2,2,6000);
             ReservaHabitacion rh = new ReservaHabitacion(fechaInicio,fechaTermino,r,h);
-            Habitacion h2 = new Habitacion("Doble",101,2,2,6000);
-            rh.setHabitacion(h2);
-            assertEquals(h2,rh.getHabitacion());
+            rh.setActiva(false);
+            assertEquals(false,rh.isActiva());
         } catch (ParseException e) {
             e.printStackTrace();
         }
