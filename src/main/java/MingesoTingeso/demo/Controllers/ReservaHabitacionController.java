@@ -256,7 +256,7 @@ public class ReservaHabitacionController {
 			List<Registro> registros = registroRepository.findAll();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			for(ReservaHabitacion rh : reservahabitacion){
-				map.put("tipo", "reserva");
+				map.put("tipo", "Reservada");
 				map.put("fechaInicio", formatter.format(rh.getFechaInicioRH()));
 				map.put("fechaTermino", formatter.format(rh.getFechaTerminoRH()));
 				map.put("nroHabitacion", Integer.toString(rh.getHabitacion().getNroHabitacion()));
@@ -266,7 +266,7 @@ public class ReservaHabitacionController {
 				map = new HashMap<>();
 			}
 			for(Registro r: registros){
-				map.put("tipo", "registro");
+				map.put("tipo", "Ocupada");
 				map.put("fechaInicio", formatter.format(r.getFechaInicio()));
 				map.put("fechaTermino", formatter.format(r.getFechaTermino()));
 				map.put("nroHabitacion", Integer.toString(r.getHabitacion().getNroHabitacion()));
