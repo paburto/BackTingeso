@@ -118,18 +118,8 @@ public class HabitacionControllerTest {
         map.put("capacidadAdultos", 2);
         map.put("precioNoche", 60000);
         List<HashMap<String, String>> cr = hc.create(map);
+        assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
         assertEquals(401, Integer.parseInt(cr.get(0).get("status")));
-        Habitacion aux = hr.findHabitacionByNroHabitacion(-1);
-        try{
-            cr = hc.update(aux.getIdHabitacion());
-            assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
-            cr = hc.create(map);
-            assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
-        }catch (LazyInitializationException e){
-            e.printStackTrace();
-        }
-
-
     }
 
     @Test
@@ -159,6 +149,12 @@ public class HabitacionControllerTest {
                 Habitacion a = hr.findHabitacionByNroHabitacion(-2);
                 cr = hc.update(a.getIdHabitacion());
                 assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
+                HashMap<String, Object> mapa = new HashMap<>();
+                List<HashMap<String, String>> xd = hc.update((long)5);
+                assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
+
+
+
             }catch (LazyInitializationException e){
                 e.printStackTrace();
             }
