@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -112,20 +114,20 @@ public class HabitacionControllerTest {
     @Test
     public void create() throws ParseException {
         HashMap<String, Object> map = new HashMap<>();
+        Habitacion hab = hr.findAll().get(0);
         map.put("tipo", "Inhabilitada");
-        map.put("nroHabitacion", -1);
+        map.put("nroHabitacion", hab.getNroHabitacion());
         map.put("capacidadNinos", 2);
         map.put("capacidadAdultos", 2);
         map.put("precioNoche", 60000);
         List<HashMap<String, String>> cr = hc.create(map);
-        assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
-        cr = hc.create(map);
         assertEquals(401, Integer.parseInt(cr.get(0).get("status")));
+
     }
 
     @Test
     public void update() throws ParseException {
-        Habitacion aux = hr.findHabitacionByNroHabitacion(-1);
+        Habitacion aux = hr.findAll().get(0);
         HashMap<String, Object> map = new HashMap<>();
         map.put("nroHabitacion", -2);
         map.put("tipo", aux.getTipoHabitacion());
@@ -133,35 +135,19 @@ public class HabitacionControllerTest {
         map.put("capacidadAdultos", aux.getCapacidadAdultos());
         map.put("precioNoche", aux.getPrecioNoche()+1);
         List<HashMap<String, String>> hab = hc.update(aux.getIdHabitacion(), map);
-        assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
+        assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
         hab = hc.update((long)-1000, map);
         assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
     }
 
     @Test
+    @Transactional
     public void delete() throws ParseException {
-        int aux = -1;
-        Habitacion hab = hr.findHabitacionByNroHabitacion(aux);
-        Long id = hab.getIdHabitacion();
-        try{
-            List<HashMap<String, String>> cr = hc.update((long)-400);
-            assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
-            try{
-                Habitacion a = hr.findHabitacionByNroHabitacion(-2);
-                cr = hc.update(a.getIdHabitacion());
-                assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
-                HashMap<String, Object> mapa = new HashMap<>();
-                List<HashMap<String, String>> xd = hc.update((long)5);
-                assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
-
-
-
-            }catch (LazyInitializationException e){
-                e.printStackTrace();
-            }
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
+        Habitacion a = hr.findHabitacionByNroHabitacion(-2);
+        List<HashMap<String, String>> cr = hc.update((long)-4000);
+        assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
+        cr = hc.update((long)5);
+        assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
 
     }
 
