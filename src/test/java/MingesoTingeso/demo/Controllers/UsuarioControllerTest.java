@@ -45,7 +45,7 @@ public class UsuarioControllerTest {
     public void create() throws ParseException {
         HashMap<String, Object> map = new HashMap<>();
         Usuario user = uc.getAllUsuarios().get(0);
-        map.put("rut_usuario", 11111111);
+        map.put("rut_usuario", 10000001);
         map.put("nombre_usuario", "test");
         map.put("rol_usuario", "test");
         map.put("correo_usuario", "test@test.test");
@@ -59,12 +59,12 @@ public class UsuarioControllerTest {
     @Test
     public void update() throws ParseException {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("rut_usuario", 11111111);
+        map.put("rut_usuario", 10000001);
         map.put("nombre_usuario", "test1");
         map.put("rol_usuario", "test");
         map.put("correo_usuario", "test@test.test");
         map.put("password", "test");
-        List<HashMap<String, String>> hab = uc.update(11111111, map);
+        List<HashMap<String, String>> hab = uc.update(10000001, map);
         assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
         hab = uc.update(-5645, map);
         assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
@@ -72,7 +72,7 @@ public class UsuarioControllerTest {
 
     @Test
     public void delete() throws ParseException {
-        Usuario aux = ur.findUsuarioByRutUsuario(11111111);
+        Usuario aux = ur.findUsuarioByRutUsuario(10000001);
         List<HashMap<String, String>> cr = uc.delete(aux.getIdUsuario());
         assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
         cr = uc.delete((long)-105);
