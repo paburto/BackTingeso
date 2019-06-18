@@ -94,4 +94,121 @@ public class ComprobantePagoTest {
         }
     }
 
+
+    @Test
+    public void getTotal() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            LocalDateTime cpfecha = LocalDateTime.now();
+            ComprobantePago cp = new ComprobantePago((long)10000, "test", cpfecha, r);
+            cp.setTotal(1L);
+            assertEquals(1L,(long)cp.getTotal());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void setTotal() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            LocalDateTime cpfecha = LocalDateTime.now();
+            ComprobantePago cp = new ComprobantePago((long)10000, "test", cpfecha, r);
+            cp.setTotal(1L);
+            assertEquals(1L,(long)cp.getTotal());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getDetalle() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            LocalDateTime cpfecha = LocalDateTime.now();
+            ComprobantePago cp = new ComprobantePago((long)10000, "test", cpfecha, r);
+            cp.setDetalle("test1");
+            assertEquals("test1",cp.getDetalle());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void setDetalle() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            LocalDateTime cpfecha = LocalDateTime.now();
+            ComprobantePago cp = new ComprobantePago((long)10000, "test", cpfecha, r);
+            cp.setDetalle("test1");
+            assertEquals("test1",cp.getDetalle());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getFecha() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            LocalDateTime cpfecha = LocalDateTime.now();
+            ComprobantePago cp = new ComprobantePago((long)10000, "test", cpfecha, r);
+            cpfecha = LocalDateTime.now();
+            cp.setFecha(cpfecha);
+            assertEquals(cpfecha,cp.getFecha());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void setFecha() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            Registro r = new Registro("Edgar Blau",fechaInicio,fechaTermino, h);
+            LocalDateTime cpfecha = LocalDateTime.now();
+            ComprobantePago cp = new ComprobantePago((long)10000, "test", cpfecha, r);
+            cpfecha = LocalDateTime.now();
+            cp.setFecha(cpfecha);
+            assertEquals(cpfecha,cp.getFecha());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
