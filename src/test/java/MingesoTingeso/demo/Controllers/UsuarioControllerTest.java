@@ -1,5 +1,7 @@
 package MingesoTingeso.demo.Controllers;
 
+import MingesoTingeso.demo.Models.Habitacion;
+import MingesoTingeso.demo.Repositories.UsuarioRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import MingesoTingeso.demo.Models.Usuario;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -20,6 +24,8 @@ import static org.junit.Assert.*;
 public class UsuarioControllerTest {
     @Autowired
     UsuarioController uc;
+    @Autowired
+    UsuarioRepository ur;
     @Test
     public void getAllUsuarios() {
         List<Usuario> h1 = uc.getAllUsuarios();
@@ -36,17 +42,40 @@ public class UsuarioControllerTest {
     }
 
     @Test
-    public void create() {
-
+    public void create() throws ParseException {
+        HashMap<String, Object> map = new HashMap<>();
+        Usuario user = uc.getAllUsuarios().get(0);
+        map.put("rut_usuario", 11111111);
+        map.put("nombre_usuario", "test");
+        map.put("rol_usuario", "test");
+        map.put("correo_usuario", "test@test.test");
+        map.put("password", "test");
+        List<HashMap<String, String>> cr = uc.create(map);
+        assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
+        cr = uc.create(map);
+        assertEquals(401, Integer.parseInt(cr.get(0).get("status")));
     }
 
     @Test
-    public void update() {
-
+    public void update() throws ParseException {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("rut_usuario", 11111111);
+        map.put("nombre_usuario", "test1");
+        map.put("rol_usuario", "test");
+        map.put("correo_usuario", "test@test.test");
+        map.put("password", "test");
+        List<HashMap<String, String>> hab = uc.update(11111111, map);
+        assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
+        hab = uc.update(-5645, map);
+        assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
     }
 
     @Test
-    public void delete() {
-
+    public void delete() throws ParseException {
+        Usuario aux = ur.findUsuarioByRutUsuario(11111111);
+        List<HashMap<String, String>> cr = uc.delete(aux.getIdUsuario());
+        assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
+        cr = uc.delete((long)-105);
+        assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
     }
 }
