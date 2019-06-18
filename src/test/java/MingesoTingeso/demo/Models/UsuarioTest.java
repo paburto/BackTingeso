@@ -44,6 +44,18 @@ public class UsuarioTest {
     }
 
     @Test
+    public void getIdUser() {
+        Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
+        assertEquals(true,u.getIdUser()>0);
+    }
+
+    @Test
+    public void getPassword() {
+        Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
+        assertEquals("tingeso",u.getPassword());
+    }
+
+    @Test
     public void setIdUsuario() {
       Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
       u.setIdUsuario(1L);
