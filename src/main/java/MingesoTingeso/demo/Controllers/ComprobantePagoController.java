@@ -60,42 +60,43 @@ public class ComprobantePagoController {
 
     @PostMapping("/create")
     @ResponseBody
-    public List<HashMap<String, Object>> create(@RequestBody Map<String, Object> jsonData) throws ParseException{
+    public List<HashMap<String, Object>> create(@RequestBody List<Map<String, Object>> jsonData) throws ParseException{
         List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> map = new HashMap<>();
-        Registro registro = registroRepository.findRegistroByIdRegistro(Long.parseLong(jsonData.get("idRegistro").toString()));
-        if(registro != null){
-            List<ReservaHabitacion> rh = resHabRepository.findReservaHabitacionByHabitacion(registro.getHabitacion());
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Instant inicio = formatter.parse(jsonData.get("fechaInicio").toString()).toInstant();
-            Instant termino = formatter.parse(jsonData.get("fechaTermino").toString()).toInstant();
-            List<RegistroServicio> rs = registroServicioRepository.findRegistroServicioByRegistro(registro);
-            Set<Servicio> servicios = new HashSet<Servicio>();
-            for(RegistroServicio registroServicio : rs){
-                if(registroServicio.getRegistro().getIdRegistro().equals(registro.getIdRegistro())){
-                    servicios.add(registroServicio.getServicio());
+        for(Map<String, Object> json : jsonData){
+            Registro registro = registroRepository.findRegistroByIdRegistro(Long.parseLong(json.get("idRegistro").toString()));
+            if(registro != null){
+                List<ReservaHabitacion> rh = resHabRepository.findReservaHabitacionByHabitacion(registro.getHabitacion());
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Instant inicio = formatter.parse(json.get("fechaInicio").toString()).toInstant();
+                Instant termino = formatter.parse(json.get("fechaTermino").toString()).toInstant();
+                List<RegistroServicio> rs = registroServicioRepository.findRegistroServicioByRegistro(registro);
+                Set<Servicio> servicios = new HashSet<Servicio>();
+                for(RegistroServicio registroServicio : rs){
+                    if(registroServicio.getRegistro().getIdRegistro().equals(registro.getIdRegistro())){
+                        servicios.add(registroServicio.getServicio());
+                    }
                 }
+                long total = registro.getHabitacion().getPrecioNoche()*ChronoUnit.DAYS.between(inicio, termino) + 1;
+                for(Servicio sh : servicios){
+                    total = total + sh.getPrecio();
+                }
+                LocalDateTime timeNow = LocalDateTime.now();
+                String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion());
+                ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
+                map.put("status", 201);
+                map.put("data", resultado);
+                map.put("message", "OK.");
+                result.add(map);
             }
-            long total = registro.getHabitacion().getPrecioNoche()*ChronoUnit.DAYS.between(inicio, termino) + 1;
-            for(Servicio sh : servicios){
-                total = total + sh.getPrecio();
+            else{
+                map.put("status", 401);
+                map.put("data", null);
+                map.put("message", "No existe un registro con ese id.");
+                result.add(map);
             }
-            LocalDateTime timeNow = LocalDateTime.now();
-            String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion());
-            ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
-            map.put("status", 201);
-            map.put("data", resultado);
-            map.put("message", "OK.");
-            result.add(map);
-            return result;
         }
-        else{
-            map.put("status", 401);
-            map.put("data", null);
-            map.put("message", "No existe un registro con ese id.");
-            result.add(map);
-            return result;
-        }
+        return result;
     }
 
     private String createDetails(Set<Servicio> servicios, Instant inicio, Instant termino, Habitacion habitacion){
