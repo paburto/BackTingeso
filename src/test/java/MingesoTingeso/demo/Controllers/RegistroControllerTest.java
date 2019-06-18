@@ -1,11 +1,16 @@
 package MingesoTingeso.demo.Controllers;
 
+import MingesoTingeso.demo.Models.Habitacion;
+import MingesoTingeso.demo.Models.Registro;
+import MingesoTingeso.demo.Repositories.RegistroRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -15,25 +20,32 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class RegistroControllerTest {
     @Autowired
-    UsuarioController uc;
+    RegistroController rc;
+    @Autowired
+    RegistroRepository rr;
     @Test
     public void getAllRegitros() {
-        assertEquals(1,1);
+        List<Registro> h1 = rc.getAllRegitros();
+        List<Registro> h2 = rc.getAllRegitros();
+        assertEquals(h1.size(),h2.size());
     }
 
     @Test
     public void getByCodigoHabitacion() {
-        assertEquals(1,1);
+        List<Registro> recib = rc.getByCodigoHabitacion(100);
+        assertEquals(true, recib.size()>=0);
     }
 
     @Test
     public void getByidHabitacion() {
-        assertEquals(1,1);
+        List<Registro> recib = rc.getByidHabitacion((long)1);
+        assertEquals(true, recib.size()>=0);
     }
 
     @Test
     public void getByRepresentante() {
-        assertEquals(1,1);
+        List<Registro> recib = rc.getByRepresentante("Diego Águila");
+        assertEquals(true, recib.size()>=0);
     }
 
     @Test

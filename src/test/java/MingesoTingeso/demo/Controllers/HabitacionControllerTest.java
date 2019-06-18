@@ -119,7 +119,7 @@ public class HabitacionControllerTest {
         map.put("precioNoche", 60000);
         List<HashMap<String, String>> cr = hc.create(map);
         assertEquals(401, Integer.parseInt(cr.get(0).get("status")));
-        cr = hc.update((long)-2);
+        cr = hc.update((long)-1);
         assertEquals(200, Integer.parseInt(cr.get(0).get("status")));
         cr = hc.create(map);
         assertEquals(201, Integer.parseInt(cr.get(0).get("status")));
