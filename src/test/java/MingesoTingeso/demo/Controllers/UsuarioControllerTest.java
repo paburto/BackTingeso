@@ -59,12 +59,13 @@ public class UsuarioControllerTest {
     @Test
     public void update() throws ParseException {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("rut_usuario", 10000001);
-        map.put("nombre_usuario", "test1");
-        map.put("rol_usuario", "test");
+        Usuario user = uc.getAllUsuarios().get(0);
+        map.put("rut_usuario", user.getRutUsuario());
+        map.put("nombre_usuario", user.getNombreUsuario());
+        map.put("rol_usuario", user.getRolUsuario());
         map.put("correo_usuario", "test@test.test");
-        map.put("password", "test");
-        List<HashMap<String, String>> hab = uc.update(10000001, map);
+        map.put("password", user.getPassword());
+        List<HashMap<String, String>> hab = uc.update(user.getRutUsuario(), map);
         assertEquals(200, Integer.parseInt(hab.get(0).get("status")));
         hab = uc.update(-5645, map);
         assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
