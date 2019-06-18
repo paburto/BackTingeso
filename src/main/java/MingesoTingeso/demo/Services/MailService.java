@@ -12,7 +12,7 @@ public class MailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendMail(String from, String to, String subject, String body) {
+    public int sendMail(String from, String to, String subject, String body) {
 
         SimpleMailMessage mail = new SimpleMailMessage();
 
@@ -22,5 +22,6 @@ public class MailService {
         mail.setText(body);
 
         javaMailSender.send(mail);
+        return 0;
     }
 }
