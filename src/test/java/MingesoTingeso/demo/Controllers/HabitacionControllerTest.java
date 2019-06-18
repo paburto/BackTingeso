@@ -74,6 +74,26 @@ public class HabitacionControllerTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        formatter = new SimpleDateFormat("dd-MM-yyyy");
+        dateInString1 = "05-05-2019";
+        dateInString2 = "10-05-2019";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            List<Habitacion> aux = hc.filtrarHabitaciones(fechaInicio.toString(), fechaTermino.toString(),"Simple" );
+            if (aux==null){
+                assertEquals(null,aux);
+            }
+            try{
+
+                assertEquals(true,aux.size()>=0);
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -84,17 +104,18 @@ public class HabitacionControllerTest {
         List<Habitacion> h1 = hc.getAllHabitaciones();
         List<HashMap<String, String>> ih = hc.inhabilitar(h1.get(0).getIdHabitacion(), map);
         assertEquals(200, Integer.parseInt(ih.get(0).get("status")));
+        ih = hc.inhabilitar((long)-1000, map);
+        assertEquals(404, Integer.parseInt(ih.get(0).get("status")));
     }
 
     @Test
-    public void delete() throws ParseException {/*
+    public void delete() throws ParseException {
         int aux = -1;
         Habitacion hab = hr.findHabitacionByNroHabitacion(aux);
         Long id = hab.getIdHabitacion();
         List<HashMap<String, String>> cr;
-        cr = hc.delete(id);
-        assertEquals(200, Integer.parseInt(cr.get(0).get("status")));*/
-        assertEquals(1,1);
+        cr = hc.update((long)-400);
+        assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
     }
 
     @Test
@@ -121,6 +142,8 @@ public class HabitacionControllerTest {
         map.put("capacidadAdultos", aux.getCapacidadAdultos());
         map.put("precioNoche", aux.getPrecioNoche()+1);
         List<HashMap<String, String>> hab = hc.update(aux.getIdHabitacion(), map);
+        assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
+        hab = hc.update((long)-1000, map);
         assertEquals(404, Integer.parseInt(hab.get(0).get("status")));
     }
 
