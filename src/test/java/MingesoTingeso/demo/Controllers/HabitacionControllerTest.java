@@ -84,7 +84,7 @@ public class HabitacionControllerTest {
 
     @Test
     public void update() throws ParseException {
-        Habitacion aux = hr.findHabitacionByNroHabitacion(-2);
+        Habitacion aux = hr.findHabitacionByNroHabitacion(-1);
         HashMap<String, Object> map = new HashMap<>();
         map.put("nroHabitacion", -2);
         map.put("tipo", aux.getTipoHabitacion());

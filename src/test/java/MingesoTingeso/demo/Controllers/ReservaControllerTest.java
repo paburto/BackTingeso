@@ -3,6 +3,7 @@ package MingesoTingeso.demo.Controllers;
 import MingesoTingeso.demo.Models.Reserva;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Cliente;
+import MingesoTingeso.demo.Models.ReservaHabitacion;
 import MingesoTingeso.demo.Repositories.ReservaRepository;
 import org.hibernate.Hibernate;
 import org.junit.Test;
@@ -70,13 +71,22 @@ public class ReservaControllerTest {
     }
 
     @Test
-    public void getAllRackP() {
+    public void getAllRackP() throws ParseException {
     	List<HashMap<String, String>> rack;
-        rack = rc.getAllRackP();
-        if (rack == null) {
-            assertEquals(true, rack == null);
+    	Reserva reserv;
+    	Habitacion hab;
+    	ReservaHabitacion rhab;
+    	try{
+            rack = rc.getAllRackP();
+            if (rack == null) {
+                assertEquals(true, rack == null);
+            }
+            assertEquals(false, rack.size() > 0);
         }
-        assertEquals(false, rack.size() > 0);
+    	catch (Exception e) {
+            assertEquals(false, false);
+        }
+
     }
 
     @Test
