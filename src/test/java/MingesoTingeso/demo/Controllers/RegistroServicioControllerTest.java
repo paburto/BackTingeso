@@ -13,26 +13,21 @@ import static org.junit.Assert.*;
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration
 @SpringBootTest
-public class RegistroControllerTest {
+public class RegistroServicioControllerTest {
     @Autowired
     UsuarioController uc;
     @Test
-    public void getAllRegitros() {
+    public void getAllRegistroServicios() {
         assertEquals(1,1);
     }
 
     @Test
-    public void getByCodigoHabitacion() {
+    public void getRegistroServicioById() {
         assertEquals(1,1);
     }
 
     @Test
-    public void getByidHabitacion() {
-        assertEquals(1,1);
-    }
-
-    @Test
-    public void getByRepresentante() {
+    public void getRegistroServicioByIdRegistro() {
         assertEquals(1,1);
     }
 
