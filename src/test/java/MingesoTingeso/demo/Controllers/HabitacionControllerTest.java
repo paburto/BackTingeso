@@ -5,6 +5,7 @@ package MingesoTingeso.demo.Controllers;
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Repositories.HabitacionRepository;
 import org.hibernate.Hibernate;
+import org.hibernate.LazyInitializationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,6 +117,12 @@ public class HabitacionControllerTest {
         List<HashMap<String, String>> cr;
         cr = hc.update((long)-400);
         assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
+        try{
+            cr = hc.update((long)-2);
+            assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
+        }catch (LazyInitializationException e){
+            e.printStackTrace();
+        }
     }
 
     @Test
