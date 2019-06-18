@@ -89,12 +89,14 @@ public class ComprobantePagoController {
                 map.put("data", resultado);
                 map.put("message", "OK.");
                 result.add(map);
+                map = new HashMap<>();
             }
             else{
                 map.put("status", 401);
                 map.put("data", null);
                 map.put("message", "No existe un registro con ese id.");
                 result.add(map);
+                map = new HashMap<>();
             }
         }
         return result;
