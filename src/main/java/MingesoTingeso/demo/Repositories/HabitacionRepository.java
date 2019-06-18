@@ -21,4 +21,5 @@ List<Habitacion> findHabitacionByPrecioNoche(int precioNoche);
 
 Habitacion deleteHabitacionByIdHab(Long idHab);
 
+List<Habitacion> findAll();
 }

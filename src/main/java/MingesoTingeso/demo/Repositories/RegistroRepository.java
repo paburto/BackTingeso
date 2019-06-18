@@ -4,6 +4,7 @@ import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Registro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RegistroRepository extends JpaRepository<Registro, Long> {
@@ -14,4 +15,6 @@ public interface RegistroRepository extends JpaRepository<Registro, Long> {
     List<Registro> findRegistroByHabitacion(Habitacion habitacion);
 
     List<Registro> findAll();
+
+    List<Registro> findByHabitacionAndFechaTerminoGreaterThan(Habitacion habitacion, Date fechaTermino);
 }

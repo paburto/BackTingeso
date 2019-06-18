@@ -8,15 +8,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import MingesoTingeso.demo.Models.Registro;
+import MingesoTingeso.demo.Repositories.RegistroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.ReservaHabitacion;
@@ -32,6 +27,12 @@ public class HabitacionController {
 	@Autowired
 	HabitacionRepository habitacionRepository;
 
+	@Autowired
+	RegistroRepository registroRepository;
+
+	@Autowired
+	ResHabRepository resHabRepository;
+
 	@RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Habitacion> getAllHabitaciones() {
@@ -44,10 +45,76 @@ public class HabitacionController {
         return habitacionRepository.findHabitacionByIdHab(id);
     }
 
-		@RequestMapping(value = "/nroHabitacion/{nroHabitacion}", method = RequestMethod.GET)
+		@GetMapping(value = "/nroHabitacion/{nroHabitacion}")
 		@ResponseBody
 		public Habitacion getHabitacionByNroHabitacion(@PathVariable int nroHabitacion) {
 				return habitacionRepository.findHabitacionByNroHabitacion(nroHabitacion);
+		}
+
+		@GetMapping(value = "/filtrar")
+		@ResponseBody
+		public List<Habitacion> filtrarHabitaciones(@RequestParam("fechaInicio") String fechaInicio, @RequestParam("fechaTermino") String fechaTermino, @RequestParam String tipo){
+			List<Habitacion> listaHabitacion = habitacionRepository.findHabitacionByTipo(tipo);
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			Date inicio;
+			Date termino;
+			try {
+				inicio = formatter.parse(fechaInicio);
+				termino = formatter.parse(fechaTermino);
+			} catch (java.text.ParseException e) {
+				return null;
+			}
+			List<Habitacion> salida = new ArrayList<>();
+			List<ReservaHabitacion> lrh;
+			List<Registro> lr;
+			boolean apta;
+			for(Habitacion h: listaHabitacion){
+				apta = true;
+				lrh = resHabRepository.findByHabitacionAndFechaTerminoGreaterThan(h,inicio);
+				lr = registroRepository.findByHabitacionAndFechaTerminoGreaterThan(h,inicio);
+				for(ReservaHabitacion rh: lrh){
+					if(rh.getFechaInicioRH().compareTo(inicio) < 0 && rh.getFechaTerminoRH().compareTo(inicio) > 0){
+						apta = false;
+						break;
+					}
+					if(rh.getFechaInicioRH().compareTo(termino) < 0 && rh.getFechaTerminoRH().compareTo(termino) >0){
+						apta = false;
+						break;
+					}
+					if(rh.getFechaInicioRH().compareTo(inicio) > 0 && rh.getFechaInicioRH().compareTo(termino) < 0){
+						apta = false;
+						break;
+					}
+					if(rh.getFechaTerminoRH().compareTo(inicio) > 0 && rh.getFechaTerminoRH().compareTo(termino) <0){
+						apta = false;
+						break;
+					}
+				}
+				if(apta){
+					for(Registro r: lr){
+						if(r.getFechaInicio().compareTo(inicio) < 0 && r.getFechaTermino().compareTo(inicio) > 0){
+							apta = false;
+							break;
+						}
+						if(r.getFechaInicio().compareTo(termino) < 0 && r.getFechaTermino().compareTo(termino) >0){
+							apta = false;
+							break;
+						}
+						if(r.getFechaInicio().compareTo(inicio) > 0 && r.getFechaInicio().compareTo(termino) < 0){
+							apta = false;
+							break;
+						}
+						if(r.getFechaTermino().compareTo(inicio) > 0 && r.getFechaTermino().compareTo(termino) <0){
+							apta = false;
+							break;
+						}
+					}
+				}
+				if(apta){
+					salida.add(h);
+				}
+			}
+			return salida;
 		}
 
 		@PostMapping("/deshabilitar/{id}")

@@ -1,4 +1,5 @@
 package MingesoTingeso.demo.Repositories;
+import java.util.Date;
 import java.util.List;
 
 import MingesoTingeso.demo.Models.Habitacion;
@@ -19,4 +20,5 @@ public interface ResHabRepository extends JpaRepository<ReservaHabitacion, Long>
 	List<ReservaHabitacion> findByReserva(Reserva reserva);
 	List<ReservaHabitacion> findByReservaAndActiva(Reserva reserva, boolean activa);
 	ReservaHabitacion findByReservaAndHabitacion(Reserva reserva, Habitacion habitacion);
+	List<ReservaHabitacion> findByHabitacionAndFechaTerminoGreaterThan(Habitacion habitacion, Date fechaTermino);
 }
