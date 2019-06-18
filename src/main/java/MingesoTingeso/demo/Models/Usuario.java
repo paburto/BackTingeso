@@ -108,12 +108,12 @@ public class Usuario implements Serializable {
         return idUser;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
-    }
-
     public String getPassword() {
         return password;
+    }
+/*
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public void setPassword(String password) {
@@ -134,5 +134,5 @@ public class Usuario implements Serializable {
 
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
-    }
+    }*/
 }

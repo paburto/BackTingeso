@@ -15,6 +15,28 @@ import static org.junit.Assert.*;
 public class ReservaHabitacionTest {
 
     @Test
+    public void isActiva() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        String dateInString3 = "2000-10-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Date fechaCliente = formatter.parse(dateInString3);
+            Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fechaCliente);
+            Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
+            Reserva r = new Reserva(1,10,10,u,c);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            ReservaHabitacion rh = new ReservaHabitacion(fechaInicio,fechaTermino,r,h);
+            rh.setActiva(true);
+            assertEquals(true,rh.isActiva());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void getIdRH() {
       SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
       String dateInString1 = "2019-05-05";
@@ -243,5 +265,27 @@ public class ReservaHabitacionTest {
       } catch (ParseException e) {
           e.printStackTrace();
       }
+    }
+
+    @Test
+    public void setActiva() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateInString1 = "2019-05-05";
+        String dateInString2 = "2019-05-10";
+        String dateInString3 = "2000-10-10";
+        try {
+            Date fechaInicio = formatter.parse(dateInString1);
+            Date fechaTermino = formatter.parse(dateInString2);
+            Date fechaCliente = formatter.parse(dateInString3);
+            Cliente c = new Cliente(75483759,"Edgar Blau","edgar.blau@usach.cl",912345678,fechaCliente);
+            Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
+            Reserva r = new Reserva(1,10,10,u,c);
+            Habitacion h = new Habitacion("Simple",101,2,2,6000);
+            ReservaHabitacion rh = new ReservaHabitacion(fechaInicio,fechaTermino,r,h);
+            rh.setActiva(false);
+            assertEquals(false,rh.isActiva());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
