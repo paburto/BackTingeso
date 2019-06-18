@@ -1,7 +1,9 @@
 package MingesoTingeso.demo.Models;
 
+import MingesoTingeso.demo.Repositories.UsuarioRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -11,7 +13,8 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 @SpringBootTest
 public class UsuarioTest {
-
+    @Autowired
+    UsuarioRepository usuarioRepository;
     @Test
     public void getIdUsuario() {
       Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
@@ -45,7 +48,7 @@ public class UsuarioTest {
 
     @Test
     public void getIdUser() {
-        Usuario u = new Usuario("Diego Águila","Operador","diego.aguila@usach.cl",123456789, "tingeso");
+        Usuario u = usuarioRepository.findAll().get(0);
         assertEquals(true,u.getIdUser()>0);
     }
 
