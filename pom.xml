@@ -25,7 +25,9 @@
     		<sonar.language>java</sonar.language>
 			<sonar.exclusions>
 				src/main/java/MingesoTingeso/demo/Controllers/ComprobantePagoController.java,
-				src/main/java/MingesoTingeso/demo/Services/*
+				src/main/java/MingesoTingeso/demo/Services/*,
+				src/main/java/MingesoTingeso/demo/Controllers/SendMailController.java,
+				src/main/java/MingesoTingeso/demo/Controllers/ReservaHabitacionController.java
 			</sonar.exclusions>
 
 	</properties>
