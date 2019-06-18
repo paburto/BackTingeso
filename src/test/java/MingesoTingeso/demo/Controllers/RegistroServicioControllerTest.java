@@ -55,9 +55,15 @@ public class RegistroServicioControllerTest {
         RegistroServicio regs = rsc.getAllRegistroServicios().get(0);
 
         map.put("idRegistro", (long)-100);
-        map.put("idServicio", (long)-100);
+        map.put("idServicio", (long)1);
         List<HashMap<String, String>> cr = rsc.create(map);
         assertEquals(401, Integer.parseInt(cr.get(0).get("status")));
+
+        map.put("idRegistro", (long)1);
+        map.put("idServicio", (long)-100);
+        cr = rsc.create(map);
+        assertEquals(401, Integer.parseInt(cr.get(0).get("status")));
+
 
 
     }
