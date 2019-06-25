@@ -89,6 +89,7 @@ public class UsuarioController {
                 map.put("status", 200);
                 map.put("message", "OK");
                 map.put("login", "true");
+                map.put("rut", user.getRutUsuario());
                 map.put("id", user.getIdUsuario());
                 map.put("name", user.getNombreUsuario());
                 map.put("email", user.getCorreoUsuario());
@@ -165,4 +166,3 @@ public class UsuarioController {
         }
     }
 }
-
