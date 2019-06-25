@@ -1,21 +1,55 @@
 package MingesoTingeso.demo.Controllers;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import java.time.LocalDate;
+import java.util.*;
 
 import MingesoTingeso.demo.Models.Historial;
+import MingesoTingeso.demo.Models.Usuario;
+import MingesoTingeso.demo.Repositories.HistorialRepository;
+import MingesoTingeso.demo.Repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/historial")
+public class HistorialController {
+    @Autowired
+    HistorialRepository historialRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @GetMapping("/")
+    @ResponseBody
+    public List<Historial> getAllHistorial(){
+        return historialRepository.findAll();
+    }
+
+    @GetMapping("/history")
+    @ResponseBody
+    public List<HashMap<String, Object>> getHistory(){
+
+        List<Historial> data = historialRepository.findAll(Sort.by("idHis").ascending());
+        List<HashMap<String, Object>> result = new ArrayList<>();
+        HashMap<String, Object> map = new HashMap<>();
+
+        for(Historial history : data){
+            map.put("Empleado", history.getUsuario().getNombreUsuario());
+            map.put("Correo", history.getUsuario().getCorreoUsuario());
+            map.put("Fecha", history.getFecha());
+            map.put("Descripcion", history.getDescripcion());
+            result.add(map);
+            map = new HashMap<>();
+        }
+        return result;
+    }
+
+    public void create(Usuario user, String description){
+        Usuario existUser = usuarioRepository.findUsuarioByIdUser(user.getIdUser());
+        if(existUser != null){
+            LocalDate date = LocalDate.now();
+            historialRepository.save(new Historial(description, date, existUser));
+        }
+    }
+
+}

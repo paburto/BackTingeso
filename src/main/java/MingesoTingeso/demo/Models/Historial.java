@@ -1,6 +1,7 @@
 package MingesoTingeso.demo.Models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -28,6 +29,9 @@ public class Historial implements Serializable {
     @Column(nullable = false, name = "`descripcion`")
     private String descripcion;
 
+    @Column(nullable = false, name = "`fecha`")
+    private LocalDate fecha;
+
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -37,24 +41,41 @@ public class Historial implements Serializable {
 
     }
 
-    public Historial(String descripcion){
+    public Historial(String descripcion, LocalDate fecha, Usuario usuario){
       this.descripcion = descripcion;
+      this.fecha = fecha;
+      this.usuario = usuario;
     }
 
-	public Long getIdHistorial() {
-		return idHis;
-	}
+    public Long getIdHis() {
+        return idHis;
+    }
 
-	public void setIdHistorial(Long idHis) {
-		this.idHis = idHis;
-	}
+    public void setIdHis(Long idHis) {
+        this.idHis = idHis;
+    }
 
-	public String getDescripcionHistorial() {
-		return descripcion;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setDescripcionHistorial(String descripcion) {
-		this.descripcion= descripcion;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
