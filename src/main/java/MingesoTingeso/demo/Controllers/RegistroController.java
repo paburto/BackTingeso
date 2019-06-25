@@ -1,13 +1,7 @@
 package MingesoTingeso.demo.Controllers;
 
-import MingesoTingeso.demo.Models.Cliente;
-import MingesoTingeso.demo.Models.ClienteRegistro;
-import MingesoTingeso.demo.Models.Habitacion;
-import MingesoTingeso.demo.Models.Registro;
-import MingesoTingeso.demo.Repositories.ClienteRegistroRepository;
-import MingesoTingeso.demo.Repositories.ClienteRepository;
-import MingesoTingeso.demo.Repositories.HabitacionRepository;
-import MingesoTingeso.demo.Repositories.RegistroRepository;
+import MingesoTingeso.demo.Models.*;
+import MingesoTingeso.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +25,9 @@ public class RegistroController {
 
     @Autowired
     ClienteRegistroRepository clienteRegistroRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     @GetMapping("/")
     @ResponseBody
@@ -67,8 +64,9 @@ public class RegistroController {
     @PostMapping(value = "/create")
     @ResponseBody
     public Registro create(@RequestBody List<Map<String, String>> data, @RequestParam(value = "idHab") Long idHab, @RequestParam(value = "fechaInicio") String fechaInicio,
-                           @RequestParam(value ="fechaTermino")  String fechaTermino, @RequestParam(value="descuento") Integer descuento) throws ParseException {
+                           @RequestParam(value ="fechaTermino")  String fechaTermino, @RequestParam(value="descuento") Integer descuento, @RequestParam(value= "user") Long user) throws ParseException {
         Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(idHab);
+        Usuario usuario = usuarioRepository.findUsuarioByIdUser(user);
         Registro registro = new Registro();
         String representante = "";
         for(int i = 0; i<data.size(); i++){
@@ -81,6 +79,7 @@ public class RegistroController {
         registro.setFechaTermino(formatter.parse(fechaTermino));
         registro.setHabitacion(habitacion);
         registro.setRepresentante(representante);
+        registro.setUsuario(usuario);
         float desc = descuento/100f;
         registro.setPrecio(Math.round(habitacion.getPrecioNoche()-habitacion.getPrecioNoche()*desc));
         registroRepository.save(registro);

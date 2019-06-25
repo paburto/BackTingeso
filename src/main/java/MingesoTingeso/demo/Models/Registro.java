@@ -43,6 +43,11 @@ public class Registro implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Habitacion habitacion;
 
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUsuario")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Usuario usuario;
+
     public Registro() {
 
     }
@@ -53,6 +58,14 @@ public class Registro implements Serializable {
         this.fechaTermino = fechaTermino;
         this.habitacion = habitacion;
     }
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Long getIdRegistro() {
 		return idRegistro;

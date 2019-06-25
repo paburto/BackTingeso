@@ -2,6 +2,7 @@ package MingesoTingeso.demo.Repositories;
 
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Models.Registro;
+import MingesoTingeso.demo.Models.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
@@ -15,6 +16,8 @@ public interface RegistroRepository extends JpaRepository<Registro, Long> {
     List<Registro> findRegistroByHabitacion(Habitacion habitacion);
 
     List<Registro> findAll();
+
+    List<Registro> findByUsuario(Usuario usuario);
 
     List<Registro> findByFechaTerminoGreaterThan(Date fechaTermino);
 
