@@ -100,7 +100,7 @@ public class HabitacionControllerTest {
 
     }
 
-    @Test
+    /*@Test
     public void inhabilitar() throws ParseException{
         HashMap<String, Object> map = new HashMap<>();
         map.put("tipo", "Simple");
@@ -109,7 +109,7 @@ public class HabitacionControllerTest {
         assertEquals(200, Integer.parseInt(ih.get(0).get("status")));
         ih = hc.inhabilitar((long)-1000, map);
         assertEquals(404, Integer.parseInt(ih.get(0).get("status")));
-    }
+    }*/
 
     @Test
     public void create() throws ParseException {

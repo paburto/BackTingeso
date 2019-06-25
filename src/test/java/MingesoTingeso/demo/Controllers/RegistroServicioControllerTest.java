@@ -1,4 +1,4 @@
-package MingesoTingeso.demo.Controllers;
+/*package MingesoTingeso.demo.Controllers;
 
 import MingesoTingeso.demo.Models.Registro;
 import MingesoTingeso.demo.Models.RegistroServicio;
@@ -67,4 +67,4 @@ public class RegistroServicioControllerTest {
 
 
     }
-}
+}*/
