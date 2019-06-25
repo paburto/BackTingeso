@@ -1,4 +1,4 @@
-package MingesoTingeso.demo.Models;
+/*package MingesoTingeso.demo.Models;
 
 
 import org.junit.Test;
@@ -40,4 +40,4 @@ public class HistorialTest {
         assertEquals("Lorem2",h.getDescripcionHistorial());
     }
 
-}
+}*/
