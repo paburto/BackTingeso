@@ -319,18 +319,18 @@ public class ReservaController {
         Reserva reserva;
         int descuento = Integer.parseInt(jsonData.get("descuento").toString());
         ReservaHabitacion reservaHabitacion;
+
+        do {
+            randomInt = randomGenerator.nextInt(50) + 1;
+            aux = reservaRepository.findReservaByCodigoReserva(randomInt);
+        }while(aux!=null);
+
+        reserva =reservaRepository.save(new Reserva(1,
+                descuento,
+                randomInt,
+                usuario2,
+                cliente));
         for(Long i: identificadores){
-            do {
-                randomInt = randomGenerator.nextInt(50) + 1;
-                aux = reservaRepository.findReservaByCodigoReserva(randomInt);
-            }while(aux!=null);
-
-            reserva =reservaRepository.save(new Reserva(1,
-                    descuento,
-                    randomInt,
-                    usuario2,
-                    cliente));
-
 
              habitacion = habitacionRepository.findHabitacionByIdHab(i);
             if(habitacion==null){
