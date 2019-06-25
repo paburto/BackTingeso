@@ -67,13 +67,17 @@ public class HabitacionController {
 			List<Habitacion> salida = new ArrayList<>();
 			List<ReservaHabitacion> lrh;
 			List<Registro> lr;
+			String comparadorI;
+			String comparadorT;
 			boolean apta;
 			for(Habitacion h: listaHabitacion){
 				apta = true;
 				lrh = resHabRepository.findByHabitacionAndFechaTerminoGreaterThan(h,inicio);
 				lr = registroRepository.findByHabitacionAndFechaTerminoGreaterThan(h,inicio);
 				for(ReservaHabitacion rh: lrh){
-					if(rh.getFechaInicioRH().equals(inicio) || rh.getFechaInicioRH().equals(termino) || rh.getFechaTerminoRH().equals(inicio) || rh.getFechaTerminoRH().equals(termino)){
+					comparadorI = formatter.format(rh.getFechaInicioRH());
+					comparadorT = formatter.format(rh.getFechaTerminoRH());
+					if(comparadorI.equals(inicio) || comparadorI.equals(termino) || comparadorT.equals(inicio) || comparadorT.equals(termino)){
 						apta = false;
 						break;
 					}
@@ -96,7 +100,9 @@ public class HabitacionController {
 				}
 				if(apta){
 					for(Registro r: lr){
-						if(r.getFechaInicio().equals(inicio) || r.getFechaInicio().equals(termino) || r.getFechaTermino().equals(inicio) || r.getFechaTermino().equals(termino)){
+						comparadorI = formatter.format(r.getFechaInicio());
+						comparadorT = formatter.format(r.getFechaTermino());
+						if(comparadorI.equals(inicio) || comparadorI.equals(termino) || comparadorT.equals(inicio) || comparadorT.equals(termino)){
 							apta = false;
 							break;
 						}

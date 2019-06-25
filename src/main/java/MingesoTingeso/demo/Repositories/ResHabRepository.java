@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 @Transactional
 public interface ResHabRepository extends JpaRepository<ReservaHabitacion, Long>{
 	List<ReservaHabitacion> findAll();
-	List<ReservaHabitacion> findByActiva(boolean activa);
+	List<ReservaHabitacion> findByActivaAndFechaTerminoGreaterThan(boolean activa, Date fechaTermino);
 	List<ReservaHabitacion> findReservaHabitacionByHabitacion(Habitacion habitacion);
 	List<ReservaHabitacion> findByReserva(Reserva reserva);
 	List<ReservaHabitacion> findByReservaAndActiva(Reserva reserva, boolean activa);

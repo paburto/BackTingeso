@@ -3,11 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import MingesoTingeso.demo.Models.*;
 import MingesoTingeso.demo.Repositories.*;
@@ -252,7 +248,8 @@ public class ReservaHabitacionController {
 	public List<HashMap<String, String>> getAllRack() {
 			List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 			HashMap<String, String> map = new HashMap<>();
-			List<ReservaHabitacion> reservahabitacion = reshabRepository.findByActiva(true);
+			Date hoy = Calendar.getInstance().getTime();
+			List<ReservaHabitacion> reservahabitacion = reshabRepository.findByActivaAndFechaTerminoGreaterThan(true, hoy);
 			List<Registro> registros = registroRepository.findAll();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			for(ReservaHabitacion rh : reservahabitacion){
