@@ -29,6 +29,9 @@ public class RegistroController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    HistorialController historialController;
+
     @GetMapping("/")
     @ResponseBody
     public List<Registro> getAllRegitros() {
@@ -101,6 +104,8 @@ public class RegistroController {
                 cliente.setCorreoCliente(data.get(i).get("correo"));
                 cliente.setTelefonoCliente(Integer.parseInt(data.get(i).get("telefono")));
             }
+            String description = "Registro de la habitacion " + habitacion.getNroHabitacion() + "\r\nCon fecha de inicio: " + fechaInicio + " y fecha de termino: " + fechaTermino + "\r\nPara el cliente llamado: " + data.get(i).get("nombre") + ".";
+            historialController.create(usuario, description);
             clienteRepository.save(cliente);
             clienteRegistroRepository.save(new ClienteRegistro(cliente,registro));
         }

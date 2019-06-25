@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import MingesoTingeso.demo.Models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,8 @@ public class RegistroServicioController {
 	RegistroRepository registroRepository;
 	@Autowired
 	ServicioRepository servicioRepository;
-
+	@Autowired
+	HistorialController historialController;
 	@RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<RegistroServicio> getAllRegistroServicios() {
@@ -67,6 +69,9 @@ public class RegistroServicioController {
 			if(r != null){
 				if(s != null){
 		  		registroServicioRepository.save(new RegistroServicio(r,s));
+		  		Usuario user = r.getUsuario();
+		  		String description = "Agregado servicio a la habitacion: " + r.getHabitacion().getNroHabitacion() + "\r\nRepresentante: " + r.getRepresentante() + "\r\nServicio agregado: " + s.getNombreServicio() + "\r\nPrecio: " + s.getPrecio() + ".";
+		  		historialController.create(user, description);
 		  		map.put("status", "201");
 		  		map.put("message", "RegistroServicio agregado con exito");
 		  		result.add(map);

@@ -34,6 +34,8 @@ public class ReservaController {
 
     @Autowired
     HabitacionRepository habitacionRepository;
+    @Autowired
+    HistorialController historialController;
 
     private Random randomGenerator = new Random();
 
@@ -139,6 +141,8 @@ public class ReservaController {
         Long idUsuario = usuario.getIdUsuario();
         Usuario usuario2= usuarioRepository.findUsuarioByIdUser(idUsuario);
         if (cliente == null){
+            String description = "Agregado nuevo cliente con nombre: " + jsonData.get("nombre").toString() + "\r\nCorreo: " + jsonData.get("correo").toString();
+            historialController.create(usuario, description);
             cliente = clienteRepository.save(new Cliente(Integer.parseInt(jsonData.get("rut").toString()),
                     jsonData.get("nombre").toString(),
                     jsonData.get("correo").toString(),
@@ -239,7 +243,8 @@ public class ReservaController {
             result.add(map);
             return result;
         }
-
+        String desc = "Creada nueva reserva con habitacion: " + habitacion.getNroHabitacion() + "\r\nCliente: " + jsonData.get("nombre").toString() + "\r\nFecha de inicio: " + jsonData.get("fechaInicio").toString() + "\r\nFecha de termino: " + jsonData.get("fechaTermino").toString() + ".";
+        historialController.create(usuario, desc);
         ReservaHabitacion reservaHabitacion = resHabRepository.save(new ReservaHabitacion(formatter.parse(jsonData.get("fechaInicio").toString()),
                 formatter.parse(jsonData.get("fechaTermino").toString()),
                 reserva,
