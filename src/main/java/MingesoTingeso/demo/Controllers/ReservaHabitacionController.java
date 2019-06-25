@@ -250,7 +250,7 @@ public class ReservaHabitacionController {
 			HashMap<String, String> map = new HashMap<>();
 			Date hoy = Calendar.getInstance().getTime();
 			List<ReservaHabitacion> reservahabitacion = reshabRepository.findByActivaAndFechaTerminoGreaterThan(true, hoy);
-			List<Registro> registros = registroRepository.findAll();
+			List<Registro> registros = registroRepository.findByFechaTerminoGreaterThan(hoy);
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			for(ReservaHabitacion rh : reservahabitacion){
 				map.put("tipo", "Reservada");

@@ -16,5 +16,7 @@ public interface RegistroRepository extends JpaRepository<Registro, Long> {
 
     List<Registro> findAll();
 
+    List<Registro> findByFechaTerminoGreaterThan(Date fechaTermino);
+
     List<Registro> findByHabitacionAndFechaTerminoGreaterThan(Habitacion habitacion, Date fechaTermino);
 }

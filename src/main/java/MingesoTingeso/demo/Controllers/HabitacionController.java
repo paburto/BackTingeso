@@ -77,7 +77,7 @@ public class HabitacionController {
 				for(ReservaHabitacion rh: lrh){
 					comparadorI = formatter.format(rh.getFechaInicioRH());
 					comparadorT = formatter.format(rh.getFechaTerminoRH());
-					if(comparadorI.equals(inicio) || comparadorI.equals(termino) || comparadorT.equals(inicio) || comparadorT.equals(termino)){
+					if(comparadorI.equals(fechaInicio) || comparadorI.equals(fechaTermino) || comparadorT.equals(fechaInicio) || comparadorT.equals(fechaTermino)){
 						apta = false;
 						break;
 					}
@@ -102,7 +102,7 @@ public class HabitacionController {
 					for(Registro r: lr){
 						comparadorI = formatter.format(r.getFechaInicio());
 						comparadorT = formatter.format(r.getFechaTermino());
-						if(comparadorI.equals(inicio) || comparadorI.equals(termino) || comparadorT.equals(inicio) || comparadorT.equals(termino)){
+						if(comparadorI.equals(fechaInicio) || comparadorI.equals(fechaTermino) || comparadorT.equals(fechaInicio) || comparadorT.equals(fechaTermino)){
 							apta = false;
 							break;
 						}
