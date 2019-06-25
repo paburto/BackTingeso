@@ -55,7 +55,7 @@ public class HabitacionController {
 		@ResponseBody
 		public List<Habitacion> filtrarHabitaciones(@RequestParam("fechaInicio") String fechaInicio, @RequestParam("fechaTermino") String fechaTermino, @RequestParam String tipo){
 			List<Habitacion> listaHabitacion = habitacionRepository.findHabitacionByTipo(tipo);
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date inicio;
 			Date termino;
 			try {
