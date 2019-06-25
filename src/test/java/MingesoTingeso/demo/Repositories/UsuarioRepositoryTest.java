@@ -1,4 +1,4 @@
-package MingesoTingeso.demo.Repositories;
+/*package MingesoTingeso.demo.Repositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.junit.Test;
@@ -39,3 +39,4 @@ public class UsuarioRepositoryTest {
 		assertEquals(rut, usuarioRepository.findUsuarioByRutUsuario(rut).getRutUsuario());
 	}
 }
+*/

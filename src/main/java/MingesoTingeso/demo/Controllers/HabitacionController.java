@@ -53,7 +53,7 @@ public class HabitacionController {
 
 		@GetMapping(value = "/filtrar")
 		@ResponseBody
-		public List<Habitacion> filtrarHabitaciones(@RequestParam("fechaInicio") String fechaInicio, @RequestParam("fechaTermino") String fechaTermino, @RequestParam String tipo){
+		public List<Habitacion> filtrarHabitaciones(@RequestParam("fechaInicio") String fechaInicio, @RequestParam("fechaTermino") String fechaTermino, @RequestParam("tipo") String tipo){
 			List<Habitacion> listaHabitacion;
 			if(tipo.equals("no")){
 				listaHabitacion = habitacionRepository.findAll();

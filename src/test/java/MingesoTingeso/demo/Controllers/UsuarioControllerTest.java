@@ -1,4 +1,4 @@
-package MingesoTingeso.demo.Controllers;
+/*package MingesoTingeso.demo.Controllers;
 
 import MingesoTingeso.demo.Models.Habitacion;
 import MingesoTingeso.demo.Repositories.UsuarioRepository;
@@ -79,4 +79,4 @@ public class UsuarioControllerTest {
         cr = uc.delete((long)-105);
         assertEquals(404, Integer.parseInt(cr.get(0).get("status")));
     }
-}
+}*/
