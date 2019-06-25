@@ -54,7 +54,13 @@ public class HabitacionController {
 		@GetMapping(value = "/filtrar")
 		@ResponseBody
 		public List<Habitacion> filtrarHabitaciones(@RequestParam("fechaInicio") String fechaInicio, @RequestParam("fechaTermino") String fechaTermino, @RequestParam String tipo){
-			List<Habitacion> listaHabitacion = habitacionRepository.findHabitacionByTipo(tipo);
+			List<Habitacion> listaHabitacion;
+			if(tipo.equals("no")){
+				listaHabitacion = habitacionRepository.findAll();
+			}
+			else{
+				listaHabitacion = habitacionRepository.findHabitacionByTipo(tipo);
+			}
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date inicio;
 			Date termino;
