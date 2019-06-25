@@ -9,14 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import MingesoTingeso.demo.Models.Cliente;
 import MingesoTingeso.demo.Repositories.ClienteRepository;
@@ -28,16 +21,22 @@ public class ClienteController {
 	@Autowired
 	ClienteRepository clienteRepository;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
     @ResponseBody
     public List<Cliente> getAllClientes() {
         return clienteRepository.findAll();
     }
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
     @ResponseBody
     public String getNombreClienteById(@PathVariable Long id) {
         Cliente cliente = clienteRepository.findClienteByIdCliente(id);
 				return cliente.getNombreCliente();
+    }
+
+    @GetMapping(value = "/rut/{rut}")
+    @ResponseBody
+    public Cliente getClienteByRut(@PathVariable Integer rut){
+	    return clienteRepository.findClienteByRut(rut);
     }
 }

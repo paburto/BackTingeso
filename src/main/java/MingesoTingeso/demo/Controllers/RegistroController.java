@@ -97,6 +97,11 @@ public class RegistroController {
                 cliente.setCorreoCliente(data.get(i).get("correo"));
                 cliente.setTelefonoCliente(Integer.parseInt(data.get(i).get("telefono")));
             }
+            else{
+                cliente.setNombreCliente(data.get(i).get("nombre"));
+                cliente.setCorreoCliente(data.get(i).get("correo"));
+                cliente.setTelefonoCliente(Integer.parseInt(data.get(i).get("telefono")));
+            }
             clienteRepository.save(cliente);
             clienteRegistroRepository.save(new ClienteRegistro(cliente,registro));
         }
