@@ -73,6 +73,10 @@ public class HabitacionController {
 				lrh = resHabRepository.findByHabitacionAndFechaTerminoGreaterThan(h,inicio);
 				lr = registroRepository.findByHabitacionAndFechaTerminoGreaterThan(h,inicio);
 				for(ReservaHabitacion rh: lrh){
+					if(rh.getFechaInicioRH().equals(inicio) || rh.getFechaInicioRH().equals(termino) || rh.getFechaTerminoRH().equals(inicio) || rh.getFechaTerminoRH().equals(termino)){
+						apta = false;
+						break;
+					}
 					if(rh.getFechaInicioRH().compareTo(inicio) < 0 && rh.getFechaTerminoRH().compareTo(inicio) > 0){
 						apta = false;
 						break;
@@ -92,6 +96,10 @@ public class HabitacionController {
 				}
 				if(apta){
 					for(Registro r: lr){
+						if(r.getFechaInicio().equals(inicio) || r.getFechaInicio().equals(termino) || r.getFechaTermino().equals(inicio) || r.getFechaTermino().equals(termino)){
+							apta = false;
+							break;
+						}
 						if(r.getFechaInicio().compareTo(inicio) < 0 && r.getFechaTermino().compareTo(inicio) > 0){
 							apta = false;
 							break;
