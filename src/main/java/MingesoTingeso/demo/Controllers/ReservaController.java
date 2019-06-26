@@ -129,6 +129,7 @@ public class ReservaController {
 
 
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/create")
     @ResponseBody
     public List<HashMap<String, String>> create(@RequestBody Map<String, Object> jsonData) throws ParseException {
@@ -260,6 +261,7 @@ public class ReservaController {
     }
 
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/createmulti")
     @ResponseBody
     public List<HashMap<String, String>> createMulti(@RequestBody Map<String, Object> jsonData) throws ParseException {
