@@ -40,7 +40,7 @@ public class MailService {
                 "				<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"border: 1px solid #cccccc; border-collapse: collapse;\">\r\n" +
                 "					<tr>\r\n" +
                 "						<td align=\"center\" bgcolor=\"#70bbd9\" style=\"padding: 40px 0 30px 0; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;\">\r\n" +
-                "							<img src=\"https://i.ibb.co/zRw8YmP/h1.gif\" alt=\"¡Bienvenido a Hotel Mingeso!\" width=\"300\" height=\"230\" style=\"display: block;\" />" +
+                "							<img src=\"https://i.ibb.co/0JvbDKy/h1.gif\" alt=\"¡Bienvenido a Hotel Mingeso!\" width=\"300\" height=\"230\" style=\"display: block;\" />" +
                 "						</td>\r\n" +
                 "					</tr>\r\n" +
                 "					<tr>\r\n" +
@@ -149,7 +149,7 @@ public class MailService {
                 "				<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"border: 1px solid #cccccc; border-collapse: collapse;\">\r\n" +
                 "					<tr>\r\n" +
                 "						<td align=\"center\" bgcolor=\"#70bbd9\" style=\"padding: 40px 0 30px 0; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;\">\r\n" +
-                "							<img src=\"https://i.ibb.co/zRw8YmP/h1.gif\" alt=\"¡Bienvenido a Hotel Mingeso!\" width=\"300\" height=\"230\" style=\"display: block;\" />" +
+                "							<img src=\"https://i.ibb.co/0JvbDKy/h1.gif\" alt=\"¡Bienvenido a Hotel Mingeso!\" width=\"300\" height=\"230\" style=\"display: block;\" />" +
                 "						</td>\r\n" +
                 "					</tr>\r\n" +
                 "					<tr>\r\n" +
