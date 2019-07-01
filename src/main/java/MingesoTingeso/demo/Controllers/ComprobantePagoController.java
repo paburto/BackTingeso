@@ -6,6 +6,7 @@ import MingesoTingeso.demo.Repositories.RegistroRepository;
 import MingesoTingeso.demo.Repositories.ResHabRepository;
 import MingesoTingeso.demo.Repositories.RegistroServicioRepository;
 import MingesoTingeso.demo.Repositories.ServicioRepository;
+import MingesoTingeso.demo.Services.EmailSenderComprobante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
@@ -33,9 +34,6 @@ public class ComprobantePagoController {
 
     @Autowired
     ServicioRepository servicioRepository;
-
-    @Autowired
-    SendMailController sendMailController;
 
     @GetMapping("/")
     @ResponseBody
@@ -96,7 +94,8 @@ public class ComprobantePagoController {
                         nombreCliente = resHab.getReserva().getCliente().getNombreCliente();
                     }
                 }
-                sendMailController.sendMailComprobante(correoUsuario, "Hotelería Mingeso - Check-out", detalles, registro.getHabitacion().getNroHabitacion(), nombreCliente);
+                Thread mail = new Thread(new EmailSenderComprobante(correoUsuario, "Hotelería Mingeso - Check-out", detalles, nombreCliente, registro.getHabitacion().getNroHabitacion()));
+                mail.start();
                 map.put("status", 201);
                 map.put("data", resultado);
                 map.put("message", "OK.");

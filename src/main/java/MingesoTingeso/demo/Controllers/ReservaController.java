@@ -8,6 +8,7 @@ import java.util.*;
 
 import MingesoTingeso.demo.Models.*;
 import MingesoTingeso.demo.Repositories.*;
+import MingesoTingeso.demo.Services.EmailSenderReserva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.remoting.soap.SoapFaultException;
@@ -17,9 +18,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/reservas")
 public class ReservaController {
-    @Autowired
-    SendMailController enviar;
-
     @Autowired
     ReservaRepository reservaRepository;
 
@@ -250,8 +248,8 @@ public class ReservaController {
                 formatter.parse(jsonData.get("fechaTermino").toString()),
                 reserva,
                 habitacion));
-
-        enviar.sendMailHabitacion(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString());
+        Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString()));
+        mail.start();
 
 
         map.put("status", "201");
@@ -381,8 +379,8 @@ public class ReservaController {
                 formatter.parse(jsonData.get("fechaTermino").toString()),
                 reserva,
                 habitacion));
-
-        enviar.sendMailHabitacion(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString());
+        Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString()));
+        mail.start();
 
         String res =  String.valueOf(reserva.getCodigoReserva());
         map.put("status", "201");
@@ -516,7 +514,8 @@ public class ReservaController {
                     fechaTermino,
                     reserva,
                     habitacion));
-            enviar.sendMailHabitacion(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString());
+            Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString()));
+            mail.start();
 
         }
 
