@@ -260,6 +260,168 @@ public class ReservaController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("/createMultiFechas")
+    @ResponseBody
+    public List<HashMap<String, String>> createMultiFechas(@RequestBody Map<String, Object> jsonData) throws ParseException {
+        List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map = new HashMap<>();
+        List<ReservaHabitacion> reservahabitaciones = resHabRepository.findAll();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Cliente cliente = clienteRepository.findClienteByRut(Integer.parseInt(jsonData.get("rut").toString()));
+        Usuario usuario = usuarioRepository.findUsuarioByRutUsuario(Integer.parseInt(jsonData.get("rutUsuario").toString()));
+        Long idUsuario = usuario.getIdUsuario();
+        Usuario usuario2= usuarioRepository.findUsuarioByIdUser(idUsuario);
+        if (cliente == null){
+            String description = "Agregado nuevo cliente con nombre: " + jsonData.get("nombre").toString() + "\r\nCorreo: " + jsonData.get("correo").toString();
+            historialController.create(usuario, description);
+            cliente = clienteRepository.save(new Cliente(Integer.parseInt(jsonData.get("rut").toString()),
+                    jsonData.get("nombre").toString(),
+                    jsonData.get("correo").toString(),
+                    Integer.parseInt(jsonData.get("telefono").toString()),
+                    formatter.parse(jsonData.get("fechaNacimiento").toString())));
+        }
+
+        LocalDate localDate = LocalDate.now();
+        Date actual = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date fechaInicio = new Date(),fechaTermino = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            /** actual = formato.parse(actual.toString());*/
+            fechaInicio = formato.parse(jsonData.get("fechaInicio").toString());
+            fechaTermino = formato.parse(jsonData.get("fechaTermino").toString());
+        }
+        catch (ParseException ex)
+        {
+            map.put("status", "401");
+            map.put("message", "Error al convertir date.");
+            result.add(map);
+            return result;
+        }
+        if(fechaInicio.before(actual)){
+            map.put("status", "401");
+            map.put("message", "Error: La fecha de inicio debe ser mayor a la actual.");
+            result.add(map);
+            return result;
+        }
+        else if(fechaInicio.after(fechaTermino)){
+            map.put("status", "401");
+            map.put("message", "La fecha de inicio no puede estar después de la fecha de termino.");
+            result.add(map);
+            return result;
+        }
+        for (ReservaHabitacion reserva: reservahabitaciones){
+            if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString()))
+                    && reserva.getReserva().getEstado()==1 && !reserva.getHabitacion().getTipoHabitacion().equals("Inhabilitada")){
+
+                if(fechaInicio.after(reserva.getFechaInicioRH()) && fechaInicio.before(reserva.getFechaTerminoRH())){
+                    map.put("status", "401");
+                    map.put("message", "La fecha de inicio no se puede agregar, ya que no está disponible.");
+                    result.add(map);
+                    return result;
+                }
+                if(fechaTermino.after(reserva.getFechaInicioRH()) && fechaTermino.before(reserva.getFechaTerminoRH())){
+                    map.put("status", "401");
+                    map.put("message", "La fecha de termino no se puede agregar, ya que no está disponible.");
+                    result.add(map);
+                    return result;
+                }
+                if(reserva.getFechaInicioRH().after(fechaInicio) && reserva.getFechaInicioRH().before(fechaTermino)){
+                    map.put("status", "401");
+                    map.put("message", "Existe una reserva dentro de este periodo (i).");
+                    result.add(map);
+                    return result;
+                }
+                if(reserva.getFechaTerminoRH().after(fechaInicio) && reserva.getFechaTerminoRH().before(fechaTermino)){
+                    map.put("status", "401");
+                    map.put("message", "Existe una reserva dentro de este periodo (T)..");
+                    result.add(map);
+                    return result;
+                }
+                if(fechaTermino.equals(reserva.getFechaTerminoRH()) || fechaTermino.equals(reserva.getFechaInicioRH())
+                        || fechaInicio.equals(reserva.getFechaTerminoRH()) || fechaInicio.equals(reserva.getFechaInicioRH())){
+                    map.put("status", "401");
+                    map.put("message", "Uno de los días extremos calza con un día de reserva");
+                    result.add(map);
+                    return result;
+                }
+            }
+            else if(reserva.getHabitacion().getIdHabitacion().equals(Long.parseLong(jsonData.get("IdHab").toString()))){
+                if (reserva.getHabitacion().getTipoHabitacion().equals("Inhabilitada")){
+                    map.put("status", "401");
+                    map.put("message", "La habitación seleccionada está anulada.");
+                    result.add(map);
+                    return result;
+                }
+            }
+        }
+        Reserva aux = new Reserva();
+
+        int randomInt;
+        do {
+            randomInt = randomGenerator.nextInt(50) + 1;
+            aux = reservaRepository.findReservaByCodigoReserva(randomInt);
+        }while(aux!=null);
+        Reserva reserva =reservaRepository.save(new Reserva(Integer.parseInt(jsonData.get("estado").toString()),
+                Integer.parseInt(jsonData.get("descuento").toString()),
+                randomInt,
+                usuario2,
+                cliente));
+
+        Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(Long.parseLong(jsonData.get("IdHab").toString()));
+        if(habitacion==null){
+            map.put("status", "401");
+            map.put("message", "Error, la habitación ingresada no existe.");
+            result.add(map);
+            return result;
+        }
+        String desc = "Creada nueva reserva con habitacion: " + habitacion.getNroHabitacion() + "\r\nCliente: " + jsonData.get("nombre").toString() + "\r\nFecha de inicio: " + jsonData.get("fechaInicio").toString() + "\r\nFecha de termino: " + jsonData.get("fechaTermino").toString() + ".";
+        historialController.create(usuario, desc);
+        ReservaHabitacion reservaHabitacion = resHabRepository.save(new ReservaHabitacion(formatter.parse(jsonData.get("fechaInicio").toString()),
+                formatter.parse(jsonData.get("fechaTermino").toString()),
+                reserva,
+                habitacion));
+
+        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", "Se ha creado una reserva en nuestro sitio web.");
+
+        String res =  String.valueOf(reserva.getCodigoReserva());
+        map.put("status", "201");
+        map.put("message", "OK");
+        map.put("message", res);
+        result.add(map);
+        return result;
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/addMultiFechas")
+    @ResponseBody
+    public List<HashMap<String, String>> addMultiFechas(@RequestParam("fechaInicio") String fechaInicio, @RequestParam("fechaTermino") String fechaTermino
+    , @RequestParam("codigoReserva") String codigoReserva, @RequestParam("idHabitacion") String idHabitacion) {
+        List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map = new HashMap<>();
+
+        Habitacion habitacion = habitacionRepository.findHabitacionByIdHab(Long.parseLong(idHabitacion));
+        Reserva reserva = reservaRepository.findReservaByCodigoReserva(Integer.parseInt(codigoReserva));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            ReservaHabitacion reservaHabitacion = resHabRepository.save(new ReservaHabitacion(formatter.parse(fechaInicio),
+                    formatter.parse(fechaTermino),
+                    reserva,
+                    habitacion));
+        }catch (ParseException ex)
+        {
+            map.put("status", "401");
+            map.put("message", "Error al convertir date.");
+            result.add(map);
+            return result;
+        }
+
+        map.put("status", "201");
+        map.put("message", "OK");
+        result.add(map);
+        return result;
+    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/createmulti")
