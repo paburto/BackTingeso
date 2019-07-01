@@ -397,7 +397,7 @@ public class ReservaController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/addMultiFechas")
+    @GetMapping(value = "/addMultiFechas")
     @ResponseBody
     public List<HashMap<String, String>> addMultiFechas(@RequestParam("fechaInicio") String fechaInicio, @RequestParam("fechaTermino") String fechaTermino
     , @RequestParam("codigoReserva") String codigoReserva, @RequestParam("idHabitacion") String idHabitacion) {
