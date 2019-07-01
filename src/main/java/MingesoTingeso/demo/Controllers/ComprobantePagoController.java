@@ -34,6 +34,9 @@ public class ComprobantePagoController {
     @Autowired
     ServicioRepository servicioRepository;
 
+    @Autowired
+    SendMailController sendMailController;
+
     @GetMapping("/")
     @ResponseBody
     public List<ComprobantePago> getAllComprobantes(){
@@ -85,6 +88,15 @@ public class ComprobantePagoController {
                 LocalDateTime timeNow = LocalDateTime.now();
                 String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
                 ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
+                String correoUsuario = "";
+                String nombreCliente = "";
+                for(ReservaHabitacion resHab : rh){
+                    if(resHab.getReserva().getIdReserva().equals(Long.parseLong(json.get("idRegistro").toString()))){
+                        correoUsuario = resHab.getReserva().getCliente().getCorreoCliente();
+                        nombreCliente = resHab.getReserva().getCliente().getNombreCliente();
+                    }
+                }
+                sendMailController.sendMailComprobante(correoUsuario, "Hotelería Mingeso - Check-out", detalles, registro.getHabitacion().getNroHabitacion(), nombreCliente);
                 map.put("status", 201);
                 map.put("data", resultado);
                 map.put("message", "OK.");

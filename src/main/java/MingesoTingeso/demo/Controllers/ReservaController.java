@@ -251,7 +251,7 @@ public class ReservaController {
                 reserva,
                 habitacion));
 
-        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", "Se ha creado una reserva en nuestro sitio web.");
+        enviar.sendMailHabitacion(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString());
 
 
         map.put("status", "201");
@@ -382,7 +382,7 @@ public class ReservaController {
                 reserva,
                 habitacion));
 
-        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", "Se ha creado una reserva en nuestro sitio web.");
+        enviar.sendMailHabitacion(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString());
 
         String res =  String.valueOf(reserva.getCodigoReserva());
         map.put("status", "201");
@@ -516,10 +516,9 @@ public class ReservaController {
                     fechaTermino,
                     reserva,
                     habitacion));
+            enviar.sendMailHabitacion(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString());
 
         }
-        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", "Se ha creado una reserva en nuestro sitio web.");
-
 
         map.put("status", "201");
         map.put("message", "OK");
@@ -568,8 +567,6 @@ public class ReservaController {
         reservaU.setEstado(Integer.parseInt(jsonData.get("estado").toString()));
         reservaU.setDescuento(Integer.parseInt(jsonData.get("descuento").toString()));
         reservaRepository.save(reservaU);
-
-        enviar.sendMail(jsonData.get("correo").toString(), "Hotelería Mingeso - Usuario Modificado", "Se ha modificado una cuenta cliente en nuestro sitio web.");
 
         map.put("status", "201");
         map.put("message", "OK");

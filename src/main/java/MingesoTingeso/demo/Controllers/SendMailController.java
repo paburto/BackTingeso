@@ -24,13 +24,13 @@ public class SendMailController {
         return "send_mail_view";
     }
 */
-    @PostMapping
-    public List<HashMap<String, String>> sendMail(String correo, String asunto, String mensaje) throws ParseException {
+    @PostMapping("/hab")
+    public List<HashMap<String, String>> sendMailHabitacion(String correo, String asunto, String username, int habitacion, String fechaInicio, String fechaTermino) throws ParseException {
 
         List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> map = new HashMap<>();
 
-        if (correo == null && asunto==null && mensaje==null){
+        if (correo == null && asunto==null && fechaInicio==null){
             map.put("status", "401");
             map.put("message", "Error correo nulo.");
             result.add(map);
@@ -38,7 +38,7 @@ public class SendMailController {
         }
 
         //String message = body +"\n\n Datos de contacto: " + "\nNombre: " + name + "\nE-mail: " + mail;
-        mailService.sendMail("noresponder.alaya@gmail.com",correo,asunto,mensaje);
+        mailService.reservaMail("noresponder.alaya@gmail.com",correo,asunto,username,habitacion, fechaInicio, fechaTermino);
 
 
         map.put("status", "200");
@@ -49,4 +49,28 @@ public class SendMailController {
         return "send_mail_view";*/
     }
 
+    @PostMapping("/com")
+    public List<HashMap<String, String>> sendMailComprobante(String correo, String asunto, String detalles, int habitacion, String username) throws ParseException {
+
+        List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map = new HashMap<>();
+
+        if (correo == null && asunto==null && detalles==null){
+            map.put("status", "401");
+            map.put("message", "Error correo nulo.");
+            result.add(map);
+            return result;
+        }
+
+        //String message = body +"\n\n Datos de contacto: " + "\nNombre: " + name + "\nE-mail: " + mail;
+        mailService.comprobantePago("noresponder.alaya@gmail.com",correo,asunto, detalles, habitacion, username);
+
+
+        map.put("status", "200");
+        map.put("message", "OK.");
+        result.add(map);
+        return result;
+        /**
+         return "send_mail_view";*/
+    }
 }
