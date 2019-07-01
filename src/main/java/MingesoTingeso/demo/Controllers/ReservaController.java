@@ -387,9 +387,13 @@ public class ReservaController {
         String res =  String.valueOf(reserva.getCodigoReserva());
         map.put("status", "201");
         map.put("message", "OK");
+        List<HashMap<String, String>> env = new ArrayList<HashMap<String, String>>();
+        env.add(map);
+        map = new HashMap<>();
+        map.put("status", "201");
         map.put("message", res);
-        result.add(map);
-        return result;
+        env.add(map);
+        return env;
     }
 
     @CrossOrigin(origins = "*")
