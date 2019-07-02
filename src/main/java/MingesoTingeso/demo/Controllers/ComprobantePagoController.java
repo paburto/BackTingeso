@@ -66,8 +66,8 @@ public class ComprobantePagoController {
             Registro registro = registroRepository.findRegistroByIdRegistro(Long.parseLong(json.get("idRegistro").toString()));
             if(registro != null){
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Instant inicio = formatter.parse(json.get("fechaInicio").toString()).toInstant();
-                Instant termino = formatter.parse(json.get("fechaTermino").toString()).toInstant();
+                Instant inicio = formatter.parse(json.get("fechaInicio").toString().split("T")[0]).toInstant();
+                Instant termino = formatter.parse(json.get("fechaTermino").toString().split("T")[0]).toInstant();
                 List<ClienteRegistro> cr = clienteRegistroRepository.findByRegistro(registro);
                 List<RegistroServicio> rs = registroServicioRepository.findRegistroServicioByRegistro(registro);
                 List<Servicio> servicios = new ArrayList<>();
@@ -107,9 +107,7 @@ public class ComprobantePagoController {
     }
 
     private String createDetails(List<Servicio> servicios, Instant inicio, Instant termino, Habitacion habitacion, long totalDias, long totalFinal){
-        String i = inicio.toString().split("T")[0];
-        String t = termino.toString().split("T")[0];
-        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + ":\r\nDesde: " + i + "\r\nHasta: " + t + "\r\nTotal de dias: " + totalDias + "\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "\r\nServicios:\r\n";
+        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + ":\r\nDesde: " + inicio + "\r\nHasta: " + termino + "\r\nTotal de dias: " + totalDias + "\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "\r\nServicios:\r\n";
         int totalServicios = 0;
         if(servicios.size() > 0){
             for(Servicio serv : servicios){
