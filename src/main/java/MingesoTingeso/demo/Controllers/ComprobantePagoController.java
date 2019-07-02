@@ -83,9 +83,10 @@ public class ComprobantePagoController {
                 }
                 LocalDateTime timeNow = LocalDateTime.now();
                 String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
+                String detallesHTML = createDetails(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
                 ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
                 for(ClienteRegistro clienteRegistro : cr){
-                    Thread mail = new Thread(new EmailSenderComprobante(clienteRegistro.getCliente().getCorreoCliente(), "Hotelería Mingeso - Check-out", detalles, clienteRegistro.getCliente().getNombreCliente(), registro.getHabitacion().getNroHabitacion()));
+                    Thread mail = new Thread(new EmailSenderComprobante(clienteRegistro.getCliente().getCorreoCliente(), "Hotelería Mingeso - Check-out", detallesHTML, clienteRegistro.getCliente().getNombreCliente(), registro.getHabitacion().getNroHabitacion()));
                     mail.start();
                 }
                 map.put("status", 201);
@@ -118,6 +119,24 @@ public class ComprobantePagoController {
         }
         else{
             detalles = detalles + "No ha consumido servicios.\r\n";
+            detalles = detalles + "Total a pagar: " + totalFinal;
+            return detalles;
+        }
+    }
+
+    private String createDetailsHTML(List<Servicio> servicios, Instant inicio, Instant termino, Habitacion habitacion, long totalDias, long totalFinal){
+        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + ":<br>\r\nDesde: " + inicio + "<br>\r\nHasta: " + termino + "<br>\r\nTotal de dias: " + totalDias + "<br>\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "<br>\r\nServicios:<br>\r\n";
+        int totalServicios = 0;
+        if(servicios.size() > 0){
+            for(Servicio serv : servicios){
+                detalles = detalles +  serv.getNombreServicio() + " Precio: " + serv.getPrecio() + "<br>\r\n";
+                totalServicios = totalServicios + serv.getPrecio();
+            }
+            detalles = detalles + "Total a pagar: " + totalFinal;
+            return detalles;
+        }
+        else{
+            detalles = detalles + "No ha consumido servicios.<br>\r\n";
             detalles = detalles + "Total a pagar: " + totalFinal;
             return detalles;
         }
