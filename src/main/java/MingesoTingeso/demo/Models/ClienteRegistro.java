@@ -31,6 +31,10 @@ public class ClienteRegistro implements Serializable {
         this.registro = registro;
     }
 
+    public ClienteRegistro(){
+
+    }
+
     public Long getId() {
         return id;
     }

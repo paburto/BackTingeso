@@ -1,11 +1,7 @@
 package MingesoTingeso.demo.Controllers;
 
 import MingesoTingeso.demo.Models.*;
-import MingesoTingeso.demo.Repositories.ComprobantePagoRepository;
-import MingesoTingeso.demo.Repositories.RegistroRepository;
-import MingesoTingeso.demo.Repositories.ResHabRepository;
-import MingesoTingeso.demo.Repositories.RegistroServicioRepository;
-import MingesoTingeso.demo.Repositories.ServicioRepository;
+import MingesoTingeso.demo.Repositories.*;
 import MingesoTingeso.demo.Services.EmailSenderComprobante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +30,8 @@ public class ComprobantePagoController {
 
     @Autowired
     ServicioRepository servicioRepository;
+    @Autowired
+    ClienteRegistroRepository clienteRegistroRepository;
 
     @GetMapping("/")
     @ResponseBody
@@ -67,10 +65,10 @@ public class ComprobantePagoController {
         for(Map<String, Object> json : jsonData){
             Registro registro = registroRepository.findRegistroByIdRegistro(Long.parseLong(json.get("idRegistro").toString()));
             if(registro != null){
-                List<ReservaHabitacion> rh = resHabRepository.findReservaHabitacionByHabitacion(registro.getHabitacion());
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Instant inicio = formatter.parse(json.get("fechaInicio").toString()).toInstant();
                 Instant termino = formatter.parse(json.get("fechaTermino").toString()).toInstant();
+                List<ClienteRegistro> cr = clienteRegistroRepository.findByRegistro(registro);
                 List<RegistroServicio> rs = registroServicioRepository.findRegistroServicioByRegistro(registro);
                 List<Servicio> servicios = new ArrayList<>();
                 for(RegistroServicio registroServicio : rs){
@@ -86,16 +84,10 @@ public class ComprobantePagoController {
                 LocalDateTime timeNow = LocalDateTime.now();
                 String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
                 ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
-                String correoUsuario = "";
-                String nombreCliente = "";
-                for(ReservaHabitacion resHab : rh){
-                    if(resHab.getReserva().getIdReserva().equals(Long.parseLong(json.get("idRegistro").toString()))){
-                        correoUsuario = resHab.getReserva().getCliente().getCorreoCliente();
-                        nombreCliente = resHab.getReserva().getCliente().getNombreCliente();
-                    }
+                for(ClienteRegistro clienteRegistro : cr){
+                    Thread mail = new Thread(new EmailSenderComprobante(clienteRegistro.getCliente().getCorreoCliente(), "Hotelería Mingeso - Check-out", detalles, clienteRegistro.getCliente().getNombreCliente(), registro.getHabitacion().getNroHabitacion()));
+                    mail.start();
                 }
-                Thread mail = new Thread(new EmailSenderComprobante(correoUsuario, "Hotelería Mingeso - Check-out", detalles, nombreCliente, registro.getHabitacion().getNroHabitacion()));
-                mail.start();
                 map.put("status", 201);
                 map.put("data", resultado);
                 map.put("message", "OK.");
