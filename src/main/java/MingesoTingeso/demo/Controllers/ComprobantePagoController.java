@@ -83,7 +83,7 @@ public class ComprobantePagoController {
                 }
                 LocalDateTime timeNow = LocalDateTime.now();
                 String detalles = createDetails(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
-                String detallesHTML = createDetails(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
+                String detallesHTML = createDetailsHTML(servicios, inicio, termino, registro.getHabitacion(), totalDias, total);
                 ComprobantePago resultado = comprobantePagoRepository.save(new ComprobantePago(total, detalles, timeNow, registro));
                 for(ClienteRegistro clienteRegistro : cr){
                     Thread mail = new Thread(new EmailSenderComprobante(clienteRegistro.getCliente().getCorreoCliente(), "Hotelería Mingeso - Check-out", detallesHTML, clienteRegistro.getCliente().getNombreCliente(), registro.getHabitacion().getNroHabitacion()));
