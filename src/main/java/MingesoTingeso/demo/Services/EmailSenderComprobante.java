@@ -86,8 +86,8 @@ public class EmailSenderComprobante implements Runnable {
                 "								</tr>\r\n" +
                 "								<tr>\r\n" +
                 "									<td style=\"padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;\">\r\n" +
-                "										Estimado(a) "+ username +", usted ha realizado el check-out de la habitaci\u00F3n"+ habitacion +". Detalle a continuaci\u00F3n:\r\n" +
-                "                                       Detalle:\r\n" + detalles + "\r\n" +
+                "										Estimado(a) "+ username +", usted ha realizado el check-out de la habitaci\u00F3n "+ habitacion +". Detalle a continuaci\u00F3n:<br>\r\n" +
+                "                                       Detalle:<br>" + detalles + "<br>\r\n" +
                 "									</td>\r\n" +
                 "								</tr>\r\n" +
                 "								<tr>\r\n" +
