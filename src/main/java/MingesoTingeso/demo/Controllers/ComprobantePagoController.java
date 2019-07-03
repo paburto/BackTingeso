@@ -108,7 +108,9 @@ public class ComprobantePagoController {
     }
 
     private String createDetails(List<Servicio> servicios, Instant inicio, Instant termino, Habitacion habitacion, long totalDias, long totalFinal){
-        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + ":\r\nDesde: " + inicio + "\r\nHasta: " + termino + "\r\nTotal de dias: " + totalDias + "\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "\r\nServicios:\r\n";
+        String i = inicio.toString().split("T")[0];
+        String t = termino.toString().split("T")[0];
+        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + ":\r\nDesde: " + i + "\r\nHasta: " + t + "\r\nTotal de dias: " + totalDias + "\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "\r\nServicios:\r\n";
         int totalServicios = 0;
         if(servicios.size() > 0){
             for(Servicio serv : servicios){
