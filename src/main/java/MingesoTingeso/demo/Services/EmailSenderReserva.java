@@ -5,6 +5,7 @@ import javax.mail.internet.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class EmailSenderReserva implements Runnable {
 
