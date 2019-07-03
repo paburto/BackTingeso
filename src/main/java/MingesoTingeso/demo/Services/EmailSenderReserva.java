@@ -8,13 +8,14 @@ import java.util.Properties;
 
 public class EmailSenderReserva implements Runnable {
 
-    public EmailSenderReserva(String to, String subject, String username, int habitacion, String fechaInicio, String fechaTermino){
+    public EmailSenderReserva(String to, String subject, String username, int habitacion, String fechaInicio, String fechaTermino, int codReserva){
         this.to = to;
         this.subject = subject;
         this.username = username;
         this.habitacion = habitacion;
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
+        this.codReserva = codReserva;
     }
 
     private String to;
@@ -22,6 +23,7 @@ public class EmailSenderReserva implements Runnable {
     private String username;
     private String fechaInicio;
     private String fechaTermino;
+    private int codReserva;
     private int habitacion;
 
     public void sendMail() throws AddressException, MessagingException, IOException {
@@ -44,7 +46,7 @@ public class EmailSenderReserva implements Runnable {
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent(reservaMail(this.username, this.habitacion, this.fechaInicio, this.fechaTermino), "text/html");
+        messageBodyPart.setContent(reservaMail(this.username, this.habitacion, this.fechaInicio, this.fechaTermino, this.codReserva), "text/html");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
@@ -61,7 +63,7 @@ public class EmailSenderReserva implements Runnable {
         }
     }
 
-    public String reservaMail(String username, int habitacion, String fechaInicio, String fechaTermino){
+    public String reservaMail(String username, int habitacion, String fechaInicio, String fechaTermino, int codReserva){
         String messageUserWelcome = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n" +
                 "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n" +
                 "<head>\r\n" +
@@ -89,7 +91,9 @@ public class EmailSenderReserva implements Runnable {
                 "								</tr>\r\n" +
                 "								<tr>\r\n" +
                 "									<td style=\"padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;\">\r\n" +
-                "										Estimado(a) "+ username +", usted ha realizado una reserva de la habitaci\u00F3n "+ habitacion +". Detalle a continuaci\u00F3n:<br>\r\n" +
+                "										Estimado(a) "+ username +", usted ha realizado una reserva. Detalle a continuaci\u00F3n:<br>\r\n" +
+                "                                       Habitaci\u00F3n: "+ habitacion + "<br>\r\n" +
+                "                                       Codigo de reserva: " + codReserva + "<br>\r\n" +
                 "                                       Fecha de inicio: " + fechaInicio + "<br>\r\n" +
                 "                                       Fecha de termino: " + fechaTermino + "<br>\r\n" +
                 "									</td>\r\n" +

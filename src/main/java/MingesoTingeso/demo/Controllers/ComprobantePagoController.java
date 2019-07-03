@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -125,7 +126,13 @@ public class ComprobantePagoController {
     }
 
     private String createDetailsHTML(List<Servicio> servicios, Instant inicio, Instant termino, Habitacion habitacion, long totalDias, long totalFinal){
-        String detalles = "Total de dias en la habitacion " + habitacion.getNroHabitacion() + ":<br>\r\nDesde: " + inicio + "<br>\r\nHasta: " + termino + "<br>\r\nTotal de dias: " + totalDias + "<br>\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "<br>\r\nServicios:<br>\r\n";
+        String inicioFormatted = inicio.toString().split(Pattern.quote("T"))[0].replace('-', '/');
+        String terminoFormatted = termino.toString().split(Pattern.quote("T"))[0].replace('-', '/');
+        String[] inicio_preFormmat = inicioFormatted.split(Pattern.quote("/"));
+        String[] termino_preFormmat = terminoFormatted.split(Pattern.quote("/"));
+        String inicioFinal = inicio_preFormmat[2] + "/" + inicio_preFormmat[1] + "/" + inicio_preFormmat[0];
+        String terminoFinal = termino_preFormmat[2] + "/" + termino_preFormmat[1] + "/" + termino_preFormmat[0];
+        String detalles = "Habitacion: " + habitacion.getNroHabitacion() + "<br>\r\nDesde: " + inicioFinal + "<br>\r\nHasta: " + terminoFinal + "<br>\r\nTotal de dias: " + totalDias + "<br>\r\nTotal por habitacion: " + habitacion.getPrecioNoche()*totalDias + "<br>\r\nServicios:<br>\r\n";
         int totalServicios = 0;
         if(servicios.size() > 0){
             for(Servicio serv : servicios){

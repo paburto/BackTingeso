@@ -248,7 +248,7 @@ public class ReservaController {
                 formatter.parse(jsonData.get("fechaTermino").toString()),
                 reserva,
                 habitacion));
-        Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString()));
+        Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString(), reservaHabitacion.getReserva().getCodigoReserva()));
         mail.start();
 
 
@@ -379,7 +379,7 @@ public class ReservaController {
                 formatter.parse(jsonData.get("fechaTermino").toString()),
                 reserva,
                 habitacion));
-        Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString()));
+        Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString(), reservaHabitacion.getReserva().getCodigoReserva()));
         mail.start();
 
         String res =  String.valueOf(reserva.getCodigoReserva());
@@ -510,11 +510,11 @@ public class ReservaController {
                 result.add(map);
                 return result;
             }
-            resHabRepository.save(new ReservaHabitacion(fechaInicio,
+            ReservaHabitacion resHab = resHabRepository.save(new ReservaHabitacion(fechaInicio,
                     fechaTermino,
                     reserva,
                     habitacion));
-            Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString()));
+            Thread mail = new Thread(new EmailSenderReserva(jsonData.get("correo").toString(), "Hotelería Mingeso - Reserva Creada", jsonData.get("nombre").toString(), habitacion.getNroHabitacion(), jsonData.get("fechaInicio").toString(), jsonData.get("fechaTermino").toString(), resHab.getReserva().getCodigoReserva()));
             mail.start();
 
         }
