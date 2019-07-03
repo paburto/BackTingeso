@@ -29,7 +29,7 @@ public class HistorialController {
     @ResponseBody
     public List<HashMap<String, Object>> getHistory(){
 
-        List<Historial> data = historialRepository.findAll(Sort.by("idHis").ascending());
+        List<Historial> data = historialRepository.findAll(Sort.by("idHis").descending());
         List<HashMap<String, Object>> result = new ArrayList<>();
         HashMap<String, Object> map = new HashMap<>();
 
