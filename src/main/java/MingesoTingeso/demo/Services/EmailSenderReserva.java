@@ -64,6 +64,10 @@ public class EmailSenderReserva implements Runnable {
     }
 
     public String reservaMail(String username, int habitacion, String fechaInicio, String fechaTermino, int codReserva){
+        String[] inicio_preFormmat = fechaInicio.split(Pattern.quote("-"));
+        String[] termino_preFormmat = fechaTermino.split(Pattern.quote("-"));
+        String inicioFinal = inicio_preFormmat[2] + "/" + inicio_preFormmat[1] + "/" + inicio_preFormmat[0];
+        String terminoFinal = termino_preFormmat[2] + "/" + termino_preFormmat[1] + "/" + termino_preFormmat[0];
         String messageUserWelcome = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n" +
                 "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n" +
                 "<head>\r\n" +
@@ -94,8 +98,8 @@ public class EmailSenderReserva implements Runnable {
                 "										Estimado(a) "+ username +", usted ha realizado una reserva. Detalle a continuaci\u00F3n:<br>\r\n" +
                 "                                       Habitaci\u00F3n: "+ habitacion + "<br>\r\n" +
                 "                                       Codigo de reserva: " + codReserva + "<br>\r\n" +
-                "                                       Fecha de inicio: " + fechaInicio + "<br>\r\n" +
-                "                                       Fecha de termino: " + fechaTermino + "<br>\r\n" +
+                "                                       Fecha de inicio: " + inicioFinal + "<br>\r\n" +
+                "                                       Fecha de termino: " + terminoFinal + "<br>\r\n" +
                 "									</td>\r\n" +
                 "								</tr>\r\n" +
                 "								<tr>\r\n" +
@@ -128,7 +132,7 @@ public class EmailSenderReserva implements Runnable {
                 "														</tr>\r\n" +
                 "														<tr>\r\n" +
                 "															<td style=\"padding: 25px 0 0 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;\">\r\n" +
-                "																Al momento de hacer Check-in en nuestro hotel, recuerde llevar su c\u00F3odigo de reserva, o presente este correo al recepcionista.\r\n" +
+                "																Al momento de hacer Check-in en nuestro hotel, recuerde llevar su c\u00F3digo de reserva, o presente este correo al recepcionista.\r\n" +
                 "															</td>\r\n" +
                 "														</tr>\r\n" +
                 "													</table>\r\n" +
